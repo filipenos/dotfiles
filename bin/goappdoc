@@ -1,0 +1,42 @@
+#!/bin/bash
+
+findProccess() {
+	POUT=$(ps fax | grep 'godoc' | grep -v grep | awk -F ' ' '{print $1}')
+}
+
+stopProccess() {
+	findProccess
+	if [[ "" -eq "$POUT" ]]; then
+		echo "No proccess found"
+	else
+		echo "Found proccess runnint at PID: $POUT"
+		echo "Kill proccess $POUT"
+		kill -9 $POUT
+	fi
+}
+
+startNew() {
+	echo "Running new proccess"
+	exec /home/action/.local/lib/google-cloud-sdk/platform/google_appengine/godoc -http=:8000
+}
+
+usage() {
+	echo "Usage $0"
+	exit 1
+}
+
+case $1 in
+	-h|--help)
+		usage
+		;;
+	-f|--find)
+		findProccess
+		echo "Found proccess running at PID: $POUT"
+		;;
+	-k|--kill)
+		stopProccess
+		;;
+	-s|--start)
+		startNew
+		;;
+esac
