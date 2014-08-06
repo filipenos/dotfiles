@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PORT=4000
+
 findProccess() {
 	POUT=$(ps fax | grep 'godoc' | grep -v grep | awk -F ' ' '{print $1}')
 }
@@ -16,13 +18,21 @@ stopProccess() {
 }
 
 startNew() {
+	stopProccess
 	echo "Running new proccess"
-	exec /home/action/.local/lib/google-cloud-sdk/platform/google_appengine/godoc -http=:8000
+	exec /home/action/.local/lib/google-cloud-sdk/platform/google_appengine/godoc -http=:$PORT &
 }
 
 usage() {
-	echo "Usage $0"
-	exit 1
+	cat <<EOF
+Usage: $0 [-h|-f|-k|-s]
+
+where
+	-h This help
+	-f Find goappdoc running
+	-k Kill current proccess
+	-s Start new godocapp
+EOF
 }
 
 case $1 in
