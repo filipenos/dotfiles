@@ -44,3 +44,4 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
+let g:default_java_workspace="~/workspace/java"
