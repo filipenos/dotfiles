@@ -4,6 +4,9 @@ set ttymouse=xterm2
 set background=dark
 set t_Co=256
 
+" Map to clear last search
+nmap <SPACE> <SPACE>:noh<CR>
+
 Plugin 'dgryski/vim-godef'
 Plugin 'syntaxcomplete'
 Plugin 'benmills/vimux-golang'
