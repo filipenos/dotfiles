@@ -1,26 +1,34 @@
 #!/bin/bash
 
 PORT=4000
+PID=$(ps -C godoc -o pid=)
 
 findProccess() {
-	POUT=$(ps fax | grep 'godoc' | grep -v grep | awk -F ' ' '{print $1}')
+	if [[ -z "$PID" ]]; then
+		echo "No proccess found"
+	else
+		echo "Found proccess running at PID: $PID"
+	fi
 }
 
 stopProccess() {
-	findProccess
-	if [[ "" -eq "$POUT" ]]; then
+	if [[ -z "$PID" ]]; then
 		echo "No proccess found"
 	else
-		echo "Found proccess runnint at PID: $POUT"
-		echo "Kill proccess $POUT"
-		kill -9 $POUT
+		echo "Found proccess runnint at PID: $PID"
+		echo "Kill proccess $PID"
+		kill -9 $PID
+		unset PID
 	fi
 }
 
 startNew() {
-	stopProccess
-	/home/action/.local/lib/google-cloud-sdk/platform/google_appengine/godoc -http=:$PORT & \
-   	echo "Running new proccess $!"
+	if [[ -z "$PID" ]]; then
+		/home/action/.local/lib/google-cloud-sdk/platform/google_appengine/godoc -http=:$PORT & \
+	   	echo "Running new proccess $!"
+	else
+		echo "Found a process $PID aborting..."
+	fi
 }
 
 usage() {
@@ -41,12 +49,18 @@ case $1 in
 		;;
 	-f|--find)
 		findProccess
-		echo "Found proccess running at PID: $POUT"
 		;;
 	-k|--kill)
 		stopProccess
 		;;
 	-s|--start)
 		startNew
+		;;
+	-r|--reload)
+		stopProccess
+		startNew
+		;;
+	*)
+		findProccess
 		;;
 esac
