@@ -3,6 +3,8 @@
 PORT=4000
 PID=$(ps -C godoc -o pid=)
 
+export GOPATH=$HOME/workspace/go
+
 findProccess() {
 	if [[ -z "$PID" ]]; then
 		echo "No proccess found"
