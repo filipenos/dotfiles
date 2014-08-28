@@ -40,6 +40,7 @@ where
 	-f Find goappdoc running
 	-k Kill current proccess
 	-s Start new godocapp
+	-r Reload godoc
 EOF
 }
 
