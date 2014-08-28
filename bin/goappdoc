@@ -19,8 +19,8 @@ stopProccess() {
 
 startNew() {
 	stopProccess
-	echo "Running new proccess"
-	exec /home/action/.local/lib/google-cloud-sdk/platform/google_appengine/godoc -http=:$PORT &
+	/home/action/.local/lib/google-cloud-sdk/platform/google_appengine/godoc -http=:$PORT & \
+   	echo "Running new proccess $!"
 }
 
 usage() {
