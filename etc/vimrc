@@ -2,10 +2,12 @@ source ~/workspace/sh/tools/etc/vimrc
 
 set ttymouse=xterm2
 set background=dark
-set t_Co=256
+"set t_Co=256
 
 " Map to clear last search
 nmap <SPACE> <SPACE>:noh<CR>
+nmap <F8> :TagbarToggle<CR>
+nnoremap <F7> :NERDTreeToggle<CR>
 
 Plugin 'dgryski/vim-godef'
 Plugin 'syntaxcomplete'
@@ -14,14 +16,22 @@ Plugin 'othree/html5.vim' " Suporte para html5 tags e atributes
 Plugin 'wookiehangover/jshint.vim'
 Plugin 'tpope/vim-fugitive' " Allow to use git in vim
 Plugin 'ludovicchabant/vim-lawrencium' " Allow to use mercurial in vim
+Plugin 'kchmck/vim-coffee-script' " Plugin para editart coffeescript
 
 "colorscheme mophiaDark
 "colorscheme guardian
 "colorscheme molokai
 "colorscheme solarized
+colorscheme jiks
 
+let g:syntastic_html_checkers = ['w3']
+
+let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_check_on_open = 1
+let g:syntastic_auto_jump = 1
 let g:gofmt_command="goimports"
 let JSHintUpdateWriteOnly=1
+let g:JSHintHighlightErrorLine = 0
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
