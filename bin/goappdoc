@@ -1,0 +1,69 @@
+#!/bin/bash
+
+PORT=4000
+PID=$(ps -C godoc -o pid=)
+
+export GOPATH=$HOME/workspace/go
+
+findProccess() {
+	if [[ -z "$PID" ]]; then
+		echo "No proccess found"
+	else
+		echo "Found proccess running at PID: $PID"
+	fi
+}
+
+stopProccess() {
+	if [[ -z "$PID" ]]; then
+		echo "No proccess found"
+	else
+		echo "Found proccess runnint at PID: $PID"
+		echo "Kill proccess $PID"
+		kill -9 $PID
+		unset PID
+	fi
+}
+
+startNew() {
+	if [[ -z "$PID" ]]; then
+		/home/action/.local/lib/google-cloud-sdk/platform/google_appengine/godoc -http=:$PORT & \
+	   	echo "Running new proccess $!"
+	else
+		echo "Found a process $PID aborting..."
+	fi
+}
+
+usage() {
+	cat <<EOF
+Usage: $0 [-h|-f|-k|-s]
+
+where
+	-h This help
+	-f Find goappdoc running
+	-k Kill current proccess
+	-s Start new godocapp
+	-r Reload godoc
+EOF
+}
+
+case $1 in
+	-h|--help)
+		usage
+		;;
+	-f|--find)
+		findProccess
+		;;
+	-k|--kill)
+		stopProccess
+		;;
+	-s|--start)
+		startNew
+		;;
+	-r|--reload)
+		stopProccess
+		startNew
+		;;
+	*)
+		findProccess
+		;;
+esac
