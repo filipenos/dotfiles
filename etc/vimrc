@@ -24,7 +24,7 @@ Plugin 'kchmck/vim-coffee-script' " Plugin para editart coffeescript
 "colorscheme solarized
 colorscheme jiks
 
-let g:syntastic_html_checkers = ['w3']
+"let g:syntastic_html_checkers = ['w3']
 
 let g:syntastic_always_populate_loc_list = 1
 "let g:syntastic_check_on_open = 1
