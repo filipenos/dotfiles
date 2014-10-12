@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+#Gocode
+go get -u -v github.com/nsf/gocode
+go install -v github.com/nsf/gocode
+
+#Goimport
+go get -u -v code.google.com/p/go.tools/cmd/goimports
+go install -v code.google.com/p/go.tools/cmd/goimports
+
+#Godef
+go get -u -v code.google.com/p/rog-go/exp/cmd/godef
+go install -v code.google.com/p/rog-go/exp/cmd/godef
+
+#Gotags
+go get -u -v github.com/jstemmer/gotags
+go install -v github.com/jstemmer/gotags
