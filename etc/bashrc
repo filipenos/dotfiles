@@ -1,0 +1,3 @@
+# Completions
+. /home/action/workspace/sh/maven-bash-completion/bash_completion.bash
+. $GOROOT/misc/bash/go
