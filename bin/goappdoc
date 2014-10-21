@@ -26,7 +26,7 @@ stopProccess() {
 
 startNew() {
 	if [[ -z "$PID" ]]; then
-		/home/action/.local/lib/google-cloud-sdk/platform/google_appengine/godoc -http=:$PORT & \
+		$GOROOT/bin/godoc -http=:$PORT & \
 	   	echo "Running new proccess $!"
 	else
 		echo "Found a process $PID aborting..."
