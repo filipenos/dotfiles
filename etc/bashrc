@@ -1,5 +1,5 @@
 # Completions
-. /home/action/workspace/sh/maven-bash-completion/bash_completion.bash
+. $HOME/workspace/sh/maven-bash-completion/bash_completion.bash
 . $GOROOT/misc/bash/go
 
 # Aliases
