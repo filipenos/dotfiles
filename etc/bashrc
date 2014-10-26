@@ -1,8 +1,10 @@
 # Completions
 . $HOME/workspace/sh/maven-bash-completion/bash_completion.bash
 . $GOROOT/misc/bash/go
-
+source $HOME/.parts/packages/nodejs/0.10.32/lib/node_modules/npm/lib/utils/completion.sh
 # Aliases
+
 alias bashrc="vim ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
+
 
