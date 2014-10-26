@@ -20,3 +20,6 @@ go install -v github.com/jstemmer/gotags
 
 #Google Appengine
 go get -u -v code.google.com/p/appengine-go
+
+#Google Api GO Client
+go get -u -v code.google.com/p/google-api-go-client
