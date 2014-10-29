@@ -1,13 +1,17 @@
 # Completions
-. $HOME/workspace/sh/maven-bash-completion/bash_completion.bash
-. $HOME/workspace/javascript/cordova-cli/scripts/cordova.completion
-. $GOROOT/misc/bash/go
+function completion {
+	if [ -f $1 ]; then
+		. $1
+	fi
+}
+completion $HOME/workspace/sh/maven-bash-completion/bash_completion.bash
+completion $HOME/workspace/javascript/cordova-cli/scripts/cordova.completion
+completion $GOROOT/misc/bash/go
 
-source $HOME/.parts/packages/nodejs/0.10.32/lib/node_modules/npm/lib/utils/completion.sh
+if [ -f ~/.parts/packages/nodejs/0.10.32/lib/node_modules/npm/lib/utils/completion.sh ]; then
+	source $HOME/.parts/packages/nodejs/0.10.32/lib/node_modules/npm/lib/utils/completion.sh
+fi
 # Aliases
 
 alias bashrc="vim ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
-
-
-
