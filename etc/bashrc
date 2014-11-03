@@ -7,15 +7,17 @@ function completion {
 completion $HOME/workspace/sh/maven-bash-completion/bash_completion.bash
 completion $HOME/workspace/javascript/cordova-cli/scripts/cordova.completion
 completion $GOROOT/misc/bash/go
+completion $HOME/workspace/sh/android-completion/android
 
 if [ -f ~/.parts/packages/nodejs/0.10.32/lib/node_modules/npm/lib/utils/completion.sh ]; then
 	source $HOME/.parts/packages/nodejs/0.10.32/lib/node_modules/npm/lib/utils/completion.sh
 fi
-# Aliases
 
+# Aliases
 alias bashrc="vim ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
 alias copy="xclip -selection clipboard"
 alias clean-number="sed -e 's;[^0-9];;g' -e 's;\n;;g'"
 alias cpf="zzcpf | clean-number | copy"
 alias docker-ubuntu="sudo docker run -i -t ubuntu /bin/bash"
+
