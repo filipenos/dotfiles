@@ -25,3 +25,6 @@ go get -u -v code.google.com/p/google-api-go-client
 #Godev editor
 go get -u -v github.com/sirnewton01/godev
 go get -u -v github.com/sirnewton01/godbg
+
+#Whenchange
+go get -u -v ronoaldo.gopkg.net/whenchange
