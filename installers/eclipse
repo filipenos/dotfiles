@@ -1,0 +1,26 @@
+#!/bin/bash
+
+URL=http://eclipse.c3sl.ufpr.br/technology/epp/downloads/release/luna/SR1/eclipse-java-luna-SR1-linux-gtk-x86_64.tar.gz
+TMP=$HOME/.local/tmp
+INSTALL=$HOME/.local/lib
+
+if [ ! -d $INSTALL ]; then
+	echo "Create dir to instal eclipse"
+	mkdir -p $INSTALL
+fi
+
+if [ ! -d $TMP ]; then
+	echo "Create temp dir to download eclipse"
+	mkdir -p $TMP
+fi
+
+if [ -d $INSTALL/eclipse ]; then
+	echo "Eclipse installed, aborting" #TODO allow update
+	exit 0
+fi
+
+echo "Downloading eclipse"
+wget $URL -O $TMP/eclipse.tar
+
+echo "Extracting eclipse to install dir"
+tar xf $TMP/eclipse.tar -C $INSTALL
