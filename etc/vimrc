@@ -16,12 +16,15 @@ Plugin 'syntaxcomplete'
 Plugin 'tpope/vim-fugitive' " Allow to use git in vim
 Plugin 'phleet/vim-mercenary' " Allow to use mercurial in vim
 Plugin 'kchmck/vim-coffee-script' " Plugin to edit coffeescript files
+Plugin 'elzr/vim-json' " JSON formater
 
 "colorscheme mophiaDark
 "colorscheme guardian
 "colorscheme molokai
 "colorscheme solarized
 colorscheme jiks
+
+let g:syntastic_json_checkers = ['jsonlint']
 
 "let g:syntastic_html_checkers = ['w3']
 let g:syntastic_always_populate_loc_list = 1
@@ -58,3 +61,13 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 let g:default_java_workspace="~/workspace/java"
+
+function! ToggleErrors()
+  if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
+    " No location/quickfix list shown, open syntastic error location panel
+    Errors
+  else
+    lclose
+  endif
+endfunction
+nnoremap <F6> :call ToggleErrors()<CR>
