@@ -5,8 +5,8 @@ go get -u -v github.com/nsf/gocode
 go install -v github.com/nsf/gocode
 
 #Goimport
-go get -u -v code.google.com/p/go.tools/cmd/goimports
-go install -v code.google.com/p/go.tools/cmd/goimports
+go get -u -v golang.org/x/tools/imports
+go install -v golang.org/x/tools/imports
 
 #Godef
 go get -u -v code.google.com/p/rog-go/exp/cmd/godef
@@ -24,6 +24,7 @@ go get -u -v code.google.com/p/google-api-go-client
 
 #Godev editor
 go get -u -v github.com/sirnewton01/godev
+go install -v github.com/sirnewton01/godev
 go get -u -v github.com/sirnewton01/godbg
 
 #Whenchange
