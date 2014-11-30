@@ -8,3 +8,5 @@ npm install -g phonegap
 
 npm install -g bower
 npm install -g jsonlint
+
+npm install -g underscore-cli
