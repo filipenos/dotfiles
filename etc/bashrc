@@ -1,3 +1,7 @@
+# Use bash-completion, if available
+[[ $PS1 && -f $HOME/workspace/sh/bash-completion/bash_completion ]] && \
+		. $HOME/workspace/sh/bash-completion/bash_completion
+
 # Completions
 function completion {
 	if [ -f $1 ]; then
