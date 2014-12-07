@@ -11,5 +11,6 @@ npm install -g bower
 npm install -g grunt
 npm install -g compass
 npm install -g jsonlint
+npm install -g phantom
 
 npm install -g underscore-cli
