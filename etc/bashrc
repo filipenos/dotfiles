@@ -14,8 +14,8 @@ completion $GOROOT/misc/bash/go
 completion $HOME/workspace/sh/android-completion/android
 completion $HOME/workspace/sh/ant-completion/ant-completion.bash
 
-if [ -f ~/.parts/packages/nodejs/0.10.32/lib/node_modules/npm/lib/utils/completion.sh ]; then
-	source $HOME/.parts/packages/nodejs/0.10.32/lib/node_modules/npm/lib/utils/completion.sh
+if [ -f ~/.parts/packages/nodejs/0.10.33/lib/node_modules/npm/lib/utils/completion.sh ]; then
+	source $HOME/.parts/packages/nodejs/0.10.33/lib/node_modules/npm/lib/utils/completion.sh
 fi
 
 # setup nodejs
