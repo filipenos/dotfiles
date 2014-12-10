@@ -9,4 +9,12 @@ npm install -g phonegap
 npm install -g yo
 npm install -g bower
 npm install -g grunt
+<<<<<<< HEAD
+=======
+npm install -g grunt-cli
+npm install -g compass
+npm install -g jsonlint
+npm install -g phantom
+
+>>>>>>> 8d200c488f83df076a107d4f39f151a733c071f5
 npm install -g underscore-cli
