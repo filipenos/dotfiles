@@ -16,8 +16,9 @@ Plugin 'syntaxcomplete'
 Plugin 'tpope/vim-fugitive' " Allow to use git in vim
 Plugin 'phleet/vim-mercenary' " Allow to use mercurial in vim
 Plugin 'kchmck/vim-coffee-script' " Plugin to edit coffeescript files
-Plugin 'elzr/vim-json' " JSON formater
+"Plugin 'elzr/vim-json' " JSON formater
 Plugin 'chase/vim-ansible-yaml' " Yaml 
+Plugin 'maksimr/vim-jsbeautify' "Plugin to format js
 
 "colorscheme mophiaDark
 "colorscheme guardian
