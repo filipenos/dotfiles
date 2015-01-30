@@ -3,7 +3,8 @@
 PORT=4000
 PID=$(ps -C godoc -o pid=)
 
-export GOPATH=$HOME/workspace/go
+export GOPATH=/home/action/workspace/go
+export GOROOT=/home/action/.parts/packages/go/1.4
 
 findProccess() {
 	if [[ -z "$PID" ]]; then
