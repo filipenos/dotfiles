@@ -5,8 +5,8 @@ go get -u -v github.com/nsf/gocode
 go install -v github.com/nsf/gocode
 
 #Goimport
-go get -u -v golang.org/x/tools/imports
-go install -v golang.org/x/tools/imports
+go get -u -v golang.org/x/tools/
+go install -v golang.org/x/tools/cmd/goimports
 
 #Godef
 go get -u -v code.google.com/p/rog-go/exp/cmd/godef
@@ -16,8 +16,12 @@ go install -v code.google.com/p/rog-go/exp/cmd/godef
 go get -u -v github.com/jstemmer/gotags
 go install -v github.com/jstemmer/gotags
 
+#Golint
+go get -u -v github.com/golang/lint
+go install -v github.com/golnag/lint
+
 #Google Appengine
-go get -u -v code.google.com/p/appengine-go
+#go get -u -v code.google.com/p/appengine-go
 
 #Google Api GO Client
 go get -u -v code.google.com/p/google-api-go-client
@@ -29,3 +33,8 @@ go get -u -v github.com/sirnewton01/godbg
 
 #Whenchange
 go get -u -v ronoaldo.gopkg.net/whenchange
+go install -v ronoaldo.gopkg.net/whenchange
+
+#Batterymon
+go get -u -v ronoaldo.gopkg.net/batterymon
+go install -v ronoaldo.gopkg.net/batterymon
