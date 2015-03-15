@@ -19,10 +19,6 @@ if [ -f ~/.parts/packages/nodejs/0.10.33/lib/node_modules/npm/lib/utils/completi
 	source $HOME/.parts/packages/nodejs/0.10.33/lib/node_modules/npm/lib/utils/completion.sh
 fi
 
-# setup nodejs
-export NODE=$HOME/.parts/packages/nodejs/0.10.33
-export NODE_PATH=$HOME/.parts/lib/node_modules
-
 # Aliases
 alias bashrc="vim ~/.bashrc"
 alias vimrc="vim ~/.vimrc"
@@ -32,41 +28,8 @@ alias cpf="zzcpf | clean-number | copy"
 alias docker-ubuntu="docker run -i -t ubuntu /bin/bash"
 alias git-push="git push origin master && git push github master"
 alias formatJSON="python -m json.tool"
+alias serveDir="python -m SimpleHTTPServer"
 alias change-ps1='export PS1="\e[0;34m\W: \e[m"'
 alias npm-list="npm list -g --depth=0"
 alias dpkg-purge-rc='dpkg -l | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge'
-
-## See http://blog.grahampoulter.com/2011/09/show-current-git-bazaar-or-mercurial.html
-## Print nickname for git/hg/bzr/svn version control in CWD
-## Optional $1 of format string for printf, default "(%s) "
-function be_get_branch {
-  local dir="$PWD"
-  local vcs
-  local nick
-  while [[ "$dir" != "/" ]]; do
-    for vcs in git hg svn bzr; do
-      if [[ -d "$dir/.$vcs" ]] && hash "$vcs" &>/dev/null; then
-        case "$vcs" in
-          git) __git_ps1 "${1:-(%s) }"; return;;
-          hg) nick=$(hg branch 2>/dev/null);;
-          svn) nick=$(svn info 2>/dev/null\
-                | grep -e '^Repository Root:'\
-                | sed -e 's#.*/##');;
-          bzr)
-            local conf="${dir}/.bzr/branch/branch.conf" # normal branch
-            [[ -f "$conf" ]] && nick=$(grep -E '^nickname =' "$conf" | cut -d' ' -f 3)
-            conf="${dir}/.bzr/branch/location" # colo/lightweight branch
-            [[ -z "$nick" ]] && [[ -f "$conf" ]] && nick="$(basename "$(< $conf)")"
-            [[ -z "$nick" ]] && nick="$(basename "$(readlink -f "$dir")")";;
-        esac
-        [[ -n "$nick" ]] && printf "${1:-(%s) }" "$nick"
-        return 0
-      fi
-    done
-    dir="$(dirname "$dir")"
-  done
-}
-
-## Add branch to PS1 (based on $PS1 or $1), formatted as $2
-export GIT_PS1_SHOWDIRTYSTATE=yes
-export PS1="\$(be_get_branch "$2")${PS1}";
+alias kissfm='mplayer "http://7289.live.streamtheworld.com/SAOPAULO1021AAC"'
