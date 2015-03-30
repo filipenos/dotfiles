@@ -13,7 +13,6 @@ Plugin 'dgryski/vim-godef'
 Plugin 'syntaxcomplete'
 "Plugin 'othree/html5.vim' " Suporte para html5 tags e atributes
 "Plugin 'wookiehangover/jshint.vim'
-Plugin 'tpope/vim-fugitive' " Allow to use git in vim
 Plugin 'phleet/vim-mercenary' " Allow to use mercurial in vim
 Plugin 'kchmck/vim-coffee-script' " Plugin to edit coffeescript files
 "Plugin 'elzr/vim-json' " JSON formater
@@ -24,7 +23,6 @@ Plugin 'maksimr/vim-jsbeautify' "Plugin to format js
 "colorscheme guardian
 "colorscheme molokai
 "colorscheme solarized
-colorscheme jiks
 
 let g:syntastic_json_checkers = ['jsonlint']
 
