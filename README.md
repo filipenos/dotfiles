@@ -1,4 +1,4 @@
-dotfiles
+$HOME
 ========
 
-Dotfiles used for me
+My home files
