@@ -1,0 +1,43 @@
+"*":
+  "autocomplete-go": {}
+  "browser-plus": {}
+  core:
+    autoHideMenuBar: true
+    disabledPackages: [
+      "gometalinter-linter"
+      "tester-go"
+      "vim-mode"
+    ]
+    themes: [
+      "atom-light-ui"
+      "atom-light-syntax"
+    ]
+  editor:
+    invisibles: {}
+    showInvisibles: true
+    tabLength: 4
+  "exception-reporting":
+    userId: "d7b0d1ef-ca08-3931-30a3-87c68875c5a0"
+  "git-plus":
+    splitPane: "Up"
+    wordDiff: false
+  "highlight-selected": {}
+  jshint:
+    validateOnlyOnSave: true
+  linter:
+    errorPanelHeight: 46
+  "linter-htmlhint": {}
+  "linter-jshint": {}
+  "one-light-ui":
+    layoutMode: "Compact"
+  "rest-client": {}
+  "terminal-plus":
+    core:
+      shell: "/bin/zsh"
+    style:
+      theme: "novel"
+  "tree-view":
+    hideVcsIgnoredFiles: true
+  "vim-mode": {}
+  welcome:
+    showOnStartup: false
