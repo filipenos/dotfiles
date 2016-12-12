@@ -11,9 +11,10 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
-Plugin 'powerline/powerline'
 Plugin 'kien/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
@@ -36,10 +37,16 @@ set number         " show line number
 set ruler          " show line and column number
 set encoding=utf-8
 set listchars=nbsp:☠,tab:▸»
-" set visualbell     " shut vim up
-" set noerrorbells
-" set history=1000
-" set autoread
+set visualbell     " shut vim up
+set noerrorbells
+set history=1000
+set autoread
+let mapleader=","
+
+" backup
+set noswapfile
+set nobackup
+set nowb
 
 " searching
 set hlsearch   " highlight searches
@@ -54,17 +61,28 @@ else
     set background=dark
 endif
 
+" airline
+"let g:airline_theme='dark'
+"let g:airline_left_sep='>'
+"let g:airline_right_sep='<'
+"let g:airline_detect_modified=1
+"let g:airline_extensions = ['branch', 'tabline']
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#branch#enabled = 1
+"let g:airline#extensions#syntastic#enabled = 1
+"let g:airline#extensions#tagbar#enabled = 1
 
-" Map to clear last search
-nmap <SPACE> <SPACE>:noh<CR>
-nmap <F8> :TagbarToggle<CR>
-nnoremap <F7> :NERDTreeToggle<CR>
-nnoremap <F6> :call ToggleErrors()<CR>
 
-" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-" let g:syntastic_json_checkers = ['jsonlint']
+" nerdtree
+let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
+
+" syntastic
+let g:syntastic_enable_signs=1
+let g:syntastic_quiet_messages = {'level': 'warnings'}
+let g:syntastic_auto_loc_list=0
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_jump = 0
+let g:syntastic_full_redraws=1
 
 let g:gofmt_command="goimports"
 
@@ -124,6 +142,7 @@ augroup END
 
 command! FormatJSON call FormatJSON()
 command! -nargs=* GoappTest call GoappTest()
+command! ToggleErrors call ToggleErrors()
 
 function! ToggleErrors()
   if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
@@ -153,9 +172,27 @@ function! FormatJSON()
   %!python -m json.tool
 endfunction
 
+" All-modes shortcut helper function
+function! KeyMap(key, action, insert_mode)
+  execute "noremap  <silent> " . a:key . " " . a:action . "<CR>"
+  execute "vnoremap <silent> " . a:key . " <C-C>" . a:action . "<CR>"
+  if a:insert_mode
+    execute "inoremap <silent> " . a:key . " <C-O>" . a:action . "<CR>"
+  endif
+endfunction
+
 if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
 if filereadable(expand("~/.gvimrc.local"))
     source ~/.vimrc.local
 endif
+
+
+" Map to clear last search
+nmap <SPACE> <SPACE>:noh<CR>
+nnoremap <F6> :ToggleErrors<CR>
+call KeyMap("<F7>", ":NERDTreeToggle", 1)
+call KeyMap("<F8>", ":TagbarToggle", 1)
+call KeyMap("<Leader>t", ":GoappTest", 0)
+call KeyMap("<Leader>fj", ":FormatJSON", 0)
