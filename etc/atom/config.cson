@@ -1,13 +1,10 @@
 "*":
-  "autocomplete-go": {}
-  "browser-plus": {}
   core:
     autoHideMenuBar: true
     disabledPackages: [
-      "gometalinter-linter"
       "tester-go"
-      "vim-mode"
     ]
+    telemetryConsent: "no"
     themes: [
       "atom-light-ui"
       "atom-light-syntax"
@@ -24,20 +21,13 @@
   "highlight-selected": {}
   jshint:
     validateOnlyOnSave: true
-  linter:
-    errorPanelHeight: 46
-  "linter-htmlhint": {}
-  "linter-jshint": {}
-  "one-light-ui":
-    layoutMode: "Compact"
-  "rest-client": {}
   "terminal-plus":
     core:
       shell: "/bin/zsh"
     style:
       theme: "novel"
   "tree-view":
+    hideIgnoredNames: true
     hideVcsIgnoredFiles: true
-  "vim-mode": {}
   welcome:
     showOnStartup: false
