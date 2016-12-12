@@ -1,3 +1,18 @@
 #!/bin/bash
 
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
+if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
+    echo "Configuring new usage for VIM Vundle Plugin"
+    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+else
+    echo "Updating VIM Vundle Plugin"
+    git -C "$HOME/.vim/bundle/Vundle.vim" pull origin master
+fi
+    
+vim +BundleClean +PluginInstall +qall
+
+if [ ! -e "$HOME/.vimrc" ]; then
+    echo "Ignore existing .vimrc confi file"
+else
+    echo "Creating link to .vimrc config file"
+    ln -s "$HOME/workspace/dotfiles/etc/vimrc .vimrc"
+fi
