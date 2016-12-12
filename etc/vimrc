@@ -1,30 +1,75 @@
-"set ttymouse=xterm2
-"set background=dark
-"set t_Co=256
-colorscheme koehler
+" enable plugin manager Vundle
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+Plugin 'powerline/powerline'
+Plugin 'kien/ctrlp.vim'
+Plugin 'editorconfig/editorconfig-vim'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-git'
+
+Plugin 'vim-syntastic/syntastic'
+
+Plugin 'Blackrush/vim-gocode'
+Plugin 'fatih/vim-go'
+Plugin 'dgryski/vim-godef'
+
+" plugin from http://vim-scripts.org/vim/scripts.html
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+" basic confs
+syntax enable      " allays show highlight for file
+set number         " show line number
+set ruler          " show line and column number
+set encoding=utf-8
+set listchars=nbsp:☠,tab:▸»
+" set visualbell     " shut vim up
+" set noerrorbells
+" set history=1000
+" set autoread
+
+" searching
+set hlsearch   " highlight searches
+set incsearch  " incremental searching
+set ignorecase " searches are case insensitive
+set smartcase  " unless there is one capital letter
+
+set t_Co=256
+if has('gui_running')
+    set background=light
+else
+    set background=dark
+endif
+
 
 " Map to clear last search
 nmap <SPACE> <SPACE>:noh<CR>
 nmap <F8> :TagbarToggle<CR>
 nnoremap <F7> :NERDTreeToggle<CR>
+nnoremap <F6> :call ToggleErrors()<CR>
 
-Bundle 'dgryski/vim-godef'
-Bundle 'xolox/vim-misc'
-Bundle 'vim-colorscheme-switcher'
-
-"UnBundle 'easymotion/vim-easymotion'
-
-let g:colorscheme_switcher_define_mappings = 0
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-"let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:syntastic_json_checkers = ['jsonlint']
+" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+" let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_check_on_open = 1
 let g:syntastic_auto_jump = 0
+
 let g:gofmt_command="goimports"
-"let JSHintUpdateWriteOnly=1
-"let g:JSHintHighlightErrorLine = 0
+
 let g:airline_powerline_fonts=1
+
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -53,6 +98,33 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
+" Default options for various file types
+augroup filemapping
+  " Java settings  
+  au BufRead,BufNewFile *.java compiler javac
+  au BufRead,BufNewFile *.java setlocal makeprg=javac\ %
+  au BufRead,BufNewFile *.java let g:syntastic_java_javac_options = "-Xlint -encoding utf-8"
+  au BufRead,BufNewFile *.bsh setlocal filetype=java
+  " Go AppEngine support via 'goapp'
+  if executable('goapp')
+    au BufRead,BufNewFile *.go setlocal makeprg=goapp\ test\ -c
+    au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['goapp', 'govet']
+  else
+    au BufRead,BufNewFile *.go setlocal makeprg=go\ test\ -c
+    au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['go', 'govet', 'golint']
+  end
+
+  " Auto close preview/scratch window after select option with omnicomplete
+  autocmd CursorMovedI * if pumvisible() == 0 | pclose | endif
+  autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
+
+  " Posiciona a janela QuickFix sempre na parte inferior da tela
+  au FileType qf wincmd J
+augroup END
+
+command! FormatJSON call FormatJSON()
+command! -nargs=* GoappTest call GoappTest()
+
 function! ToggleErrors()
   if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
     " No location/quickfix list shown, open syntastic error location panel
@@ -61,4 +133,29 @@ function! ToggleErrors()
     lclose
   endif
 endfunction
-nnoremap <F6> :call ToggleErrors()<CR>
+
+" Google App Engine Go
+function! GoappTest()
+  let test_line = search("func Test", "bs")
+  ''
+  if test_line > 0
+    let line = getline(test_line)
+    let test_name_raw = split(line, " ")[1]
+    let test_name = split(test_name_raw, "(")[0]
+    let go_cmd = '!goapp test -v -test.run=' . test_name
+    exec go_cmd
+  else
+    echo "No test found"
+  endif
+endfunction
+
+function! FormatJSON()
+  %!python -m json.tool
+endfunction
+
+if filereadable(expand("~/.vimrc.local"))
+    source ~/.vimrc.local
+endif
+if filereadable(expand("~/.gvimrc.local"))
+    source ~/.vimrc.local
+endif
