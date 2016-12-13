@@ -11,10 +11,12 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'dkprice/vim-easygrep'
+Plugin 'buffet.vim'
 
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
@@ -61,17 +63,28 @@ else
     set background=dark
 endif
 
-" airline
-"let g:airline_theme='dark'
-"let g:airline_left_sep='>'
-"let g:airline_right_sep='<'
-"let g:airline_detect_modified=1
-"let g:airline_extensions = ['branch', 'tabline']
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#branch#enabled = 1
-"let g:airline#extensions#syntastic#enabled = 1
-"let g:airline#extensions#tagbar#enabled = 1
+augroup filemapping
+  " Java settings  
+  au BufRead,BufNewFile *.java compiler javac
+  au BufRead,BufNewFile *.java setlocal makeprg=javac\ %
+  au BufRead,BufNewFile *.java let g:syntastic_java_javac_options = "-Xlint -encoding utf-8"
+  au BufRead,BufNewFile *.bsh setlocal filetype=java
+  " Go AppEngine support via 'goapp'
+  if executable('goapp')
+    au BufRead,BufNewFile *.go setlocal makeprg=goapp\ test\ -c
+    au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['goapp', 'govet']
+  else
+    au BufRead,BufNewFile *.go setlocal makeprg=go\ test\ -c
+    au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['go', 'govet', 'golint']
+  end
 
+  " Auto close preview/scratch window after select option with omnicomplete
+  autocmd CursorMovedI * if pumvisible() == 0 | pclose | endif
+  autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
+
+  " Posiciona a janela QuickFix sempre na parte inferior da tela
+  au FileType qf wincmd J
+augroup END
 
 " nerdtree
 let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
@@ -84,10 +97,11 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_jump = 0
 let g:syntastic_full_redraws=1
 
+" vim-go
 let g:gofmt_command="goimports"
+let g:go_list_type = "quickfix"
 
-let g:airline_powerline_fonts=1
-
+" tagbar
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -116,33 +130,25 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
-" Default options for various file types
-augroup filemapping
-  " Java settings  
-  au BufRead,BufNewFile *.java compiler javac
-  au BufRead,BufNewFile *.java setlocal makeprg=javac\ %
-  au BufRead,BufNewFile *.java let g:syntastic_java_javac_options = "-Xlint -encoding utf-8"
-  au BufRead,BufNewFile *.bsh setlocal filetype=java
-  " Go AppEngine support via 'goapp'
-  if executable('goapp')
-    au BufRead,BufNewFile *.go setlocal makeprg=goapp\ test\ -c
-    au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['goapp', 'govet']
-  else
-    au BufRead,BufNewFile *.go setlocal makeprg=go\ test\ -c
-    au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['go', 'govet', 'golint']
-  end
-
-  " Auto close preview/scratch window after select option with omnicomplete
-  autocmd CursorMovedI * if pumvisible() == 0 | pclose | endif
-  autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
-
-  " Posiciona a janela QuickFix sempre na parte inferior da tela
-  au FileType qf wincmd J
-augroup END
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ }
 
 command! FormatJSON call FormatJSON()
 command! -nargs=* GoappTest call GoappTest()
 command! ToggleErrors call ToggleErrors()
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#cmd#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
 
 function! ToggleErrors()
   if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
@@ -188,11 +194,13 @@ if filereadable(expand("~/.gvimrc.local"))
     source ~/.vimrc.local
 endif
 
-
 " Map to clear last search
 nmap <SPACE> <SPACE>:noh<CR>
 nnoremap <F6> :ToggleErrors<CR>
+call KeyMap("<F2>", ":Bufferlist", 1)
 call KeyMap("<F7>", ":NERDTreeToggle", 1)
 call KeyMap("<F8>", ":TagbarToggle", 1)
 call KeyMap("<Leader>t", ":GoappTest", 0)
 call KeyMap("<Leader>fj", ":FormatJSON", 0)
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
