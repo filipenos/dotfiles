@@ -3,6 +3,9 @@
     autoHideMenuBar: true
     disabledPackages: [
       "tester-go"
+      "gometalinter-linter"
+      "gorename"
+      "vim-mode-plus"
     ]
     telemetryConsent: "no"
     themes: [
@@ -18,7 +21,9 @@
   "git-plus":
     splitPane: "Up"
     wordDiff: false
-  "highlight-selected": {}
+  "highlight-selected":
+    highlightBackground: true
+    lightTheme: true
   jshint:
     validateOnlyOnSave: true
   "terminal-plus":
