@@ -29,6 +29,11 @@ Plugin 'dgryski/vim-godef'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 
+" Allow to add custom plugins
+if filereadable(expand("~/.vimrc.plugins.local"))
+    source ~/.vimrc.plugins.local
+endif
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -36,14 +41,17 @@ filetype plugin indent on    " required
 " basic confs
 syntax enable      " allays show highlight for file
 set number         " show line number
-set ruler          " show Always show current position
+set ruler          " Turn line information always on
+set ai             " Turn autoindent on
 set encoding=utf-8
 set listchars=nbsp:☠,tab:▸»
 set visualbell     " shut vim up
 set noerrorbells
 set history=1000
 set autoread
-set clipboard=unnamedplus " Required vim-gnome installed
+"set clipboard=unnamedplus " Required vim-gnome installed
+set ai        
+set nowrap         " Turn off line wrapping
 let mapleader=","
 
 " backup
@@ -198,7 +206,7 @@ if filereadable(expand("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
 if filereadable(expand("~/.gvimrc.local"))
-    source ~/.vimrc.local
+    source ~/.gvimrc.local
 endif
 
 " Map to clear last search
