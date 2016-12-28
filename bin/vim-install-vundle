@@ -7,12 +7,12 @@ else
     echo "Updating VIM Vundle Plugin"
     git -C "$HOME/.vim/bundle/Vundle.vim" pull origin master
 fi
-    
-vim +BundleClean +PluginInstall +qall
 
 if [ ! -e "$HOME/.vimrc" ]; then
-    echo "Ignore existing .vimrc confi file"
+    echo "Ignore existing $HOME/.vimrc confi file"
 else
-    echo "Creating link to .vimrc config file"
-    ln -s "$HOME/workspace/dotfiles/etc/vimrc .vimrc"
+    echo "Creating link to $HOME/.vimrc config file"
+    ln -s "$HOME/workspace/dotfiles/etc/vimrc $HOME/.vimrc"
 fi
+
+vim +BundleClean +PluginInstall +qall

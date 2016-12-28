@@ -23,9 +23,6 @@ go install -v github.com/golang/lint
 #GoConvey
 go get -u -v github.com/smartystreets/goconvey
 
-#Google Appengine
-#go get -u -v code.google.com/p/appengine-go
-
 #Google Api GO Client
 go get -u -v code.google.com/p/google-api-go-client
 
@@ -33,6 +30,10 @@ go get -u -v code.google.com/p/google-api-go-client
 go get -u -v github.com/sirnewton01/godev
 go install -v github.com/sirnewton01/godev
 go get -u -v github.com/sirnewton01/godbg
+
+#GoTTy
+go get -u -v github.com/yudai/gotty
+go install github.com/yudai/gotty
 
 #Whenchange
 go get -u -v ronoaldo.gopkg.net/whenchange
