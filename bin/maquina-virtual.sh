@@ -3,7 +3,7 @@
 BASEDIR=$(dirname "$0")
 
 if [ -r ~/.maquinarc ]; then
-	echo "reading config file ~/.maquinarc"
+	#echo "reading config file ~/.maquinarc"
 	source ~/.maquinarc
 else
 	echo "config file not found ~/.maquinarc"
@@ -81,7 +81,7 @@ function ssh {
 }
 
 function output {
-	gcloud beta compute --project $PROJECT instances get-serial-port-output $SERVER --zone $ZONE 
+	gcloud beta compute --project $PROJECT instances get-serial-port-output $SERVER --zone $ZONE
 }
 
 function tty {
