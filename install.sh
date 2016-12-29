@@ -39,7 +39,7 @@ else
 	install_customrc	
 
 	log "adding dotfiles to path"
-	echo "export PATH=$PATH:$HOME/dotfiles/bin" >> $HOME/.customrc
+	echo 'export PATH="$PATH:$HOME/dotfiles/bin"' >> $HOME/.customrc
 fi
 
 log "installation occurred successfully! have a good time"
