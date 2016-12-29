@@ -12,3 +12,5 @@ fi
 
 wget https://storage.googleapis.com/appengine-sdks/featured/go_appengine_sdk_linux_amd64-1.9.48.zip -O /tmp/appengine_sdk.zip
 unzip -d $HOME/lib /tmp/appengine_sdk.zip
+
+echo 'export PATH="$PATH:$HOME/lib/go_appengine"' >> $HOME/.customrc

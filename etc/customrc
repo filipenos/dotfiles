@@ -1,8 +1,6 @@
 if [ -f ~/.customrc ]; then
+	echo "load ~/.customrc"
 	source ~/.customrc
-fi
-if [ -f $USER"rc" ]; then
-	source $USER"rc"
 fi
 
 # Aliases

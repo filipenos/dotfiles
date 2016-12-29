@@ -1,18 +1,23 @@
 #!/bin/bash
 
+info() {
+	echo "[vim] $@"
+}
+
 if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
-    echo "Configuring new usage for VIM Vundle Plugin"
+    info "Configuring new usage for VIM Vundle Plugin"
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 else
-    echo "Updating VIM Vundle Plugin"
+    info "Updating VIM Vundle Plugin"
     git -C "$HOME/.vim/bundle/Vundle.vim" pull origin master
 fi
 
-if [ ! -e "$HOME/.vimrc" ]; then
-    echo "Ignore existing $HOME/.vimrc confi file"
+if [ -e "$HOME/.vimrc" ]; then
+    info "Ignore existing $HOME/.vimrc confi file"
 else
-    echo "Creating link to $HOME/.vimrc config file"
+    info "Creating link to $HOME/.vimrc config file"
     ln -s "$HOME/workspace/dotfiles/etc/vimrc $HOME/.vimrc"
 fi
 
+info "Updating local plugins"
 vim +BundleClean +PluginInstall +qall

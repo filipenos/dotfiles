@@ -20,3 +20,4 @@ git clone https://github.com/robbyrussell/oh-my-zsh /usr/local/ohmyzsh/
 echo 'export GO15VENDOREXPERIMENT=0' >> /etc/profile
 echo 'export GOPATH="$HOME"' >> /etc/profile
 echo 'export PATH="$PATH:/usr/local/dotfiles/bin"' >> /etc/profile
+echo 'source /usr/local/dotfiles/etc/customrc' >> /etc/profile
