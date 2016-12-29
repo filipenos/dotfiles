@@ -64,7 +64,7 @@ function create {
 	gcloud compute --project $PROJECT instances create $SERVER \
 	    --zone $ZONE \
 	    --machine-type "g1-small" \
-	    --metadata-from-file startup-script=/home/filipe/workspace/dotfiles/bin/startup.sh \
+	    --metadata-from-file startup-script=/home/filipe/dotfiles/bin/startup.sh \
 	    --network "default" \
 	    --tags "http-server","http-alt","gotty" \
 	    --image "/debian-cloud/debian-8-jessie-v20160923" \
