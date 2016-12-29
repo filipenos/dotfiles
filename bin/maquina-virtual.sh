@@ -3,10 +3,10 @@
 BASEDIR=$(dirname "$0")
 
 if [ -r ~/.maquinarc ]; then
-	#echo "reading config file ~/.maquinarc"
+	#info "reading config file ~/.maquinarc"
 	source ~/.maquinarc
 else
-	echo "config file not found ~/.maquinarc"
+	info "config file not found ~/.maquinarc"
 	exit 1
 fi
 
@@ -16,7 +16,7 @@ function prop {
 	elif [ ! -z $2 ]; then
 		SERVER="$2"
 	else
-		echo "SERVER NOT FOUND"
+		info "SERVER NOT FOUND"
 		exit 1
 	fi
 }
@@ -24,87 +24,107 @@ function prop {
 prop "$SERVER" "$server"
 
 PROJECT=$project
-ZONE=$zone
+ZONE=${zone:-us-central1-a}
 USER=$user
 HOST="$USER@$SERVER"
 
-function status {
-	gcloud compute --project $PROJECT instances list | grep "^$SERVER" | awk '{print $6}'
+gcloud_compute() {
+        gcloud --project=${PROJECT} compute "$@"
 }
 
-function ip {
-	gcloud compute instances list | grep "^$SERVER" | awk '{print $5}'
+describe_instance() {
+        gcloud_compute instances describe ${SERVER} --zone=${ZONE} --format yaml
 }
+
+instance_status() {
+        describe_instance | grep status | awk '{print $2}'
+}
+
+instance_ip() {
+        describe_instance | grep natIP | awk '{print $2}'
+}
+
+instance_output() {
+	gcloud_compute instances get-serial-port-output ${SERVER} --zone=${ZONE} 
+}
+
+info() {
+        echo "[maquina-virtual] $@"
+}
+
 
 function create {
-	echo "starting creation of virtual machine $SERVER"
+	status=$(instance_status)
+	if [[ "$status" == "RUNNING"* ]]; then
+		info "server is running, aborting..."
+		exit 0
+	fi
+	
+	info "starting creation of virtual machine $SERVER"
 	gcloud compute --project $PROJECT instances create $SERVER \
 	    --zone $ZONE \
 	    --machine-type "g1-small" \
-	    --metadata-from-file startup-script="$BASEDIR/startup.sh" \
+	    --metadata-from-file startup-script=/home/filipe/workspace/dotfiles/bin/startup.sh \
 	    --network "default" \
 	    --tags "http-server","http-alt","gotty" \
 	    --image "/debian-cloud/debian-8-jessie-v20160923" \
 	    --boot-disk-size "10" \
 	    --boot-disk-type "pd-ssd" \
 	    --boot-disk-device-name $SERVER
-	echo "done"
+	info "done"
+	exit 0
 }
 
 function start {
-	echo "starting virtual machine $SERVER"
+	info "starting virtual machine $SERVER"
 	gcloud compute --project $PROJECT instances start $SERVER
-	echo "done"
+	info "done"
 }
 
 function stop {
-	echo "stoping virtual machine $SERVER"
+	info "stoping virtual machine $SERVER"
 	gcloud compute --project $PROJECT instances stop $SERVER
-	echo "done"
+	info "done"
 }
 
 function delete {
-	echo "deleting virtual machine $SERVER"
+	info "deleting virtual machine $SERVER"
 	gcloud compute --project $PROJECT instances delete $SERVER
-	echo "done"
+	info "done"
 }
 
 function ssh {
 	if [ -z "$1" ] 
 	then
-		echo "connectin on virtual machine $SERVER"
+		info "connectin on virtual machine $SERVER"
 		gcloud compute --project $PROJECT ssh --zone $ZONE $HOST
 	else
-		echo "Execute command '$@' on server $SERVER"
+		info "Execute command '$@' on server $SERVER"
 		gcloud compute --project $PROJECT ssh --zone $ZONE $HOST --command  "source /etc/profile; $@"
 	fi
 }
 
-function output {
-	gcloud beta compute --project $PROJECT instances get-serial-port-output $SERVER --zone $ZONE
-}
-
 function tty {
 	#TODO
-	echo "starting tty, connect on ip $(ip)"
+	info "starting tty, connect on ip $(ip)"
 	ssh "gotty -a 0.0.0.0 -p 2022 -w -c 'filipe:12345abc' bash"
 }
 
 function copyssh {
-	echo "Copying ssh key to server $SERVER"
-	gcloud compute --project $PROJECT copy-files --zone $ZONE .ssh/id_rsa .ssh/id_rsa.pub $HOST:~/.ssh
+	info "Copying ssh key to server $SERVER"
+	gcloud compute --project $PROJECT copy-files --zone $ZONE ~/.ssh/id_rsa ~/.ssh/id_rsa.pub $HOST:~/.ssh
 	ssh "chmod 400 ~/.ssh/id_rsa"
 	ssh "ssh-keyscan bitbucket.org >> ~/.ssh/known_hosts"
-	echo "done"
+	info "done"
 }
 
 function copyto {
-	echo "copy $1 > $HOST:$2"
+	info "copy $1 > $HOST:$2"
 	#gcloud compute --project $PROJECT copy-files --zone $ZONE $1 $HOST:$2
 }
 
 function copyfrom {
-	echo "copy $HOST:$1 > $t2"
+	info "copy $HOST:$1 > $t2"
 	#gcloud compute --project $PROJECT copy-files --zone $ZONE $HOST:$1 $2
 }
 
@@ -114,15 +134,15 @@ function help {
 	exit 0
 }
 
-#echo "${*:2}"
-#echo "${@:2}"
-
 case "$1" in
 	status)
-		status
+		instance_status
 		;;
 	ip)
-		ip
+		instance_ip
+		;;
+	output)
+		instance_output
 		;;
 	create)
 		create
@@ -142,9 +162,6 @@ case "$1" in
 	copy-ssh)
 		copyssh
 		;;
-	output)
-		output
-		;;
 	tty)
 		tty
 		;;
@@ -158,3 +175,4 @@ case "$1" in
 		help
 		;;
 esac
+exit 0
