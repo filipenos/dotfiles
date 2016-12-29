@@ -10,7 +10,8 @@ apt-get install -qq --yes \
 	gcc curl wget \
 	tmux vim git zsh \
 	npm npm2deb nodejs nodejs-legacy \
-	golang golang-go.tools
+	golang golang-go.tools \
+	exuberant-ctags
 
 update-command-not-found
 

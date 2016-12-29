@@ -43,6 +43,7 @@ else
 	install
 	install_vim
 	install_customrc	
+	install_tmux
 fi
 
 log "installation occurred successfully! have a good time"
