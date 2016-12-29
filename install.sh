@@ -4,14 +4,20 @@ log() {
 	echo "[DOTFILES] $@"
 }
 
+configure() {
+	log "adding dotfiles to custom_path"
+	echo 'export PATH="$PATH:$HOME/dotfiles/bin"' >> $HOME/.customrc
+}
+
 install() {
 	log "installing dotfiles on $HOME"
 	git clone -q https://git@github.com/filipenos/dotfiles "$HOME/dotfiles"
-	log "dotfiles installed on $HOME"
+
+	configure
 }
 
 install_customrc() {
-	echo "configuring customrc"
+	log "configuring customrc"
 	$HOME/dotfiles/bin/custom-path.sh -c
 }
 
@@ -37,9 +43,6 @@ else
 	install
 	install_vim
 	install_customrc	
-
-	log "adding dotfiles to path"
-	echo 'export PATH="$PATH:$HOME/dotfiles/bin"' >> $HOME/.customrc
 fi
 
 log "installation occurred successfully! have a good time"
