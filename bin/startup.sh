@@ -16,7 +16,6 @@ apt-get install -qq --yes \
 update-command-not-found
 
 git clone https://github.com/filipenos/dotfiles.git /usr/local/dotfiles/
-git clone https://github.com/robbyrussell/oh-my-zsh /usr/local/ohmyzsh/
 
 echo 'export GO15VENDOREXPERIMENT=0' >> /etc/profile
 echo 'export GOPATH="$HOME"' >> /etc/profile
