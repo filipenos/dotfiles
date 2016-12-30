@@ -31,5 +31,5 @@ case "$1" in
     ;;
 esac
 
-echo "copy  $value to clipboard"
 echo $value | copy
+echo "copy  $value to clipboard"

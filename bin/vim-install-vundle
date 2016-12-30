@@ -22,5 +22,12 @@ else
     ln -s "$BASE/etc/vimrc" "$HOME/.vimrc" 
 fi
 
+if [ -e "$HOME/.editorconfig" ]; then
+    info "Ignore existing $HOME/.editorconfig file"
+else
+    info "Creating link to $HOME/.editorconfig file"
+    ln -s "$BASE/etc/editorconfig" "$HOME/.editorconfig" 
+fi
+
 info "Updating local plugins"
 vim +BundleClean +PluginInstall +qall
