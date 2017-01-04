@@ -7,6 +7,7 @@ log() {
 VERSION="1.9.48"
 
 if [ ! -d "$HOME/lib" ]; then
+	log "creating local lib path $HOME/lib"
 	mkdir $HOME/lib
 fi
 
@@ -23,8 +24,9 @@ fi
 
 
 
-if grep -q -1 "go_appeninge" $HOME/.customrc ; then
-	log "configuring .bashrc"
+if ! grep -q -1 "go_appengine" $HOME/.customrc 
+then
+	log "configuring .customrc"
 	echo 'export PATH="$PATH:$HOME/lib/go_appengine"' >> $HOME/.customrc
 else
 	log "skip .customrc configuration"
