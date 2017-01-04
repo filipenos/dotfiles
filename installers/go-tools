@@ -22,14 +22,7 @@ go install -v github.com/golang/lint
 
 #GoConvey
 go get -u -v github.com/smartystreets/goconvey
-
-#Google Api GO Client
-go get -u -v code.google.com/p/google-api-go-client
-
-#Godev editor
-go get -u -v github.com/sirnewton01/godev
-go install -v github.com/sirnewton01/godev
-go get -u -v github.com/sirnewton01/godbg
+go install -v github.com/smartystreets/goconvey
 
 #GoTTy
 go get -u -v github.com/yudai/gotty
@@ -39,6 +32,6 @@ go install github.com/yudai/gotty
 go get -u -v ronoaldo.gopkg.net/whenchange
 go install -v ronoaldo.gopkg.net/whenchange
 
-#Batterymon
-go get -u -v ronoaldo.gopkg.net/batterymon
-go install -v ronoaldo.gopkg.net/batterymon
+#Aeremote
+go get -u -v ronoaldo.gopkg.net/aetools/aeremote
+go install -v ronoaldo.gopkg.net/aetools/aeremote
