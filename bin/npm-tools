@@ -1,5 +1,8 @@
 #!/bin/bash
 
+npm install -g jshint
+npm install -g js-beautify
+
 npm install -g codebox
 
 npm install -g cordova

@@ -13,9 +13,11 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'editorconfig/editorconfig-vim'
+"Plugin 'maksimr/vim-jsbeautify'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'buffet.vim'
+Plugin 'kien/tabman.vim'
 Plugin 'scrooloose/nerdcommenter'
 
 Plugin 'tpope/vim-fugitive'
@@ -26,6 +28,12 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'Blackrush/vim-gocode'
 Plugin 'fatih/vim-go'
 Plugin 'dgryski/vim-godef'
+
+"snipmate
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets' " Optional:
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 
