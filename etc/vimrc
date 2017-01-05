@@ -64,9 +64,6 @@ let mapleader=","
 set encoding=utf8
 set termencoding=utf-8
 set fileencodings=          " Don't do any encoding conversion
-" Fonts, see http://vimdoc.sourceforge.net/htmldoc/options.html#%27guifontwide%27
-set guifontwide=MingLiU:h10 " Display mixed character sets
-set guifont=Consolas:h11:cANSI
 
 " backup
 set noswapfile
