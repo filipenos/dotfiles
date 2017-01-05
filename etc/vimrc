@@ -51,27 +51,43 @@ syntax enable      " allays show highlight for file
 set number         " show line number
 set ruler          " Turn line information always on
 set ai             " Turn autoindent on
-set encoding=utf-8
 set visualbell     " shut vim up
 set noerrorbells
-set history=1000
 set autoread
-"set clipboard=unnamedplus " Required vim-gnome installed
 set ai        
 set nowrap         " Turn off line wrapping
 set laststatus=2   " Always display status line
+set wildmenu       " enhanced command-line completion
 let mapleader=","
+
+"encoding
+set encoding=utf8
+set termencoding=utf-8
+set fileencodings=          " Don't do any encoding conversion
+" Fonts, see http://vimdoc.sourceforge.net/htmldoc/options.html#%27guifontwide%27
+set guifontwide=MingLiU:h10 " Display mixed character sets
+set guifont=Consolas:h11:cANSI
 
 " backup
 set noswapfile
 set nobackup
 set nowb
+set wildignore=*.swp,*.bak,*.pyc,*.class
+
+"History
+set history=1000    " remember more commands and search history
+set undolevels=1000 " use many much levels of undo
 
 " searching
-set hlsearch   " highlight searches
-set incsearch  " incremental searching
-set ignorecase " searches are case insensitive
-set smartcase  " unless there is one capital letter
+set smarttab   " insert tabs on the start of a line according to
+               "   shiftwidth, not tabstop
+set hlsearch   " highlight search terms
+set incsearch  " show search matches as you type
+set smartcase  " ignore case if search pattern is all lowercase,
+               "   case-sensitive otherwise
+set ignorecase " ignore case when searching
+
+set pastetoggle=<F12> 
 
 set t_Co=256
 if has('gui_running')
@@ -165,6 +181,7 @@ command! FormatJSON call FormatJSON()
 command! -nargs=* GoappTest call GoappTest()
 command! ToggleErrors call ToggleErrors()
 command! ToggleHidden call ToggleHidden()
+command! ToggleCursor call ToggleCursor()
 
 command! GoDefNewTab call ChangeGoDef(2)
 command! GoDefCurrent call ChangeGoDef(0)
@@ -223,6 +240,22 @@ function! ToggleHidden()
   else
     set nolist
   endif
+" another nice listchars configuration
+" set listchars=tab:\|\ ,eol:¬
+" set listchars=eol:¬,tab:>-,trail:.,extends:»,precedes:«
+" set listchars=tab:\|\ ,eol:¬,trail:-,extends:>,precedes:<,nbsp:+
+" set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endfunction
+
+function! ToggleCursor()
+  let g:cursor_on = exists('g:cursor_on') ? !g:cursor_on : 1
+  if g:cursor_on
+    set cursorcolumn
+    set cursorline
+  else
+    set nocursorcolumn
+    set nocursorline
+  endif
 endfunction
 
 " All-modes shortcut helper function
@@ -250,6 +283,7 @@ call KeyMap("<F8>", ":TagbarToggle", 1)
 call KeyMap("<Leader>t", ":GoappTest", 0)
 call KeyMap("<Leader>fj", ":FormatJSON", 0)
 call KeyMap("<Leader>h", ":ToggleHidden", 1)
+call KeyMap("<Leader>c", ":ToggleCursor", 1)
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
