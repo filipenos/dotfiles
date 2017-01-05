@@ -166,6 +166,16 @@ command! -nargs=* GoappTest call GoappTest()
 command! ToggleErrors call ToggleErrors()
 command! ToggleHidden call ToggleHidden()
 
+command! GoDefNewTab call ChangeGoDef(2)
+command! GoDefCurrent call ChangeGoDef(0)
+command! GoDefHorizontal call ChangeGoDef(1)
+command! GoDefVertical call ChangeGoDef(3)
+
+function! ChangeGoDef(v)
+  echo "changing godef split to" a:v
+  let g:godef_split=a:v
+endfunction
+
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
   let l:file = expand('%')
