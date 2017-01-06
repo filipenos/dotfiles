@@ -9,8 +9,8 @@ go get -u -v golang.org/x/tools/
 go install -v golang.org/x/tools/cmd/goimports
 
 #Godef
-go get -u -v code.google.com/p/rog-go/exp/cmd/godef
-go install -v code.google.com/p/rog-go/exp/cmd/godef
+go get -u -v github.com/rogpeppe/godef
+go install -v github.com/rogpeppe/godef
 
 #Gotags
 go get -u -v github.com/jstemmer/gotags
