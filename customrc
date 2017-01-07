@@ -4,11 +4,8 @@ fi
 
 # Aliases
 alias clean-number="sed 's/[^0-9]*//g'"
-alias docker-ubuntu="docker run -i -t ubuntu /bin/bash"
 alias serve-dir="python -m SimpleHTTPServer"
 alias format-json="python -m json.tool"
 alias change-ps1='export PS1="\e[0;34m\W: \e[m"'
 alias npm-list="npm list -g --depth=0"
 alias dpkg-purge-rc='dpkg -l | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge'
-
-alias kissfm='mplayer "http://7289.live.streamtheworld.com/SAOPAULO1021AAC"'
