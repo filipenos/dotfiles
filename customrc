@@ -2,9 +2,6 @@ if [ -f ~/.customrc ]; then
 	source ~/.customrc
 fi
 
-# env
-export GO15VENDOREXPERIMENT=0
-
 # Aliases
 alias clean-number="sed 's/[^0-9]*//g'"
 alias docker-ubuntu="docker run -i -t ubuntu /bin/bash"

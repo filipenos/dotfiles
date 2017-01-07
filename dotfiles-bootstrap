@@ -28,7 +28,7 @@ install_vim() {
 
 install_tmux() {
 	log "configuring tmux.conf"
-	ln -s $HOME/dotfiles/etc/tmux.conf $HOME/.tmux.conf
+	ln -s $HOME/dotfiles/tmux.conf $HOME/.tmux.conf
 }
 
 remove() {
