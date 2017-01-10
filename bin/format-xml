@@ -1,0 +1,5 @@
+#/bin/sh
+
+xmllint --version >/dev/null 2>&1 || sudo apt-get install libxml2-utils
+
+exec xmllint -format "$@"
