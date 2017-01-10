@@ -287,6 +287,15 @@ call KeyMap("<Leader>f", ":Grep", 1)
 call KeyMap("<Leader>fr", ":Rgrep", 1)
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+" Move line/block up: \k
+nnoremap <leader>k :m-2<cr>
+vnoremap <leader>k :m'<-2<cr>gv=gv
+" Move line/block down: \j
+nnoremap <leader>j :m+1<cr>
+vnoremap <leader>j :m'>+1<cr>gv=gv
+" Duplicate line/block down: \y
+nnoremap <leader>y :t.<cr>
+vnoremap <leader>y :t'>.<cr>gv=gv
 " Mappings to move lines http://vim.wikia.com/wiki/Moving_lines_up_or_down
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
