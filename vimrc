@@ -20,6 +20,8 @@ Plugin 'buffet.vim'
 Plugin 'kien/tabman.vim'
 Plugin 'scrooloose/nerdcommenter'
 
+Plugin 'yegappan/grep'
+
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
 
@@ -281,8 +283,17 @@ call KeyMap("<Leader>t", ":GoappTest", 0)
 call KeyMap("<Leader>fj", ":FormatJSON", 0)
 call KeyMap("<Leader>h", ":ToggleHidden", 1)
 call KeyMap("<Leader>c", ":ToggleCursor", 1)
+call KeyMap("<Leader>f", ":Grep", 1)
+call KeyMap("<Leader>fr", ":Rgrep", 1)
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+" Mappings to move lines http://vim.wikia.com/wiki/Moving_lines_up_or_down
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 " Links 
 " https://www.ibm.com/developerworks/library/l-vim-script-1/
