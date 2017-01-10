@@ -1,5 +1,9 @@
 if [ -f ~/.customrc ]; then
-	source ~/.customrc
+  source ~/.customrc
+fi
+
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
 fi
 
 # Aliases

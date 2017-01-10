@@ -2,9 +2,6 @@
 
 randomizer -h >/dev/null 2>&1 || go install beneficiofacil.gopkg.net/site/cmd/randomizer
 
-copy() {
-  xclip -sel clip
-}
 help() {
   echo "use $0 {cpf|cnpj|cep|date|name}"
 }
@@ -31,5 +28,5 @@ case "$1" in
     ;;
 esac
 
-echo $value | copy
+echo "$value" | copy
 echo "copy  $value to clipboard"
