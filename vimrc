@@ -19,6 +19,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'buffet.vim'
 Plugin 'kien/tabman.vim'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-surround' " provides mappings to easily delete, change and add such surroundings in pairs
 
 Plugin 'yegappan/grep'
 
