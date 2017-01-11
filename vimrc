@@ -177,6 +177,7 @@ let g:ctrlp_custom_ignore = {
   \ }
 
 command! FormatJSON call FormatJSON()
+command! FormatXML call FormatXML()
 command! -nargs=* GoappTest call GoappTest()
 command! ToggleErrors call ToggleErrors()
 command! ToggleHidden call ToggleHidden()
@@ -230,6 +231,10 @@ function! FormatJSON()
   %!python -m json.tool
 endfunction
 
+function! FormatXML()
+  %!xmllint -format -
+endfunction
+
 function! ToggleHidden()
   set listchars=eol:¬,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
   "Toggle the flag (or set it if it doesn't yet exist)...
@@ -281,6 +286,7 @@ call KeyMap("<F7>", ":NERDTreeToggle", 1)
 call KeyMap("<F8>", ":TagbarToggle", 1)
 call KeyMap("<Leader>t", ":GoappTest", 0)
 call KeyMap("<Leader>fj", ":FormatJSON", 0)
+call KeyMap("<Leader>fx", ":FormatXML", 0)
 call KeyMap("<Leader>h", ":ToggleHidden", 1)
 call KeyMap("<Leader>c", ":ToggleCursor", 1)
 call KeyMap("<Leader>f", ":Grep", 1)
