@@ -282,10 +282,12 @@ if filereadable(expand("~/.gvimrc.local"))
 endif
 
 " Map to clear last search
-nmap <SPACE> <SPACE>:noh<CR>
-nnoremap <F6> :ToggleErrors<CR>
+" http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)
+call KeyMap("<SPACE>", ":noh", 0)
 call KeyMap("<F2>", ":Bufferlist", 1)
+call KeyMap("<F6>", "ToggleErrors", 1)
 call KeyMap("<F7>", ":NERDTreeToggle", 1)
+call KeyMap("<S-F7>", ":NERDTreeFind", 1)
 call KeyMap("<F8>", ":TagbarToggle", 1)
 call KeyMap("<Leader>t", ":GoappTest", 0)
 call KeyMap("<Leader>fj", ":FormatJSON", 0)
@@ -294,6 +296,9 @@ call KeyMap("<Leader>h", ":ToggleHidden", 1)
 call KeyMap("<Leader>c", ":ToggleCursor", 1)
 call KeyMap("<Leader>f", ":Grep", 1)
 call KeyMap("<Leader>fr", ":Rgrep", 1)
+"call KeyMap("<C>C", '"+y', 1) "copy
+"call KeyMap("<C>X", '"+x', 1) "cut
+call KeyMap("<C>V", '"+gP', 1) "paste
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 " Move line/block up: \k
