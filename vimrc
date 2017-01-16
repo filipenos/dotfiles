@@ -44,7 +44,7 @@ Plugin 'honza/vim-snippets' " Optional:
 
 " Allow to add custom plugins
 if filereadable(expand("~/.vimrc.plugins.local"))
-    source ~/.vimrc.plugins.local
+  source ~/.vimrc.plugins.local
 endif
 
 " All of your Plugins must be added before the following line
@@ -80,11 +80,11 @@ set undolevels=1000 " use many much levels of undo
 
 " searching
 set smarttab   " insert tabs on the start of a line according to
-               "   shiftwidth, not tabstop
+"              " shiftwidth, not tabstop
 set hlsearch   " highlight search terms
 set incsearch  " show search matches as you type
 set smartcase  " ignore case if search pattern is all lowercase,
-               "   case-sensitive otherwise
+"              " case-sensitive otherwise
 set ignorecase " ignore case when searching
 
 " indent
@@ -96,11 +96,11 @@ set pastetoggle=<F12>
 
 set t_Co=256
 if has('gui_running')
-    set background=light
-    set mouse=a
+  set background=light
+  set mouse=a
 else
-    set background=dark
-    set mouse=
+  set background=dark
+  set mouse=
 endif
 
 augroup filemapping
@@ -149,38 +149,38 @@ let g:godef_split=1 "0 new buffer, 1 split window, 2 new tab, 3 vsplit window
 
 " tagbar
 let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : 'gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
+      \ 'ctagstype' : 'go',
+      \ 'kinds'     : [
+      \ 'p:package',
+      \ 'i:imports:1',
+      \ 'c:constants',
+      \ 'v:variables',
+      \ 't:types',
+      \ 'n:interfaces',
+      \ 'w:fields',
+      \ 'e:embedded',
+      \ 'm:methods',
+      \ 'r:constructor',
+      \ 'f:functions'
+      \ ],
+      \ 'sro' : '.',
+      \ 'kind2scope' : {
+      \ 't' : 'ctype',
+      \ 'n' : 'ntype'
+      \ },
+      \ 'scope2kind' : {
+      \ 'ctype' : 't',
+      \ 'ntype' : 'n'
+      \ },
+      \ 'ctagsbin'  : 'gotags',
+      \ 'ctagsargs' : '-sort -silent'
+      \ }
 
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
+      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ }
 
 command! FormatJSON call FormatJSON()
 command! FormatXML call FormatXML()
@@ -250,11 +250,11 @@ function! ToggleHidden()
   else
     set nolist
   endif
-" another nice listchars configuration
-" set listchars=tab:\|\ ,eol:¬
-" set listchars=eol:¬,tab:>-,trail:.,extends:»,precedes:«
-" set listchars=tab:\|\ ,eol:¬,trail:-,extends:>,precedes:<,nbsp:+
-" set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+  " another nice listchars configuration
+  " set listchars=tab:\|\ ,eol:¬
+  " set listchars=eol:¬,tab:>-,trail:.,extends:»,precedes:«
+  " set listchars=tab:\|\ ,eol:¬,trail:-,extends:>,precedes:<,nbsp:+
+  " set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
 endfunction
 
 function! ToggleCursor()
@@ -278,10 +278,10 @@ function! KeyMap(key, action, insert_mode)
 endfunction
 
 if filereadable(expand("~/.vimrc.local"))
-    source ~/.vimrc.local
+  source ~/.vimrc.local
 endif
 if filereadable(expand("~/.gvimrc.local"))
-    source ~/.gvimrc.local
+  source ~/.gvimrc.local
 endif
 
 " Map to clear last search
