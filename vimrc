@@ -55,11 +55,9 @@ filetype plugin indent on    " required
 syntax enable      " allays show highlight for file
 set number         " show line number
 set ruler          " Turn line information always on
-set ai             " Turn autoindent on
 set visualbell     " shut vim up
 set noerrorbells
 set autoread
-set ai        
 set nowrap         " Turn off line wrapping
 set laststatus=2   " Always display status line
 set wildmenu       " enhanced command-line completion
@@ -88,6 +86,11 @@ set incsearch  " show search matches as you type
 set smartcase  " ignore case if search pattern is all lowercase,
                "   case-sensitive otherwise
 set ignorecase " ignore case when searching
+
+" indent
+set autoindent      "Keep indentation from previous line
+set smartindent     "Automatically inserts indentation in some cases
+set cindent         "Like smartindent, but stricter and more customisable
 
 set pastetoggle=<F12> 
 
