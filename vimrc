@@ -12,6 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'wincent/Command-T'
 Plugin 'editorconfig/editorconfig-vim'
 "Plugin 'maksimr/vim-jsbeautify'
 Plugin 'vim-airline/vim-airline'
@@ -297,8 +298,8 @@ call KeyMap("<Leader>fj", ":FormatJSON", 0)
 call KeyMap("<Leader>fx", ":FormatXML", 0)
 call KeyMap("<Leader>h", ":ToggleHidden", 1)
 call KeyMap("<Leader>c", ":ToggleCursor", 1)
-call KeyMap("<Leader>f", ":Grep", 1)
-call KeyMap("<Leader>fr", ":Rgrep", 1)
+call KeyMap("<Leader>f", ":Rgrep", 1)
+call KeyMap("<Leader>fb", ":Bgrep", 1)
 "call KeyMap("<C>C", '"+y', 1) "copy
 "call KeyMap("<C>X", '"+x', 1) "cut
 call KeyMap("<C>V", '"+gP', 1) "paste
