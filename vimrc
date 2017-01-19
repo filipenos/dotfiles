@@ -99,6 +99,10 @@ set t_Co=256
 if has('gui_running')
   set background=light
   set mouse=a
+  set guioptions-=m  "remove menu bar
+  set guioptions-=T  "remove toolbar
+  set guioptions-=r  "remove right-hand scroll bar
+  set guioptions-=L  "remove left-hand scroll bar
 else
   set background=dark
   set mouse=
@@ -303,8 +307,10 @@ call KeyMap("<Leader>fb", ":Bgrep", 1)
 "call KeyMap("<C>C", '"+y', 1) "copy
 "call KeyMap("<C>X", '"+x', 1) "cut
 call KeyMap("<C>V", '"+gP', 1) "paste
+
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+
 " Move line/block up: \k
 nnoremap <leader>k :m-2<cr>
 vnoremap <leader>k :m'<-2<cr>gv=gv
@@ -314,6 +320,13 @@ vnoremap <leader>j :m'>+1<cr>gv=gv
 " Duplicate line/block down: \y
 nnoremap <leader>y :t.<cr>
 vnoremap <leader>y :t'>.<cr>gv=gv
+
+"Toggling the display of a widget
+"http://vim.wikia.com/wiki/Hide_toolbar_or_menus_to_see_more_text
+nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
+nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
+nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
+
 " Mappings to move lines http://vim.wikia.com/wiki/Moving_lines_up_or_down
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
