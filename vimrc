@@ -52,17 +52,20 @@ endif
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" basic confs
+let mapleader=","
+
+" display settings
 syntax enable      " allays show highlight for file
+set nowrap         " dont wrap lines
 set number         " show line number
-set ruler          " Turn line information always on
+set ruler          " show cursor position in status bar
+set title          " show file in titlebar
+set wildmenu       " enhanced command-line completion
+set laststatus=2   " Always display status line
+
+set autoread
 set visualbell     " shut vim up
 set noerrorbells
-set autoread
-set nowrap         " Turn off line wrapping
-set laststatus=2   " Always display status line
-set wildmenu       " enhanced command-line completion
-let mapleader=","
 
 "encoding
 set encoding=utf8
@@ -306,15 +309,18 @@ call KeyMap("<Leader>h", ":ToggleHidden", 1)
 call KeyMap("<Leader>c", ":ToggleCursor", 1)
 call KeyMap("<Leader>f", ":Rgrep", 1)
 call KeyMap("<Leader>fb", ":Bgrep", 1)
-"call KeyMap("<C>C", '"+y', 1) "copy
-"call KeyMap("<C>X", '"+x', 1) "cut
-call KeyMap("<C>V", '"+gP', 1) "paste
-
-nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
 " shortcut to escape
 map <C-c> <ESC>
+
+" custom copy/paste to use in X
+vnoremap <leader>y "+y
+vnoremap <leader>x "+x
+vnoremap <leader>p "+gP
+nnoremap <leader>p "+gP
+
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
 " nerd commenter
 map <leader>/ <plug>NERDCommenterToggle
@@ -326,8 +332,8 @@ vnoremap <leader>k :m'<-2<cr>gv=gv
 nnoremap <leader>j :m+1<cr>
 vnoremap <leader>j :m'>+1<cr>gv=gv
 " Duplicate line/block down: \y
-nnoremap <leader>y :t.<cr>
-vnoremap <leader>y :t'>.<cr>gv=gv
+nnoremap <leader>d :t.<cr>
+vnoremap <leader>d :t'>.<cr>gv=gv
 
 "Toggling the display of a widget
 "http://vim.wikia.com/wiki/Hide_toolbar_or_menus_to_see_more_text
