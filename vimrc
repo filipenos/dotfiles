@@ -292,11 +292,13 @@ endif
 " Map to clear last search
 " http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)
 call KeyMap("<SPACE>", ":noh", 0)
+call KeyMap("<C-l>", ":noh", 1)
 call KeyMap("<F2>", ":Bufferlist", 1)
 call KeyMap("<F6>", "ToggleErrors", 1)
 call KeyMap("<F7>", ":NERDTreeToggle", 1)
 call KeyMap("<S-F7>", ":NERDTreeFind", 1)
 call KeyMap("<F8>", ":TagbarToggle", 1)
+call KeyMap("<C-S-F>", ":normal gg=G", 1)
 call KeyMap("<Leader>t", ":GoappTest", 0)
 call KeyMap("<Leader>fj", ":FormatJSON", 0)
 call KeyMap("<Leader>fx", ":FormatXML", 0)
@@ -310,6 +312,12 @@ call KeyMap("<C>V", '"+gP', 1) "paste
 
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+
+" shortcut to escape
+map <C-c> <ESC>
+
+" nerd commenter
+map <leader>/ <plug>NERDCommenterToggle
 
 " Move line/block up: \k
 nnoremap <leader>k :m-2<cr>
