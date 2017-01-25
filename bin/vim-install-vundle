@@ -16,10 +16,17 @@ else
 fi
 
 if [ -e "$HOME/.vimrc" ]; then
-    info "Ignore existing $HOME/.vimrc confi file"
+    info "Ignore existing $HOME/.vimrc file"
 else
-    info "Creating link to $HOME/.vimrc config file"
+    info "Creating link to $HOME/.vimrc file"
     ln -s "$BASE/vimrc" "$HOME/.vimrc" 
+fi
+
+if [ -e "$HOME/.vimrc.plugins" ]; then
+    info "Ignore existing $HOME/.vimrc.plugins file"
+else
+    info "Creating link to $HOME/.vimrc.plugins file"
+    ln -s "$BASE/vimrc.plugins" "$HOME/.vimrc.plugins"
 fi
 
 if [ -e "$HOME/.editorconfig" ]; then
