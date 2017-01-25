@@ -3,8 +3,6 @@ if filereadable(expand("~/.vimrc.plugins"))
   source ~/.vimrc.plugins
 endif
 
-let mapleader=","
-
 " display settings
 syntax enable      " allays show highlight for file
 set nowrap         " dont wrap lines
@@ -243,26 +241,24 @@ if filereadable(expand("~/.gvimrc.local"))
   source ~/.gvimrc.local
 endif
 
-" Map to clear last search
-" http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)
-call KeyMap("<SPACE>", ":noh", 0)
-call KeyMap("<C-l>", ":noh", 1)
-call KeyMap("<F2>", ":Bufferlist", 1)
-call KeyMap("<F6>", "ToggleErrors", 1)
-call KeyMap("<F7>", ":NERDTreeToggle", 1)
-call KeyMap("<S-F7>", ":NERDTreeFind", 1)
-call KeyMap("<F8>", ":TagbarToggle", 1)
-call KeyMap("<C-S-F>", ":normal gg=G", 1)
-call KeyMap("<Leader>t", ":GoappTest", 0)
-call KeyMap("<Leader>fj", ":FormatJSON", 0)
-call KeyMap("<Leader>fx", ":FormatXML", 0)
-call KeyMap("<Leader>h", ":ToggleHidden", 1)
-call KeyMap("<Leader>c", ":ToggleCursor", 1)
-call KeyMap("<Leader>f", ":Rgrep", 1)
-call KeyMap("<Leader>fb", ":Bgrep", 1)
+" key (re)mapppings
+
+" The default leader is '\\', changed to ','
+let mapleader=","
 
 " shortcut to escape
 map <C-c> <ESC>
+
+" Making it so ; works like : for commands. 
+nnoremap ; :
+
+" Wrapped lines goes down/up to next row, rather than next line in file.
+nnoremap j gj
+nnoremap k gk
+
+" visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
 
 " custom copy/paste to use in X
 vnoremap <leader>y "+y
@@ -275,6 +271,14 @@ nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
 " nerd commenter
 map <leader>/ <plug>NERDCommenterToggle
+
+" Mappings to move lines http://vim.wikia.com/wiki/Moving_lines_up_or_down
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " Move line/block up: \k
 nnoremap <leader>k :m-2<cr>
@@ -292,13 +296,23 @@ nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
 nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
 nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 
-" Mappings to move lines http://vim.wikia.com/wiki/Moving_lines_up_or_down
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
+" Map to clear last search
+" http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)
+call KeyMap("<SPACE>", ":noh", 0)
+call KeyMap("<C-l>", ":noh", 1)
+call KeyMap("<F2>", ":Bufferlist", 1)
+call KeyMap("<F6>", "ToggleErrors", 1)
+call KeyMap("<F7>", ":NERDTreeToggle", 1)
+call KeyMap("<S-F7>", ":NERDTreeFind", 1)
+call KeyMap("<F8>", ":TagbarToggle", 1)
+call KeyMap("<C-S-F>", ":normal gg=G", 1)
+call KeyMap("<Leader>t", ":GoappTest", 0)
+call KeyMap("<Leader>fj", ":FormatJSON", 0)
+call KeyMap("<Leader>fx", ":FormatXML", 0)
+call KeyMap("<Leader>h", ":ToggleHidden", 1)
+call KeyMap("<Leader>c", ":ToggleCursor", 1)
+call KeyMap("<Leader>f", ":Rgrep", 1)
+call KeyMap("<Leader>fb", ":Bgrep", 1)
 
 " Links 
 " https://www.ibm.com/developerworks/library/l-vim-script-1/
