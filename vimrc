@@ -314,5 +314,11 @@ call KeyMap("<Leader>c", ":ToggleCursor", 1)
 call KeyMap("<Leader>f", ":Rgrep", 1)
 call KeyMap("<Leader>fb", ":Bgrep", 1)
 
+" map macros
+let @n='iO'
+"map nl @k
+"map nl iO
+map na i<CR><ESC>O
+
 " Links 
 " https://www.ibm.com/developerworks/library/l-vim-script-1/
