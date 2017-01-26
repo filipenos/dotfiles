@@ -318,7 +318,7 @@ call KeyMap("<Leader>fb", ":Bgrep", 1)
 let @n='iO'
 "map nl @k
 "map nl iO
-map na i<CR><ESC>O
+map nl i<CR><ESC>O
 
 " Links 
 " https://www.ibm.com/developerworks/library/l-vim-script-1/
