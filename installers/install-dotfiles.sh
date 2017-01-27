@@ -16,14 +16,14 @@ install() {
 	configure
 }
 
-install_customrc() {
-	log "configuring customrc"
-	$HOME/dotfiles/bin/custom-path.sh -c
+install_vim() {
+  log "configuring vimrc"
+  $HOME/dotfiles/bin/vim-install-vundle
 }
 
-install_vim() {
-	log "configuring vimrc"
-	$HOME/dotfiles/bin/vim-install-vundle
+install_customrc() {
+  log "configuring customrc"
+  $HOME/dotfiles/bin/custom-path.sh -c
 }
 
 install_tmux() {
