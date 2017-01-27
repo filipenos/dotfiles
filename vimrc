@@ -251,3 +251,4 @@ map nl i<CR><ESC>O
 
 " Links 
 " https://www.ibm.com/developerworks/library/l-vim-script-1/
+" http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_1)
