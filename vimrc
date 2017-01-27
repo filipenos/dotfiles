@@ -1,8 +1,3 @@
-" Load plugins
-if filereadable(expand("~/.vimrc.plugins"))
-  source ~/.vimrc.plugins
-endif
-
 " display settings
 syntax enable      " allays show highlight for file
 set nowrap         " dont wrap lines
@@ -48,6 +43,7 @@ set cindent         "Like smartindent, but stricter and more customisable
 set pastetoggle=<F12> 
 
 set t_Co=256
+
 if has('gui_running')
   set background=light
   set mouse=a
@@ -58,6 +54,14 @@ if has('gui_running')
 else
   set background=dark
   set mouse=
+endif
+
+" The default leader is '\\', changed to ','
+let mapleader=","
+
+" Load plugins
+if filereadable(expand("~/.vimrc.plugins"))
+  source ~/.vimrc.plugins
 endif
 
 augroup filemapping
@@ -177,9 +181,6 @@ endif
 
 " key (re)mapppings
 
-" The default leader is '\\', changed to ','
-let mapleader=","
-
 " shortcut to escape
 map <C-c> <ESC>
 
@@ -202,9 +203,6 @@ nnoremap <leader>p "+gP
 
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
-
-" nerd commenter
-map <leader>/ <plug>NERDCommenterToggle
 
 " Mappings to move lines http://vim.wikia.com/wiki/Moving_lines_up_or_down
 nnoremap <C-j> :m .+1<CR>==
@@ -240,8 +238,6 @@ call KeyMap("<Leader>fj", ":FormatJSON", 0)
 call KeyMap("<Leader>fx", ":FormatXML", 0)
 call KeyMap("<Leader>h", ":ToggleHidden", 1)
 call KeyMap("<Leader>c", ":ToggleCursor", 1)
-call KeyMap("<Leader>f", ":Rgrep", 1)
-call KeyMap("<Leader>fb", ":Bgrep", 1)
 
 " map macros
 let @n='iO'
