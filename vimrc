@@ -83,78 +83,12 @@ augroup filemapping
   au FileType qf wincmd J
 augroup END
 
-" nerdtree
-let NERDTreeIgnore=['\.pyc$', '\.pyo$', '\.rbc$', '\.rbo$', '\.class$', '\.o$', '\~$']
-
-" syntastic
-let g:syntastic_enable_signs=1
-let g:syntastic_quiet_messages = {'level': 'warnings'}
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_jump = 0
-let g:syntastic_full_redraws=1
-
-" syntastic Go
-let g:syntastic_auto_loc_list = 1
-" let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
-
-" vim-go
-let g:gofmt_command="goimports"
-let g:go_list_type = "quickfix"
-
-" godef
-let g:godef_split=1 "0 new buffer, 1 split window, 2 new tab, 3 vsplit window
-
-" tagbar
-let g:tagbar_type_go = {
-      \ 'ctagstype' : 'go',
-      \ 'kinds'     : [
-      \ 'p:package',
-      \ 'i:imports:1',
-      \ 'c:constants',
-      \ 'v:variables',
-      \ 't:types',
-      \ 'n:interfaces',
-      \ 'w:fields',
-      \ 'e:embedded',
-      \ 'm:methods',
-      \ 'r:constructor',
-      \ 'f:functions'
-      \ ],
-      \ 'sro' : '.',
-      \ 'kind2scope' : {
-      \ 't' : 'ctype',
-      \ 'n' : 'ntype'
-      \ },
-      \ 'scope2kind' : {
-      \ 'ctype' : 't',
-      \ 'ntype' : 'n'
-      \ },
-      \ 'ctagsbin'  : 'gotags',
-      \ 'ctagsargs' : '-sort -silent'
-      \ }
-
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-      \ 'file': '\v\.(exe|so|dll)$',
-      \ }
-
 command! FormatJSON call FormatJSON()
 command! FormatXML call FormatXML()
 command! -nargs=* GoappTest call GoappTest()
 command! ToggleErrors call ToggleErrors()
 command! ToggleHidden call ToggleHidden()
 command! ToggleCursor call ToggleCursor()
-
-command! GoDefNewTab call ChangeGoDef(2)
-command! GoDefCurrent call ChangeGoDef(0)
-command! GoDefHorizontal call ChangeGoDef(1)
-command! GoDefVertical call ChangeGoDef(3)
-
-function! ChangeGoDef(v)
-  echo "changing godef split to" a:v
-  let g:godef_split=a:v
-endfunction
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -300,11 +234,6 @@ nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 " http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)
 call KeyMap("<SPACE>", ":noh", 0)
 call KeyMap("<C-l>", ":noh", 1)
-call KeyMap("<F2>", ":Bufferlist", 1)
-call KeyMap("<F6>", "ToggleErrors", 1)
-call KeyMap("<F7>", ":NERDTreeToggle", 1)
-call KeyMap("<S-F7>", ":NERDTreeFind", 1)
-call KeyMap("<F8>", ":TagbarToggle", 1)
 call KeyMap("<C-S-F>", ":normal gg=G", 1)
 call KeyMap("<Leader>t", ":GoappTest", 0)
 call KeyMap("<Leader>fj", ":FormatJSON", 0)
