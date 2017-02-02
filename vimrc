@@ -40,6 +40,10 @@ set autoindent      "Keep indentation from previous line
 set smartindent     "Automatically inserts indentation in some cases
 set cindent         "Like smartindent, but stricter and more customisable
 
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
 set pastetoggle=<F12> 
 
 set t_Co=256
@@ -228,9 +232,11 @@ nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
 nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
 nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 
-" Map to clear last search
+" Enable folding with the spacebar
+nnoremap <space> za
+
 " http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)
-call KeyMap("<SPACE>", ":noh", 0)
+" Map to clear last search
 call KeyMap("<C-l>", ":noh", 1)
 call KeyMap("<C-S-F>", ":normal gg=G", 1)
 call KeyMap("<Leader>t", ":GoappTest", 0)
