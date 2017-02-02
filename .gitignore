@@ -2,3 +2,6 @@ atom/.apm/
 atom/blob-store/
 atom/compile-cache/
 atom/storage/
+atom/.node-gyp/
+atom/nohup.out
+atom/packages/

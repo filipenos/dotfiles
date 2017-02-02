@@ -21,6 +21,7 @@
   "git-plus":
     splitPane: "Up"
     wordDiff: false
+  "go-plus": {}
   "highlight-selected":
     highlightBackground: true
     lightTheme: true
