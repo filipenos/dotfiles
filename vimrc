@@ -235,6 +235,11 @@ nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 " Enable folding with the spacebar
 nnoremap <space> za
 
+" Shortcuts to test
+map bn :bnext<CR>
+map bp :bprevious<CR>
+map bd :bdelete<CR>
+
 " http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)
 " Map to clear last search
 call KeyMap("<C-l>", ":noh", 1)
