@@ -25,6 +25,7 @@ Plugin 'yegappan/grep'
 " vsc
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
+Plugin 'airblade/vim-gitgutter'
 
 " languages suports
 Plugin 'Blackrush/vim-gocode'
@@ -32,6 +33,8 @@ Plugin 'fatih/vim-go'
 Plugin 'dgryski/vim-godef'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'python-mode/python-mode'
+Plugin 'ternjs/tern_for_vim'
+Plugin 'burnettk/vim-angular'
 
 "snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils'
