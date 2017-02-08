@@ -167,6 +167,16 @@ function! ToggleCursor()
   endif
 endfunction
 
+function! Refresh()
+  "Use Ctrl L to redraw the screen. You can also use :redraw
+    " code
+    set noconfirm
+    bufdo e!
+    set confirm
+endfunction
+
+nmap <F5> :call Refresh()<CR>
+
 " All-modes shortcut helper function
 function! KeyMap(key, action, insert_mode)
   execute "noremap  <silent> " . a:key . " " . a:action . "<CR>"
