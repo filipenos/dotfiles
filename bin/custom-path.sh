@@ -8,10 +8,11 @@ FILE="$(readlink -f "$0")"
 BASE="${FILE%/*}"
 BASE="${BASE%/*}"
 
-add_path() {
+configure_path() {
 	if ! grep -q -1 "#CUSTOM_PATH" $HOME/.bashrc ; then
 		log "configuring .bashrc"
 		echo "source $BASE/customrc #CUSTOM_PATH" >> $HOME/.bashrc
+		echo "source $BASE/custompath #CUSTOM_PATH" >> $HOME/.bashrc
 	else
 		log "bashrc already configured"
 	fi
@@ -19,6 +20,7 @@ add_path() {
 	if ! grep -q -1 "#CUSTOM_PATH" $HOME/.zshrc ; then
 		log "configuring .zshrc"
 		echo "source $BASE/customrc #CUSTOM_PATH" >> $HOME/.zshrc
+		echo "source $BASE/custompath #CUSTOM_PATH" >> $HOME/.zshrc
 	else
 		log "zshrc already configured"
 	fi
@@ -31,26 +33,46 @@ remove() {
 	sed -i '/CUSTOM_PATH/d' "$HOME/.zshrc"
 }
 
+add_to_path() {
+  touch ~/.custompath
+  log "Adding $2 to custom path"
+  echo "$2" >> ~/.custompath
+}
+
+show_path() {
+  echo "$PATH" | tr ':' '\n'
+}
+
 help() {
-	echo "Usage $0
-	-c configure
-		Configure your .bashrc|.zshrc to use the customrc
-	-r remove
-		Remove configuration of customrc to the .bashrc|.zshrc
-	-h help
-		Show this help"
+  echo "Usage $0
+  -c configure
+    Configure your .bashrc|.zshrc to use the customrc
+  -r remove
+    Remove configuration of customrc to the .bashrc|.zshrc
+  -p show-path
+    Show current path
+  -a add
+    Add to custom path
+  -h help
+    Show this help"
 }
 
 case $1	in
-	-c|configure)
-		add_path "$@"
-		;;
-	-r|remove)
-		remove "$@"
-		;;
-	-h|help|*)
-		help
-		;;
+  -c|configure)
+    configure_path "$@"
+    ;;
+  -r|remove)
+    remove "$@"
+    ;;
+  -a|add)
+    add_to_path "$@"
+    ;;
+  -p|show-path)
+    show_path
+    ;;
+  -h|help|*)
+    help
+    ;;
 esac
 
 exit 0
