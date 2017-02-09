@@ -124,9 +124,14 @@ endfunction
 map <Leader>/ <plug>NERDCommenterToggle
 
 map <F2> :Bufferlist <CR>
-map <F6> :ToggleErrors <CR>
 map <F7> :NERDTreeToggle <CR>
 map <S-F7> :NERDTreeFind <CR>
 map <F8> :TagbarToggle <CR>
 map <Leader>f :Rgrep <CR>
 map <Leader>fb :Bgrep <CR>
+map <Leader>tg :GitGutterToggle <CR>
+map Tg :GitGutterToggle <CR>
+map <Leader>tgs :GitGutterSignsToggle <CR>
+map Tgs :GitGutterSignsToggle <CR>
+map <Leader>tgl :GitGutterLineHighlightsToggle <CR>
+map Tgl :GitGutterLineHighlightsToggle <CR>

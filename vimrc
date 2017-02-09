@@ -94,9 +94,6 @@ augroup END
 command! FormatJSON call FormatJSON()
 command! FormatXML call FormatXML()
 command! -nargs=* GoappTest call GoappTest()
-command! ToggleErrors call ToggleErrors()
-command! ToggleHidden call ToggleHidden()
-command! ToggleCursor call ToggleCursor()
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -108,6 +105,19 @@ function! s:build_go_files()
   endif
 endfunction
 
+function! ToggleCursor()
+  let g:cursor_on = exists('g:cursor_on') ? !g:cursor_on : 1
+  if g:cursor_on
+    set cursorcolumn
+    set cursorline
+  else
+    set nocursorcolumn
+    set nocursorline
+  endif
+endfunction
+map <Leader>tc :call ToggleCursor() <CR>
+map Tc :call ToggleCursor() <CR>
+
 function! ToggleErrors()
   if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
     " No location/quickfix list shown, open syntastic error location panel
@@ -116,6 +126,26 @@ function! ToggleErrors()
     lclose
   endif
 endfunction
+map <Leader>te :call ToggleErrors() <CR>
+map Te :call ToggleErrors() <CR>
+
+function! ToggleHidden()
+  set listchars=eol:¬,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
+  "Toggle the flag (or set it if it doesn't yet exist)...
+  let g:list_on = exists('g:list_on') ? !g:list_on : 1
+  if g:list_on
+    set list
+  else
+    set nolist
+  endif
+  " another nice listchars configuration
+  " set listchars=tab:\|\ ,eol:¬
+  " set listchars=eol:¬,tab:>-,trail:.,extends:»,precedes:«
+  " set listchars=tab:\|\ ,eol:¬,trail:-,extends:>,precedes:<,nbsp:+
+  " set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endfunction
+map <Leader>th :call ToggleHidden() <CR>
+map Th :call ToggleHidden() <CR>
 
 " Google App Engine Go
 function! GoappTest()
@@ -138,33 +168,6 @@ endfunction
 
 function! FormatXML()
   %!xmllint -format -
-endfunction
-
-function! ToggleHidden()
-  set listchars=eol:¬,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
-  "Toggle the flag (or set it if it doesn't yet exist)...
-  let g:list_on = exists('g:list_on') ? !g:list_on : 1
-  if g:list_on
-    set list
-  else
-    set nolist
-  endif
-  " another nice listchars configuration
-  " set listchars=tab:\|\ ,eol:¬
-  " set listchars=eol:¬,tab:>-,trail:.,extends:»,precedes:«
-  " set listchars=tab:\|\ ,eol:¬,trail:-,extends:>,precedes:<,nbsp:+
-  " set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-endfunction
-
-function! ToggleCursor()
-  let g:cursor_on = exists('g:cursor_on') ? !g:cursor_on : 1
-  if g:cursor_on
-    set cursorcolumn
-    set cursorline
-  else
-    set nocursorcolumn
-    set nocursorline
-  endif
 endfunction
 
 function! Refresh()
@@ -264,8 +267,6 @@ call KeyMap("<C-S-F>", ":normal gg=G", 1)
 call KeyMap("<Leader>t", ":GoappTest", 0)
 call KeyMap("<Leader>fj", ":FormatJSON", 0)
 call KeyMap("<Leader>fx", ":FormatXML", 0)
-call KeyMap("<Leader>h", ":ToggleHidden", 1)
-call KeyMap("<Leader>c", ":ToggleCursor", 1)
 
 " map macros
 let @n='iO'
