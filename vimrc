@@ -186,6 +186,13 @@ function! KeyMap(key, action, insert_mode)
   endif
 endfunction
 
+function CloseHelpWindows()
+  :pclose
+  :cclose
+  :lclose
+endfunction
+map <F6> :call CloseHelpWindows()<CR>
+
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
