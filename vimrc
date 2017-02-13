@@ -74,14 +74,12 @@ augroup filemapping
   au BufRead,BufNewFile *.java setlocal makeprg=javac\ %
   au BufRead,BufNewFile *.java let g:syntastic_java_javac_options = "-Xlint -encoding utf-8"
   au BufRead,BufNewFile *.bsh setlocal filetype=java
-  " Go AppEngine support via 'goapp'
-  if executable('goapp')
-    au BufRead,BufNewFile *.go setlocal makeprg=goapp\ test\ -c
-    au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['goapp', 'govet']
-  else
-    au BufRead,BufNewFile *.go setlocal makeprg=go\ test\ -c
-    au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['go', 'govet', 'golint']
-  end
+
+  " Golang settings
+  au BufRead,BufNewFile *.go setlocal makeprg=go\ test\ -c
+  au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['go', 'govet', 'golint']
+  au BufRead,BufNewFile *.go command! -nargs=* GolangTest call GolangTest()
+  au BufRead,BufNewFile *.go call KeyMap("<Leader>t", ":GolangTest", 0)
 
   " Auto close preview/scratch window after select option with omnicomplete
   autocmd CursorMovedI * if pumvisible() == 0 | pclose | endif
@@ -93,7 +91,6 @@ augroup END
 
 command! FormatJSON call FormatJSON()
 command! FormatXML call FormatXML()
-command! -nargs=* GoappTest call GoappTest()
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -147,15 +144,18 @@ endfunction
 map <Leader>th :call ToggleHidden() <CR>
 map Th :call ToggleHidden() <CR>
 
-" Google App Engine Go
-function! GoappTest()
+function! GolangTest()
   let test_line = search("func Test", "bs")
   ''
   if test_line > 0
     let line = getline(test_line)
     let test_name_raw = split(line, " ")[1]
     let test_name = split(test_name_raw, "(")[0]
-    let go_cmd = '!goapp test -v -test.run=' . test_name
+    if executable('goapp')
+      let go_cmd = '!goapp test -v -test.run=' . test_name
+    else
+      let go_cmd = '!go test -v -test.run=' . test_name
+    end
     exec go_cmd
   else
     echo "No test found"
@@ -264,7 +264,6 @@ map bd :bdelete<CR>
 " Map to clear last search
 call KeyMap("<C-l>", ":noh", 1)
 call KeyMap("<C-S-F>", ":normal gg=G", 1)
-call KeyMap("<Leader>t", ":GoappTest", 0)
 call KeyMap("<Leader>fj", ":FormatJSON", 0)
 call KeyMap("<Leader>fx", ":FormatXML", 0)
 
@@ -277,3 +276,4 @@ map nl i<CR><ESC>O
 " Links 
 " https://www.ibm.com/developerworks/library/l-vim-script-1/
 " http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_1)
+"
