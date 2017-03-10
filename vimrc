@@ -89,6 +89,11 @@ augroup filemapping
   au FileType qf wincmd J
 augroup END
 
+augroup myvimrc
+	au!
+	au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | so $MYGVIMRC | endif
+augroup END
+
 command! FormatJSON call FormatJSON()
 command! FormatXML call FormatXML()
 
@@ -189,7 +194,7 @@ function! KeyMap(key, action, insert_mode)
   endif
 endfunction
 
-function CloseHelpWindows()
+function! CloseHelpWindows()
   :pclose
   :cclose
   :lclose
@@ -263,7 +268,6 @@ map bd :bdelete<CR>
 " http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)
 " Map to clear last search
 call KeyMap("<C-l>", ":noh", 1)
-call KeyMap("<C-S-F>", ":normal gg=G", 1)
 call KeyMap("<Leader>fj", ":FormatJSON", 0)
 call KeyMap("<Leader>fx", ":FormatXML", 0)
 

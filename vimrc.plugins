@@ -14,13 +14,17 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'buffet.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'jasoncodes/ctrlp-modified.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-syntastic/syntastic'
-Plugin 'editorconfig/editorconfig-vim'
 Plugin 'tpope/vim-surround' " provides mappings to easily delete, change and add such surroundings in pairs
 Plugin 'yegappan/grep'
+
+" file ident
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'editorconfig/editorconfig-vim'
 
 " vsc
 Plugin 'tpope/vim-fugitive'
@@ -33,7 +37,7 @@ Plugin 'fatih/vim-go'
 Plugin 'dgryski/vim-godef'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'python-mode/python-mode'
-Plugin 'ternjs/tern_for_vim'
+"Plugin 'ternjs/tern_for_vim'
 Plugin 'burnettk/vim-angular'
 
 "snipmate
@@ -135,3 +139,19 @@ map <Leader>tgs :GitGutterSignsToggle <CR>
 map Tgs :GitGutterSignsToggle <CR>
 map <Leader>tgl :GitGutterLineHighlightsToggle <CR>
 map Tgl :GitGutterLineHighlightsToggle <CR>
+map <Leader>m :CtrlPModified<CR>
+map <C-B> :CtrlPModified<CR>
+map <Leader>M :CtrlPBranch<CR>
+
+" normal mode for jsbeautify
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+" visual mode for js beautify
+autocmd FileType javascript vnoremap <buffer>  <c-f> :call RangeJsBeautify()<cr>
+autocmd FileType json vnoremap <buffer> <c-f> :call RangeJsonBeautify()<cr>
+autocmd FileType jsx vnoremap <buffer> <c-f> :call RangeJsxBeautify()<cr>
+autocmd FileType html vnoremap <buffer> <c-f> :call RangeHtmlBeautify()<cr>
+autocmd FileType css vnoremap <buffer> <c-f> :call RangeCSSBeautify()<cr>
