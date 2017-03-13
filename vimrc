@@ -48,7 +48,7 @@ set foldlevel=99
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
-set pastetoggle=<F12> 
+set pastetoggle=<F12>
 
 set t_Co=256
 
@@ -74,7 +74,7 @@ if filereadable(expand("~/.vimrc.plugins"))
 endif
 
 augroup filemapping
-  " Java settings  
+  " Java settings
   au BufRead,BufNewFile *.java compiler javac
   au BufRead,BufNewFile *.java setlocal makeprg=javac\ %
   au BufRead,BufNewFile *.java let g:syntastic_java_javac_options = "-Xlint -encoding utf-8"
@@ -137,7 +137,7 @@ map <Leader>te :call ToggleErrors() <CR>
 map Te :call ToggleErrors() <CR>
 
 function! ToggleHidden()
-  set listchars=eol:¬,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
+  set listchars=eol:¶,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
   "Toggle the flag (or set it if it doesn't yet exist)...
   let g:list_on = exists('g:list_on') ? !g:list_on : 1
   if g:list_on
@@ -150,6 +150,8 @@ function! ToggleHidden()
   " set listchars=eol:¬,tab:>-,trail:.,extends:»,precedes:«
   " set listchars=tab:\|\ ,eol:¬,trail:-,extends:>,precedes:<,nbsp:+
   " set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+  " old used
+  " set listchars=eol:¬,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
 endfunction
 map <Leader>th :call ToggleHidden() <CR>
 map Th :call ToggleHidden() <CR>
@@ -206,6 +208,13 @@ function! CloseHelpWindows()
 endfunction
 map <F6> :call CloseHelpWindows()<CR>
 
+function! TrimWhiteSpace()
+  ":%s/\s\+$//e
+	%s/\s*$//
+	''
+endfunction
+command! TrimWhiteSpace call TrimWhiteSpace()
+
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
@@ -218,7 +227,7 @@ endif
 " shortcut to escape
 map <C-c> <ESC>
 
-" Making it so ; works like : for commands. 
+" Making it so ; works like : for commands.
 nnoremap ; :
 
 " Wrapped lines goes down/up to next row, rather than next line in file.
@@ -231,12 +240,31 @@ vnoremap > >gv
 
 " keep the yanked text on paste
 xnoremap <expr> p 'pgv"'.v:register.'y'
+" search visually selected text
+vnoremap // y/<C-R>"<CR>
 
 " custom copy/paste to use in X
 vnoremap <leader>y "+y
 vnoremap <leader>x "+x
 vnoremap <leader>p "+gP
 nnoremap <leader>p "+gP
+
+" z = "X11-Clipboard"
+" x = "X11 Primary Selection"
+" v = "X11 Secondary Selection"
+command! -range Cz :silent :<line1>,<line2>w !xsel -i -b
+command! -range Cx :silent :<line1>,<line2>w !xsel -i -p
+command! -range Cv :silent :<line1>,<line2>w !xsel -i -s
+cabbrev cv Cv
+cabbrev cz Cz
+cabbrev cx Cx
+
+command! -range Pz :silent :r !xsel -o -b
+command! -range Px :silent :r !xsel -o -p
+command! -range Pv :silent :r !xsel -o -s
+cabbrev pz Pz
+cabbrev px Px
+cabbrev pv Pv
 
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
@@ -283,7 +311,9 @@ let @n='iO'
 "map nl iO
 map nl i<CR><ESC>O
 
-" Links 
+" Links
 " https://www.ibm.com/developerworks/library/l-vim-script-1/
 " http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_1)
-"
+" http://vim.wikia.com/wiki/Accessing_the_system_clipboard
+" http://vim.wikia.com/wiki/Remove_unwanted_spaces
+" http://vim.wikia.com/wiki/Search_for_visually_selected_text
