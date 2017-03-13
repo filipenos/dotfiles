@@ -44,6 +44,10 @@ set cindent         "Like smartindent, but stricter and more customisable
 set foldmethod=indent
 set foldlevel=99
 
+" => Editing mappings
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
 set pastetoggle=<F12> 
 
 set t_Co=256
@@ -55,6 +59,7 @@ if has('gui_running')
   set guioptions-=T  "remove toolbar
   set guioptions-=r  "remove right-hand scroll bar
   set guioptions-=L  "remove left-hand scroll bar
+  set guitablabel=%M\ %t
 else
   set background=dark
   set mouse=
@@ -224,6 +229,9 @@ nnoremap k gk
 vnoremap < <gv
 vnoremap > >gv
 
+" keep the yanked text on paste
+xnoremap <expr> p 'pgv"'.v:register.'y'
+
 " custom copy/paste to use in X
 vnoremap <leader>y "+y
 vnoremap <leader>x "+x
@@ -258,7 +266,7 @@ nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
 nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 
 " Enable folding with the spacebar
-nnoremap <space> za
+"nnoremap <space> za
 
 " Shortcuts to test
 map bn :bnext<CR>
@@ -268,8 +276,6 @@ map bd :bdelete<CR>
 " http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)
 " Map to clear last search
 call KeyMap("<C-l>", ":noh", 1)
-call KeyMap("<Leader>fj", ":FormatJSON", 0)
-call KeyMap("<Leader>fx", ":FormatXML", 0)
 
 " map macros
 let @n='iO'
