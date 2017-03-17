@@ -107,11 +107,16 @@ let g:tagbar_type_go = {
       \ 'ctagsargs' : '-sort -silent'
       \ }
 
+
+map <Leader>m :CtrlPModified<CR>
+map <leader>t :CtrlPBufTag<CR>
+map <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',
       \ 'file': '\v\.(exe|so|dll)$',
       \ }
+let g:ctrlp_extensions = ['buffertag'] " tag, buffertag, quickfix, dir, rtscript, undo, line, changes, mixed, bookmarkdir
 
 " godef
 let g:godef_split=1 "0 new buffer, 1 split window, 2 new tab, 3 vsplit window
@@ -139,9 +144,7 @@ map <Leader>tgs :GitGutterSignsToggle <CR>
 map Tgs :GitGutterSignsToggle <CR>
 map <Leader>tgl :GitGutterLineHighlightsToggle <CR>
 map Tgl :GitGutterLineHighlightsToggle <CR>
-map <Leader>m :CtrlPModified<CR>
-map <C-B> :CtrlPModified<CR>
-map <Leader>M :CtrlPBranch<CR>
+
 
 " normal mode for jsbeautify
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>

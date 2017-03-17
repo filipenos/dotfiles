@@ -84,7 +84,7 @@ augroup filemapping
   au BufRead,BufNewFile *.go setlocal makeprg=go\ test\ -c
   au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['go', 'govet', 'golint']
   au BufRead,BufNewFile *.go command! -nargs=* GolangTest call GolangTest()
-  au BufRead,BufNewFile *.go call KeyMap("<Leader>t", ":GolangTest", 0)
+  "au BufRead,BufNewFile *.go call KeyMap("<Leader>t", ":GolangTest", 0)
 
   " Auto close preview/scratch window after select option with omnicomplete
   autocmd CursorMovedI * if pumvisible() == 0 | pclose | endif
@@ -317,3 +317,7 @@ map nl i<CR><ESC>O
 " http://vim.wikia.com/wiki/Accessing_the_system_clipboard
 " http://vim.wikia.com/wiki/Remove_unwanted_spaces
 " http://vim.wikia.com/wiki/Search_for_visually_selected_text
+
+" Comments
+" to replace selected text on visual mode use \%V before text to replace:
+" sample :'<,'>s/\%Vorig/replace/g 
