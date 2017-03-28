@@ -46,9 +46,10 @@ set foldlevel=99
 
 " => Editing mappings
 " Remap VIM 0 to first non-blank character
-map 0 ^
+"map 0 ^
 
 set pastetoggle=<F12>
+set clipboard=unnamedplus
 
 set t_Co=256
 
@@ -89,6 +90,8 @@ augroup filemapping
   " Auto close preview/scratch window after select option with omnicomplete
   autocmd CursorMovedI * if pumvisible() == 0 | pclose | endif
   autocmd InsertLeave * if pumvisible() == 0 | pclose | endif
+
+  autocmd BufEnter * :syntax sync fromstart
 
   " Posiciona a janela QuickFix sempre na parte inferior da tela
   au FileType qf wincmd J
@@ -181,16 +184,6 @@ endfunction
 function! FormatXML()
   %!xmllint -format -
 endfunction
-
-function! Refresh()
-  "Use Ctrl L to redraw the screen. You can also use :redraw
-    " code
-    set noconfirm
-    bufdo e!
-    set confirm
-endfunction
-
-nmap <F5> :call Refresh()<CR>
 
 " All-modes shortcut helper function
 function! KeyMap(key, action, insert_mode)
@@ -290,6 +283,8 @@ nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
 nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
 nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 
+noremap <F5> <Esc>:syntax sync fromstart<CR>
+
 " Enable folding with the spacebar
 "nnoremap <space> za
 
@@ -297,10 +292,6 @@ nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 map bn :bnext<CR>
 map bp :bprevious<CR>
 map bd :bdelete<CR>
-
-" http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)
-" Map to clear last search
-call KeyMap("<C-l>", ":noh", 1)
 
 " map macros
 let @n='iO'
@@ -311,10 +302,12 @@ map nl i<CR><ESC>O
 " Links
 " https://www.ibm.com/developerworks/library/l-vim-script-1/
 " http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_1)
+" http://vim.wikia.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)
 " http://vim.wikia.com/wiki/Accessing_the_system_clipboard
 " http://vim.wikia.com/wiki/Remove_unwanted_spaces
 " http://vim.wikia.com/wiki/Search_for_visually_selected_text
 " http://vim.wikia.com/wiki/Power_of_g
+" http://vim.wikia.com/wiki/Fix_syntax_highlighting
 
 " Comments
 " to replace selected text on visual mode use \%V before text to replace:
