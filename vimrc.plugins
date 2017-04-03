@@ -21,6 +21,7 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-surround' " provides mappings to easily delete, change and add such surroundings in pairs
 Plugin 'yegappan/grep'
+Plugin 'Shougo/neocomplete.vim'
 
 " file ident
 Plugin 'maksimr/vim-jsbeautify'
@@ -145,6 +146,21 @@ map Tgs :GitGutterSignsToggle <CR>
 map <Leader>tgl :GitGutterLineHighlightsToggle <CR>
 map Tgl :GitGutterLineHighlightsToggle <CR>
 
+" neocomplete configs
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 1
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " normal mode for jsbeautify
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
