@@ -224,6 +224,15 @@ map <C-c> <ESC>
 nnoremap j gj
 nnoremap k gk
 
+" Map gb and gB move between buffers
+map gb :bnext<CR>
+map gB :bprevious<CR>
+
+" Shortcuts to test
+map bn :bnext<CR>
+map bp :bprevious<CR>
+map bd :bdelete<CR>
+
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
 vnoremap > >gv
@@ -231,7 +240,7 @@ vnoremap > >gv
 " keep the yanked text on paste
 xnoremap <expr> p 'pgv"'.v:register.'y'
 " search visually selected text
-vnoremap // y/<C-R>"<CR>
+"vnoremap // y/<C-R>"<CR>
 
 " custom copy/paste to use in X
 vnoremap <leader>y "+y
@@ -283,15 +292,22 @@ nnoremap <C-F1> :if &go=~#'m'<Bar>set go-=m<Bar>else<Bar>set go+=m<Bar>endif<CR>
 nnoremap <C-F2> :if &go=~#'T'<Bar>set go-=T<Bar>else<Bar>set go+=T<Bar>endif<CR>
 nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 
+" Clear last search highlighting
+noremap <F3> :noh<CR>
 noremap <F5> <Esc>:syntax sync fromstart<CR>
+
+" Copy filename to clipboard
+"nmap ,cs :let @+=expand("%")<CR>
+" Copy full filename to clipboard
+"nmap ,cl :let @+=expand("%:p")<CR>
 
 " Enable folding with the spacebar
 "nnoremap <space> za
 
-" Shortcuts to test
-map bn :bnext<CR>
-map bp :bprevious<CR>
-map bd :bdelete<CR>
+" ,v brings up my .vimrc
+" ,V reloads it -- making all changes active (have to save first)
+map ,v :sp ~/.vimrc<CR><C-W>_
+map <silent> ,V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " map macros
 let @n='iO'
@@ -308,6 +324,7 @@ map nl i<CR><ESC>O
 " http://vim.wikia.com/wiki/Search_for_visually_selected_text
 " http://vim.wikia.com/wiki/Power_of_g
 " http://vim.wikia.com/wiki/Fix_syntax_highlighting
+" http://vim.wikia.com/wiki/Search_only_over_a_visual_range
 
 " Comments
 " to replace selected text on visual mode use \%V before text to replace:
