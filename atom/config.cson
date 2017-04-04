@@ -1,39 +1,19 @@
 "*":
   core:
-    autoHideMenuBar: true
     disabledPackages: [
-      "tester-go"
-      "gometalinter-linter"
-      "gorename"
-      "vim-mode-plus"
+      "linter"
     ]
     telemetryConsent: "no"
     themes: [
-      "atom-light-ui"
-      "atom-light-syntax"
+      "one-light-ui"
+      "one-light-syntax"
     ]
   editor:
-    invisibles: {}
     showInvisibles: true
-    tabLength: 4
   "exception-reporting":
-    userId: "d7b0d1ef-ca08-3931-30a3-87c68875c5a0"
-  "git-plus":
-    splitPane: "Up"
-    wordDiff: false
-  "go-plus": {}
-  "highlight-selected":
-    highlightBackground: true
-    lightTheme: true
-  jshint:
-    validateOnlyOnSave: true
-  "terminal-plus":
-    core:
-      shell: "/bin/zsh"
-    style:
-      theme: "novel"
-  "tree-view":
-    hideIgnoredNames: true
-    hideVcsIgnoredFiles: true
+    userId: "c904e87f-e4ae-432b-9e5e-860206846f5d"
+  "go-plus":
+    test:
+      runTestsOnSave: false
   welcome:
     showOnStartup: false
