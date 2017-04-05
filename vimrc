@@ -93,6 +93,9 @@ augroup filemapping
 
   autocmd BufEnter * :syntax sync fromstart
 
+  " Map ,gb to add current branch on commit
+  au Filetype gitcommit map ,gb :0r!git rev-parse --abbrev-ref HEAD<CR>A 
+
   " Posiciona a janela QuickFix sempre na parte inferior da tela
   au FileType qf wincmd J
 augroup END
