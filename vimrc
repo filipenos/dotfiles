@@ -51,10 +51,19 @@ set foldlevel=99
 set pastetoggle=<F12>
 set clipboard=unnamedplus
 
-set t_Co=256
+" increasing <CTRL>+a <CTRL>+x
+" avaliable options are alpha,bin,octal,hex
+set nrformats=
+
+" for vim 7
+"set t_Co=256
+
+" for vim 8
+"if (has("termguicolors"))
+  "set termguicolors
+"endif
 
 if has('gui_running')
-  set background=light
   set mouse=a
   set guioptions-=m  "remove menu bar
   set guioptions-=T  "remove toolbar
@@ -62,7 +71,6 @@ if has('gui_running')
   set guioptions-=L  "remove left-hand scroll bar
   set guitablabel=%M\ %t
 else
-  set background=dark
   set mouse=
 endif
 
@@ -73,6 +81,9 @@ let mapleader=","
 if filereadable(expand("~/.vimrc.plugins"))
   source ~/.vimrc.plugins
 endif
+
+" set colorscheme
+"colorscheme molokai
 
 augroup filemapping
   " Java settings
@@ -129,7 +140,6 @@ function! ToggleCursor()
   endif
 endfunction
 map <Leader>tc :call ToggleCursor() <CR>
-map Tc :call ToggleCursor() <CR>
 
 function! ToggleErrors()
   if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
@@ -140,7 +150,6 @@ function! ToggleErrors()
   endif
 endfunction
 map <Leader>te :call ToggleErrors() <CR>
-map Te :call ToggleErrors() <CR>
 
 function! ToggleHidden()
   set listchars=eol:¶,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
@@ -160,7 +169,19 @@ function! ToggleHidden()
   " set listchars=eol:¬,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
 endfunction
 map <Leader>th :call ToggleHidden() <CR>
-map Th :call ToggleHidden() <CR>
+
+function! GolangTestName()
+  let test_line = search("func Test", "bs")
+  ''
+  if test_line > 0
+    let line = getline(test_line)
+    let test_name_raw = split(line, " ")[1]
+    let test_name = split(test_name_raw, "(")[0]
+    echo test_name
+  else
+    echo "No test found"
+  endif
+endfunction
 
 function! GolangTest()
   let test_line = search("func Test", "bs")
@@ -328,6 +349,8 @@ map nl i<CR><ESC>O
 " http://vim.wikia.com/wiki/Power_of_g
 " http://vim.wikia.com/wiki/Fix_syntax_highlighting
 " http://vim.wikia.com/wiki/Search_only_over_a_visual_range
+" http://vim.wikia.com/wiki/Category:Searching
+" http://vim.wikia.com/wiki/Increasing_or_decreasing_numbers
 
 " Comments
 " to replace selected text on visual mode use \%V before text to replace:

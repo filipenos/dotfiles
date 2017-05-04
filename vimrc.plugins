@@ -14,7 +14,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'majutsushi/tagbar'
 Plugin 'buffet.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'jasoncodes/ctrlp-modified.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdcommenter'
@@ -31,6 +30,7 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-git'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'jasoncodes/ctrlp-modified.vim'
 
 " languages suports
 Plugin 'Blackrush/vim-gocode'
@@ -46,6 +46,9 @@ Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
 Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets' " Optional:
+
+"color
+Plugin 'fatih/molokai'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 
@@ -78,6 +81,9 @@ let g:syntastic_auto_loc_list = 1
 " vim-go
 let g:gofmt_command="goimports"
 let g:go_list_type = "quickfix"
+
+" Airline
+let airline_powerline_fonts = 1
 
 " tagbar
 let g:tagbar_type_go = {
