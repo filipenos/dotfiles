@@ -152,7 +152,7 @@ endfunction
 map <Leader>te :call ToggleErrors() <CR>
 
 function! ToggleHidden()
-  set listchars=eol:¶,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
+  set listchars=eol:↵,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
   "Toggle the flag (or set it if it doesn't yet exist)...
   let g:list_on = exists('g:list_on') ? !g:list_on : 1
   if g:list_on
@@ -166,7 +166,7 @@ function! ToggleHidden()
   " set listchars=tab:\|\ ,eol:¬,trail:-,extends:>,precedes:<,nbsp:+
   " set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
   " old used
-  " set listchars=eol:¬,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
+  " set listchars=eol:¶,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
 endfunction
 map <Leader>th :call ToggleHidden() <CR>
 
@@ -337,7 +337,11 @@ map <silent> ,V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloa
 let @n='iO'
 "map nl @k
 "map nl iO
+
+"Break lines
 map nl i<CR><ESC>O
+"Break lines after >
+map nb T>i<CR><ESC>O
 
 " Links
 " https://www.ibm.com/developerworks/library/l-vim-script-1/

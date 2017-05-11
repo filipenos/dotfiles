@@ -154,11 +154,11 @@ map Tgl :GitGutterLineHighlightsToggle <CR>
 
 " neocomplete configs
 " Disable AutoComplPop.
-let g:acp_enableAtStartup = 1
+let g:acp_enableAtStartup = 0
 " Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 0
 " Use smartcase.
-let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_smart_case = 0
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
 " Enable omni completion.
@@ -167,6 +167,21 @@ autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+function! ToggleComplete()
+  let g:complete_on = exists('g:complete_on') ? !g:complete_on : 1
+  if g:complete_on
+    echo "Enabling complete"
+    let g:acp_enableAtStartup = 1
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+  else
+    echo "Disabling complete"
+    let g:acp_enableAtStartup = 0
+    let g:neocomplete#enable_at_startup = 0
+    let g:neocomplete#enable_smart_case = 0
+  endif
+endfunction
+map <Leader>ta :call ToggleComplete() <CR>
 
 " normal mode for jsbeautify
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
