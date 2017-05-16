@@ -244,6 +244,9 @@ endif
 " shortcut to escape
 map <C-c> <ESC>
 
+" map quote to go line and column
+map ` '
+
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
 nnoremap k gk
