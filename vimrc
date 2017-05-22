@@ -338,6 +338,7 @@ map <silent> ,V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloa
 
 " map macros
 let @n='iO'
+let @t='F<yf>f>pF<a/F>a'
 "map nl @k
 "map nl iO
 
