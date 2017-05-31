@@ -11,16 +11,18 @@ BASE="${BASE%/*}"
 configure_path() {
 	if ! grep -q -1 "#CUSTOM_PATH" $HOME/.bashrc ; then
 		log "configuring .bashrc"
-		echo "source $BASE/customrc #CUSTOM_PATH" >> $HOME/.bashrc
-		echo "source $BASE/custompath #CUSTOM_PATH" >> $HOME/.bashrc
+		echo "source $BASE/customrc.sh #CUSTOM_PATH" >> $HOME/.bashrc
+		echo "source $BASE/custompath.sh #CUSTOM_PATH" >> $HOME/.bashrc
+    echo ". $BASE/completions.sh #CUSTOM_PATH" >> $HOME/.bashrc
 	else
 		log "bashrc already configured"
 	fi
 
 	if ! grep -q -1 "#CUSTOM_PATH" $HOME/.zshrc ; then
 		log "configuring .zshrc"
-		echo "source $BASE/customrc #CUSTOM_PATH" >> $HOME/.zshrc
-		echo "source $BASE/custompath #CUSTOM_PATH" >> $HOME/.zshrc
+		echo "source $BASE/customrc.sh #CUSTOM_PATH" >> $HOME/.zshrc
+		echo "source $BASE/custompath.sh #CUSTOM_PATH" >> $HOME/.zshrc
+    echo ". $BASE/completions.sh #CUSTOM_PATH" >> $HOME/.zshrc
 	else
 		log "zshrc already configured"
 	fi
