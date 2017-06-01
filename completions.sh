@@ -15,6 +15,8 @@ _aeremote()
 
   if [[ ${prev} == -*load ]]; then
     COMPREPLY=( $(compgen -f -- ${cur}) )
+  elif [[ ${prev} == -*port ]]; then
+    COMPREPLY=( $(compgen -W "80 443" -- ${cur}) )
   else
     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
   fi
