@@ -55,14 +55,6 @@ set clipboard=unnamedplus
 " avaliable options are alpha,bin,octal,hex
 set nrformats=
 
-" for vim 7
-"set t_Co=256
-
-" for vim 8
-"if (has("termguicolors"))
-  "set termguicolors
-"endif
-
 if has('gui_running')
   set mouse=a
   set guioptions-=m  "remove menu bar
@@ -96,7 +88,6 @@ augroup filemapping
   au BufRead,BufNewFile *.go setlocal makeprg=go\ test\ -c
   au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['go', 'govet', 'golint']
   au BufRead,BufNewFile *.go command! -nargs=* GolangTest call GolangTest()
-  "au BufRead,BufNewFile *.go call KeyMap("<Leader>t", ":GolangTest", 0)
 
   " Auto close preview/scratch window after select option with omnicomplete
   autocmd CursorMovedI * if pumvisible() == 0 | pclose | endif
@@ -115,9 +106,6 @@ augroup myvimrc
   au!
   au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | if filereadable(expand($MYGVIMRC)) | so $MYGVIMRC | endif | endif
 augroup END
-
-command! FormatJSON call FormatJSON()
-command! FormatXML call FormatXML()
 
 command! TabToSpace call TabToSpace()
 command! RangeTabToSpace call RangeTabToSpace()
@@ -173,28 +161,8 @@ function! ToggleHidden()
   else
     set nolist
   endif
-  " another nice listchars configuration
-  " set listchars=tab:\|\ ,eol:¬
-  " set listchars=eol:¬,tab:>-,trail:.,extends:»,precedes:«
-  " set listchars=tab:\|\ ,eol:¬,trail:-,extends:>,precedes:<,nbsp:+
-  " set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
-  " old used
-  " set listchars=eol:¶,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
 endfunction
 map <Leader>th :call ToggleHidden() <CR>
-
-function! GolangTestName()
-  let test_line = search("func Test", "bs")
-  ''
-  if test_line > 0
-    let line = getline(test_line)
-    let test_name_raw = split(line, " ")[1]
-    let test_name = split(test_name_raw, "(")[0]
-    echo test_name
-  else
-    echo "No test found"
-  endif
-endfunction
 
 function! GolangTest()
   let test_line = search("func Test", "bs")
@@ -217,10 +185,12 @@ endfunction
 function! FormatJSON()
   %!python -m json.tool
 endfunction
+command! FormatJSON call FormatJSON()
 
 function! FormatXML()
   %!xmllint -format -
 endfunction
+command! FormatXML call FormatXML()
 
 function! URLDecode()
   %!python -c "import sys, urllib as ul; print ul.unquote_plus(sys.stdin.read())"
@@ -231,15 +201,6 @@ function! URLEncode()
   %!python -c "import sys, urllib as ul; print ul.quote_plus(sys.stdin.read())"
 endfunction
 command! URLEncode call URLEncode()
-
-" All-modes shortcut helper function
-function! KeyMap(key, action, insert_mode)
-  execute "noremap  <silent> " . a:key . " " . a:action . "<CR>"
-  execute "vnoremap <silent> " . a:key . " <C-C>" . a:action . "<CR>"
-  if a:insert_mode
-    execute "inoremap <silent> " . a:key . " <C-O>" . a:action . "<CR>"
-  endif
-endfunction
 
 function! CloseHelpWindows()
   :pclose
@@ -261,8 +222,6 @@ endif
 if filereadable(expand("~/.gvimrc.local"))
   source ~/.gvimrc.local
 endif
-
-" key (re)mapppings
 
 " shortcut to escape
 map <C-c> <ESC>
@@ -289,31 +248,12 @@ vnoremap > >gv
 
 " keep the yanked text on paste
 xnoremap <expr> p 'pgv"'.v:register.'y'
-" search visually selected text
-"vnoremap // y/<C-R>"<CR>
 
 " custom copy/paste to use in X
 vnoremap <leader>y "+y
 vnoremap <leader>x "+x
 vnoremap <leader>p "+gP
 nnoremap <leader>p "+gP
-
-" z = "X11-Clipboard"
-" x = "X11 Primary Selection"
-" v = "X11 Secondary Selection"
-command! -range Cz :silent :<line1>,<line2>w !xsel -i -b
-command! -range Cx :silent :<line1>,<line2>w !xsel -i -p
-command! -range Cv :silent :<line1>,<line2>w !xsel -i -s
-cabbrev cv Cv
-cabbrev cz Cz
-cabbrev cx Cx
-
-command! -range Pz :silent :r !xsel -o -b
-command! -range Px :silent :r !xsel -o -p
-command! -range Pv :silent :r !xsel -o -s
-cabbrev pz Pz
-cabbrev px Px
-cabbrev pv Pv
 
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
@@ -345,14 +285,6 @@ nnoremap <C-F3> :if &go=~#'r'<Bar>set go-=r<Bar>else<Bar>set go+=r<Bar>endif<CR>
 " Clear last search highlighting
 noremap <F3> :noh<CR>
 noremap <F5> <Esc>:syntax sync fromstart<CR>
-
-" Copy filename to clipboard
-"nmap ,cs :let @+=expand("%")<CR>
-" Copy full filename to clipboard
-"nmap ,cl :let @+=expand("%:p")<CR>
-
-" Enable folding with the spacebar
-"nnoremap <space> za
 
 " ,v brings up my .vimrc
 " ,V reloads it -- making all changes active (have to save first)
