@@ -222,6 +222,16 @@ function! FormatXML()
   %!xmllint -format -
 endfunction
 
+function! URLDecode()
+  %!python -c "import sys, urllib as ul; print ul.unquote_plus(sys.stdin.read())"
+endfunction
+command! URLDecode call URLDecode()
+
+function! URLEncode()
+  %!python -c "import sys, urllib as ul; print ul.quote_plus(sys.stdin.read())"
+endfunction
+command! URLEncode call URLEncode()
+
 " All-modes shortcut helper function
 function! KeyMap(key, action, insert_mode)
   execute "noremap  <silent> " . a:key . " " . a:action . "<CR>"
