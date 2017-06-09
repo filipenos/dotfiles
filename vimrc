@@ -119,6 +119,19 @@ augroup END
 command! FormatJSON call FormatJSON()
 command! FormatXML call FormatXML()
 
+command! TabToSpace call TabToSpace()
+command! RangeTabToSpace call RangeTabToSpace()
+function! TabToSpace()
+  :s/\t/  /g
+endfunction
+function! RangeTabToSpace() range
+  :'<,'>s/\t/  /g
+endfunction
+
+" NEL non empty line
+command! GoToNEL call search('^.\+')
+command! GoToPNEL call search('^.\+', 'b')
+
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
   let l:file = expand('%')
@@ -338,7 +351,7 @@ map <silent> ,V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloa
 
 " map macros
 let @n='iO'
-let @t='F<yf>f>pF<a/F>a'
+let @t='F<yf>f>pF<a/F>l'
 "map nl @k
 "map nl iO
 
