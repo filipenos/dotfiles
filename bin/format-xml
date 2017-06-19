@@ -2,4 +2,9 @@
 
 xmllint --version >/dev/null 2>&1 || sudo apt-get install libxml2-utils
 
-exec xmllint -format "$@"
+INPUT="$@"
+if [ -z $1 ]; then
+  INPUT="-"
+fi
+
+exec xmllint -format "$INPUT"
