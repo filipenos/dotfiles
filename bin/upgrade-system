@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ $EUID -ne 0 ]];
+then
+    echo "not root, invoking sudo"
+    sudo apt update && sudo apt upgrade -y && sudo apt dist-upgrade -y
+else
+    echo "running with root"
+    apt update && apt upgrade -y && apt dist-upgrade -y
+fi
