@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# TODO Add suport to params
+# rename repeat.sh to repeat
+# -quant quant of repeats, default is infinite
+# -clear if clear after run command
+
 if [ -z "$1" ]
 then
 	echo "command is required!"
