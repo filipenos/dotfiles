@@ -188,7 +188,7 @@ endfunction
 command! FormatJSON call FormatJSON()
 
 function! FormatXML()
-  %!xmllint -format -
+  %!xmllint -encode utf8 -format -
 endfunction
 command! FormatXML call FormatXML()
 
@@ -216,6 +216,46 @@ function! TrimWhiteSpace()
 endfunction
 command! TrimWhiteSpace call TrimWhiteSpace()
 
+function! Table() 
+  :%y"
+  call TempWindow("Table", 1, 'v')
+  :put
+  execute 'silent %!column -t -s,'
+  "execute 'silent r!ls'
+  "0d
+endfunction
+
+" Disposable temporary window
+function! TempWindow(name, clear, mode) abort
+  let name = substitute(a:name, "[^a-zA-Z0-9]", "_", "g")
+  let bn = bufnr(name)
+  if bn == -1
+    exe "new " . name
+    let bn = bufnr(name)
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
+    setlocal buflisted
+  else
+    let wn = bufwinnr(bn)
+    if wn != -1
+      exe wn . "wincmd w"
+    else
+      exe "split +buffer" . bn
+    endif
+  endif
+
+  if a:clear
+    normal gg
+    normal dG
+  endif
+  if a:mode == 'v'
+    wincmd L
+  else
+    wincmd J
+  endif
+endfunction
+
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
@@ -234,13 +274,13 @@ nnoremap j gj
 nnoremap k gk
 
 " Map gb and gB move between buffers
-map gb :bnext<CR>
-map gB :bprevious<CR>
+"map gb :bnext<CR>
+"map gB :bprevious<CR>
 
 " Shortcuts to test
-map bn :bnext<CR>
-map bp :bprevious<CR>
-map bd :bdelete<CR>
+"map bn :bnext<CR>
+"map bp :bprevious<CR>
+"map bd :bdelete<CR>
 
 " visual shifting (does not exit Visual mode)
 vnoremap < <gv
@@ -318,3 +358,5 @@ map nb T>i<CR><ESC>O
 " Comments
 " to replace selected text on visual mode use \%V before text to replace:
 " sample :'<,'>s/\%Vorig/replace/g 
+" to replace comma inside two quotes to dot
+" %s/"\(\d\+\),\(\d\+\)"/\"\1\.\2\"/g
