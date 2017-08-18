@@ -116,6 +116,11 @@ function! RangeTabToSpace() range
   :'<,'>s/\t/  /g
 endfunction
 
+function! Space4ToTab()
+  :s/    /\t/g
+endfunction
+command! Space4ToTab call Space4ToTab()
+
 " NEL non empty line
 command! GoToNEL call search('^.\+')
 command! GoToPNEL call search('^.\+', 'b')
@@ -338,9 +343,9 @@ let @t='F<yf>f>pF<a/F>l'
 "map nl iO
 
 "Break lines
-map nl i<CR><ESC>O
+map <Leader>nl i<CR><ESC>O
 "Break lines after >
-map nb T>i<CR><ESC>O
+map <Leader>nb T>i<CR><ESC>O
 
 " Links
 " https://www.ibm.com/developerworks/library/l-vim-script-1/
@@ -354,6 +359,7 @@ map nb T>i<CR><ESC>O
 " http://vim.wikia.com/wiki/Search_only_over_a_visual_range
 " http://vim.wikia.com/wiki/Category:Searching
 " http://vim.wikia.com/wiki/Increasing_or_decreasing_numbers
+" http://vim.wikia.com/wiki/Using_marks
 
 " Comments
 " to replace selected text on visual mode use \%V before text to replace:
