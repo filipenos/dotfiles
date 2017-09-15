@@ -116,7 +116,7 @@ let g:tagbar_type_go = {
 
 
 map <Leader>m :CtrlPModified<CR>
-map <leader>t :CtrlPBufTag<CR>
+map <S-F8> :CtrlPBufTag<CR>
 map <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_custom_ignore = {
