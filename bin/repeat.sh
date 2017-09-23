@@ -5,6 +5,25 @@
 # -quant quant of repeats, default is infinite
 # -clear if clear after run command
 
+quant=
+clean=
+
+while [ "$1" != "" ]; do
+	case $1 in
+		-q | --quant)
+      shift
+      quant=$1
+      ;;
+		-c | --clean)
+      shift
+      clean=$1
+      ;;
+    -h | --help)
+      help
+      ;;
+  esac
+done
+
 if [ -z "$1" ]
 then
 	echo "command is required!"

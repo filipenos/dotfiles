@@ -221,14 +221,27 @@ function! TrimWhiteSpace()
 endfunction
 command! TrimWhiteSpace call TrimWhiteSpace()
 
-function! Table() 
+function! RunNode()
+  :%y"
+  call TempWindow("Node", 1, 's')
+  :put
+  execute 'silent %!node'
+endfunction
+
+function! Table(s) 
   :%y"
   call TempWindow("Table", 1, 'v')
   :put
   execute 'silent %!column -t -s,'
-  "execute 'silent r!ls'
-  "0d
 endfunction
+
+function! Execute(c)
+  :%y"
+  call TempWindow("Execute", 1, 's')
+  :put
+  execute 'silent %!' . a:c
+endfunction
+command! Execute -nargs=1 Execute call Execute(<f-args>)
 
 " Disposable temporary window
 function! TempWindow(name, clear, mode) abort
@@ -343,7 +356,7 @@ let @t='F<yf>f>pF<a/F>l'
 "map nl iO
 
 "Break lines
-map <Leader>nl i<CR><ESC>O
+map <Leader>o i<CR><ESC>O
 "Break lines after >
 map <Leader>nb T>i<CR><ESC>O
 
@@ -360,6 +373,7 @@ map <Leader>nb T>i<CR><ESC>O
 " http://vim.wikia.com/wiki/Category:Searching
 " http://vim.wikia.com/wiki/Increasing_or_decreasing_numbers
 " http://vim.wikia.com/wiki/Using_marks
+" http://vim.wikia.com/wiki/Highlight_unwanted_spaces
 
 " Comments
 " to replace selected text on visual mode use \%V before text to replace:

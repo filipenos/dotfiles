@@ -12,6 +12,8 @@ alias serve-dir="python -m SimpleHTTPServer"
 alias change-ps1='export PS1="\e[0;34m\W: \e[m"'
 alias npm-list="npm list -g --depth=0"
 alias dpkg-purge-rc='dpkg -l | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge'
+# Aliases of Git
+#alias diffwithmaster="git diff master...`git rev-parse --abbrev-ref HEAD`"
 
 alias starwars="telnet towel.blinkenlights.nl"
 
