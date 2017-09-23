@@ -21,6 +21,7 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-surround' " provides mappings to easily delete, change and add such surroundings in pairs
 Plugin 'yegappan/grep'
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/vimproc.vim'
 
 " file ident
 Plugin 'maksimr/vim-jsbeautify'
@@ -40,6 +41,8 @@ Plugin 'kchmck/vim-coffee-script'
 "Plugin 'python-mode/python-mode'
 "Plugin 'ternjs/tern_for_vim'
 Plugin 'burnettk/vim-angular'
+Plugin 'leafgarland/typescript-vim' " syntax highlight for typescript
+Plugin 'Quramy/tsuquyomi'
 
 "snipmate
 Plugin 'MarcWeber/vim-addon-mw-utils'
