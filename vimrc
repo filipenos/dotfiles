@@ -374,6 +374,7 @@ map <Leader>nb T>i<CR><ESC>O
 " http://vim.wikia.com/wiki/Increasing_or_decreasing_numbers
 " http://vim.wikia.com/wiki/Using_marks
 " http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+" http://vimdoc.sourceforge.net/htmldoc/motion.html#object-select
 
 " Comments
 " to replace selected text on visual mode use \%V before text to replace:
