@@ -4,26 +4,14 @@ log() {
 	echo "[DOTFILES] $@"
 }
 
-configure() {
-	log "adding dotfiles to custom_path"
-	echo 'export PATH="$PATH:$HOME/dotfiles/bin"' >> $HOME/.customrc
-}
-
 install() {
 	log "installing dotfiles on $HOME"
 	git clone -q https://git@github.com/filipenos/dotfiles "$HOME/dotfiles"
-
-	configure
 }
 
 install_vim() {
   log "configuring vimrc"
   $HOME/dotfiles/bin/vim-install-vundle
-}
-
-install_customrc() {
-  log "configuring customrc"
-  $HOME/dotfiles/bin/custom-path.sh -c
 }
 
 install_tmux() {
@@ -42,7 +30,6 @@ if [ -d "$HOME/dotfiles" ]; then
 else
 	install
 	install_vim
-	install_customrc	
 	install_tmux
 fi
 
