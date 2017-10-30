@@ -228,16 +228,22 @@ function! RunNode()
   execute 'silent %!node'
 endfunction
 
-function! Table(s) 
+function! Table(...)
+  let a:delimiter = get(a:, 1, 0)
+  if a:delimiter == "0"
+    let a:delimiter=','
+  endif
+
   :%y"
-  call TempWindow("Table", 1, 'v')
+  call TempWindow("Table", 1, 's')
   :put
-  execute 'silent %!column -t -s,'
+  execute 'silent %!column -t -s"' . a:delimiter . '"'
 endfunction
+command! Table call Table()
 
 function! Execute(c)
   :%y"
-  call TempWindow("Execute", 1, 's')
+  call TempWindow("Execute", 1, 'v')
   :put
   execute 'silent %!' . a:c
 endfunction
@@ -348,8 +354,8 @@ noremap <F5> <Esc>:syntax sync fromstart<CR>
 
 " ,v brings up my .vimrc
 " ,V reloads it -- making all changes active (have to save first)
-map ,v :sp ~/.vimrc<CR><C-W>_
-map <silent> ,V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+map <silent> ,V :sp ~/.vimrc<CR><C-W>_
+map <silent> ,v :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " map macros
 let @n='iO'
