@@ -13,3 +13,8 @@ alias starwars="telnet towel.blinkenlights.nl"
 
 # Necessary to use tmux plugin manager
 export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins"
+
+# allow to use a local dotfilesrc
+if [ -f "$HOME/.dotfilesrc" ]; then
+  source "$HOME/.dotfilesrc"
+fi
