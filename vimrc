@@ -290,6 +290,8 @@ map ` '
 " Wrapped lines goes down/up to next row, rather than next line in file.
 nnoremap j gj
 nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 " Map gb and gB move between buffers
 "map gb :bnext<CR>
