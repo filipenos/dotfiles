@@ -10,8 +10,8 @@ install() {
 }
 
 install_vim() {
-  log "configuring vimrc"
-  $HOME/dotfiles/bin/vim-install-vundle
+	log "configuring vimrc"
+	$HOME/dotfiles/bin/vim-install-vundle
 }
 
 install_tmux() {
