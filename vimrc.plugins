@@ -51,7 +51,8 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'honza/vim-snippets' " Optional:
 
 "color
-Plugin 'fatih/molokai'
+"Plugin 'fatih/molokai'
+Plugin 'tomasr/molokai'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
 

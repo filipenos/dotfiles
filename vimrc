@@ -12,8 +12,8 @@ set visualbell     " shut vim up
 set noerrorbells
 
 "encoding
-set encoding=utf8
-set termencoding=utf-8
+"set encoding=utf8
+"set termencoding=utf-8
 set fileencodings=          " Don't do any encoding conversion
 
 " backup
@@ -75,7 +75,7 @@ if filereadable(expand("~/.vimrc.plugins"))
 endif
 
 " set colorscheme
-"colorscheme molokai
+colorscheme molokai
 
 augroup filemapping
   " Java settings
@@ -250,6 +250,7 @@ endfunction
 command! Execute -nargs=1 Execute call Execute(<f-args>)
 
 " Disposable temporary window
+" TODO bug janela não atulizar se rodar mais de uma vez
 function! TempWindow(name, clear, mode) abort
   let name = substitute(a:name, "[^a-zA-Z0-9]", "_", "g")
   let bn = bufnr(name)
