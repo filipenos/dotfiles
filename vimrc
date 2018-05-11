@@ -64,6 +64,8 @@ if has('gui_running')
   set guitablabel=%M\ %t
 else
   set mouse=
+  set t_Co=256
+  "set term=screen-256color
 endif
 
 " The default leader is '\\', changed to ','
