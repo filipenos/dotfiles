@@ -14,7 +14,7 @@ set noerrorbells
 "encoding
 "set encoding=utf8
 "set termencoding=utf-8
-set fileencodings=          " Don't do any encoding conversion
+"set fileencodings=          " Don't do any encoding conversion
 
 " backup
 set noswapfile
