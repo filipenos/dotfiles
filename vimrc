@@ -87,9 +87,8 @@ augroup filemapping
   au BufRead,BufNewFile *.bsh setlocal filetype=java
 
   " Golang settings
-  au BufRead,BufNewFile *.go setlocal makeprg=go\ test\ -c
-  au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['go', 'govet', 'golint']
-  au BufRead,BufNewFile *.go command! -nargs=* GolangTest call GolangTest()
+  "au BufRead,BufNewFile *.go setlocal makeprg=go\ test\ -c
+  "au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['go', 'govet', 'golint']
 
   " Auto close preview/scratch window after select option with omnicomplete
   autocmd CursorMovedI * if pumvisible() == 0 | pclose | endif
@@ -108,6 +107,18 @@ augroup myvimrc
   au!
   au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | if filereadable(expand($MYGVIMRC)) | so $MYGVIMRC | endif | endif
 augroup END
+
+function! Build()
+  if (&ft=='go')
+    if(match(expand('%:t'), '_test\.go') > 0)
+      :GoTestCompile <CR>
+    else
+      :GoBuild <CR>
+    endif
+  endif
+endfunction
+command! Build call Build()
+map <Leader>B :call Build() <CR>
 
 command! TabToSpace call TabToSpace()
 command! RangeTabToSpace call RangeTabToSpace()
@@ -170,24 +181,6 @@ function! ToggleHidden()
   endif
 endfunction
 map <Leader>th :call ToggleHidden() <CR>
-
-function! GolangTest()
-  let test_line = search("func Test", "bs")
-  ''
-  if test_line > 0
-    let line = getline(test_line)
-    let test_name_raw = split(line, " ")[1]
-    let test_name = split(test_name_raw, "(")[0]
-    if executable('goapp')
-      let go_cmd = '!goapp test -v -test.run=' . test_name
-    else
-      let go_cmd = '!go test -v -test.run=' . test_name
-    end
-    exec go_cmd
-  else
-    echo "No test found"
-  endif
-endfunction
 
 function! FormatJSON()
   %!python -m json.tool
