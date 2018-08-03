@@ -12,7 +12,7 @@ set visualbell     " shut vim up
 set noerrorbells
 
 "encoding
-"set encoding=utf8
+"set encoding=utf-8
 "set termencoding=utf-8
 "set fileencodings=          " Don't do any encoding conversion
 

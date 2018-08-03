@@ -22,6 +22,7 @@ Plugin 'tpope/vim-surround' " provides mappings to easily delete, change and add
 Plugin 'yegappan/grep'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/vimproc.vim'
+Plugin 'google/vim-searchindex' " This plugin shows how many times does a search pattern occur in the current buffer.
 
 " file ident
 Plugin 'maksimr/vim-jsbeautify'
