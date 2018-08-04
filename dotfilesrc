@@ -18,3 +18,9 @@ export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins"
 if [ -f "$HOME/.dotfilesrc" ]; then
   source "$HOME/.dotfilesrc"
 fi
+
+#load zshrc only running on zsh
+PID=$(ps -p $$)
+if echo $PID | grep -q "zsh"; then
+  source $HOME/dotfiles/zshrc
+fi
