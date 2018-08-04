@@ -12,9 +12,9 @@ set visualbell     " shut vim up
 set noerrorbells
 
 "encoding
-"set encoding=utf8
+"set encoding=utf-8
 "set termencoding=utf-8
-set fileencodings=          " Don't do any encoding conversion
+"set fileencodings=          " Don't do any encoding conversion
 
 " backup
 set noswapfile
@@ -78,6 +78,7 @@ endif
 
 " set colorscheme if exists
 try
+  " set colorscheme
   colorscheme molokai
 catch /^Vim\%((\a\+)\)\=:E185/
   " deal with it
@@ -91,9 +92,8 @@ augroup filemapping
   au BufRead,BufNewFile *.bsh setlocal filetype=java
 
   " Golang settings
-  au BufRead,BufNewFile *.go setlocal makeprg=go\ test\ -c
-  au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['go', 'govet', 'golint']
-  au BufRead,BufNewFile *.go command! -nargs=* GolangTest call GolangTest()
+  "au BufRead,BufNewFile *.go setlocal makeprg=go\ test\ -c
+  "au BufRead,BufNewFile *.go let g:syntastic_go_checkers=['go', 'govet', 'golint']
 
   " Auto close preview/scratch window after select option with omnicomplete
   autocmd CursorMovedI * if pumvisible() == 0 | pclose | endif
@@ -113,6 +113,18 @@ augroup myvimrc
   au!
   au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | if filereadable(expand($MYGVIMRC)) | so $MYGVIMRC | endif | endif
 augroup END
+
+function! Build()
+  if (&ft=='go')
+    if(match(expand('%:t'), '_test\.go') > 0)
+      :GoTestCompile <CR>
+    else
+      :GoBuild <CR>
+    endif
+  endif
+endfunction
+command! Build call Build()
+map <Leader>B :call Build() <CR>
 
 command! TabToSpace call TabToSpace()
 command! RangeTabToSpace call RangeTabToSpace()
@@ -175,24 +187,6 @@ function! ToggleHidden()
   endif
 endfunction
 map <Leader>th :call ToggleHidden() <CR>
-
-function! GolangTest()
-  let test_line = search("func Test", "bs")
-  ''
-  if test_line > 0
-    let line = getline(test_line)
-    let test_name_raw = split(line, " ")[1]
-    let test_name = split(test_name_raw, "(")[0]
-    if executable('goapp')
-      let go_cmd = '!goapp test -v -test.run=' . test_name
-    else
-      let go_cmd = '!go test -v -test.run=' . test_name
-    end
-    exec go_cmd
-  else
-    echo "No test found"
-  endif
-endfunction
 
 function! FormatJSON()
   %!python -m json.tool
@@ -335,8 +329,8 @@ nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 " Mappings to move lines http://vim.wikia.com/wiki/Moving_lines_up_or_down
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
+"inoremap <C-j> <Esc>:m .+1<CR>==gi
+"inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 

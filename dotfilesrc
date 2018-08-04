@@ -2,6 +2,7 @@ export PATH="$PATH:$HOME/dotfiles/bin"
 
 # Aliases
 alias clean-number="sed 's/[^0-9]*//g'"
+alias clean-emptyline="sed '/^\s*$/d'"
 alias serve-dir="python -m SimpleHTTPServer"
 alias change-ps1='export PS1="\e[0;34m\W: \e[m"'
 alias npm-list="npm list -g --depth=0"
