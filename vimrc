@@ -76,6 +76,14 @@ if filereadable(expand("~/.vimrc.plugins"))
   source ~/.vimrc.plugins
 endif
 
+" set colorscheme if exists
+try
+  " set colorscheme
+  colorscheme molokai
+catch /^Vim\%((\a\+)\)\=:E185/
+  " deal with it
+endtry
+
 augroup filemapping
   " Java settings
   au BufRead,BufNewFile *.java compiler javac
@@ -100,6 +108,7 @@ augroup filemapping
   au FileType qf wincmd J
 augroup END
 
+" auto load vimrc files on save vimrc
 augroup myvimrc
   au!
   au BufWritePost .vimrc,_vimrc,vimrc,.gvimrc,_gvimrc,gvimrc so $MYVIMRC | if has('gui_running') | if filereadable(expand($MYGVIMRC)) | so $MYGVIMRC | endif | endif

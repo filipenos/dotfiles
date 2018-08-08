@@ -70,9 +70,6 @@ endif
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" set colorscheme
-colorscheme molokai
-
 " Configurations to apply on pluins
 " All plugins configs are saved after here
 
