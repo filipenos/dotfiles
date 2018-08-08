@@ -106,7 +106,8 @@ augroup myvimrc
 augroup END
 
 function! Build()
-  if (&ft=='go')
+  " build has a funtion to map custom files to build
+  if (&ft=='go') " to build work correctly is necessary the plugin fatih/vim-go
     if(match(expand('%:t'), '_test\.go') > 0)
       :GoTestCompile <CR>
     else
@@ -116,6 +117,7 @@ function! Build()
 endfunction
 command! Build call Build()
 map <Leader>B :call Build() <CR>
+command! W w | Build " map W to save and build file
 
 command! TabToSpace call TabToSpace()
 command! RangeTabToSpace call RangeTabToSpace()
@@ -201,7 +203,7 @@ command! URLEncode call URLEncode()
 
 function! CloseHelpWindows()
   :pclose
-  :cclose
+  :cclose " close the quickfix window
   :lclose
 endfunction
 map <F6> :call CloseHelpWindows()<CR>
