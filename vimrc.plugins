@@ -11,12 +11,12 @@ Plugin 'VundleVim/Vundle.vim'
 
 " basic plugins
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'buffet.vim'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'tpope/vim-surround' " provides mappings to easily delete, change and add such surroundings in pairs
 Plugin 'yegappan/grep'
@@ -42,18 +42,20 @@ Plugin 'jasoncodes/ctrlp-modified.vim'
 Plugin 'Blackrush/vim-gocode'
 Plugin 'fatih/vim-go'
 Plugin 'dgryski/vim-godef'
-Plugin 'kchmck/vim-coffee-script'
+"Plugin 'kchmck/vim-coffee-script'
 "Plugin 'python-mode/python-mode'
 "Plugin 'ternjs/tern_for_vim'
-Plugin 'burnettk/vim-angular'
-Plugin 'leafgarland/typescript-vim' " syntax highlight for typescript
-Plugin 'Quramy/tsuquyomi'
+"Plugin 'burnettk/vim-angular'
+"Plugin 'leafgarland/typescript-vim' " syntax highlight for typescript
+"Plugin 'Quramy/tsuquyomi' " Make your Vim a TypeScript IDE.
+"Plugin 'pangloss/vim-javascript' " suport for react
+"Plugin 'mxw/vim-jsx' " suport for react
 
 "snipmate
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets' " Optional:
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'garbas/vim-snipmate'
+"Plugin 'honza/vim-snippets' " Optional:
 
 "color
 "Plugin 'fatih/molokai'
@@ -124,9 +126,10 @@ let g:tagbar_type_go = {
       \ }
 
 
-map <Leader>m :CtrlPModified<CR>
-map <S-F8> :CtrlPBufTag<CR>
-map <leader>b :CtrlPBuffer<CR>
+"map <Leader>m :CtrlPModified<CR>
+"map <Leader>t :CtrlPBufTag<CR>
+"map <Leader>b :CtrlPBuffer<CR>
+
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_custom_ignore = {
       \ 'dir':  '\v[\/]\.(git|hg|svn)$',

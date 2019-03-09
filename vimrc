@@ -1,3 +1,7 @@
+""""""""""""""""""""""""""""""""""""
+" Filipe Peixoto Vimrc configuration
+""""""""""""""""""""""""""""""""""""
+
 " display settings
 syntax enable      " allays show highlight for file
 set nowrap         " dont wrap lines
@@ -30,7 +34,7 @@ set undolevels=1000 " use many much levels of undo
 set smarttab   " insert tabs on the start of a line according to
 "              " shiftwidth, not tabstop
 set hlsearch   " highlight search terms
-set incsearch  " show search matches as you type
+set incsearch  " vim incremental search
 set smartcase  " ignore case if search pattern is all lowercase,
 "              " case-sensitive otherwise
 set ignorecase " ignore case when searching
@@ -107,6 +111,10 @@ augroup filemapping
 
   " Posiciona a janela QuickFix sempre na parte inferior da tela
   au FileType qf wincmd J
+
+  "configure bigquery files to sql syntax
+  autocmd BufRead *.bq set filetype=sql
+  au FileType sql setl tabstop=2 shiftwidth=2 expandtab
 augroup END
 
 " auto load vimrc files on save vimrc
@@ -146,6 +154,9 @@ command! Space4ToTab call Space4ToTab()
 " NEL non empty line
 command! GoToNEL call search('^.\+')
 command! GoToPNEL call search('^.\+', 'b')
+
+command! SaveSession :mks! ~/.vim/session.vim
+command! LoadSession :source ~/.vim/session.vim
 
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
@@ -200,6 +211,11 @@ function! FormatXML()
   %!xmllint -encode utf8 -format -
 endfunction
 command! FormatXML call FormatXML()
+
+function! FormatSH()
+  %!shfmt
+endfunction
+command! FormatSH call FormatSH()
 
 function! URLDecode()
   %!python -c "import sys, urllib as ul; print ul.unquote_plus(sys.stdin.read())"
