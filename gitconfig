@@ -1,0 +1,7 @@
+[user]
+	name = Filipe Peixoto
+	email = filipenos@gmail.com
+[core]
+	editor = vim
+[commit]
+	gpgsign = true
