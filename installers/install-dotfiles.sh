@@ -42,6 +42,11 @@ install_tmux() {
 	ln -s $HOME/dotfiles/tmux.conf $HOME/.tmux.conf
 }
 
+install_gitconfig() {
+  log "Configuring gitconfig"
+  ln -s $HOME/dotfiles/gitconfig $HOME/.gitconfig
+}
+
 remove() {
 	log "removing dotfiles from $HOME"
 	rm -rf $HOME/dotfiles
@@ -54,6 +59,7 @@ else
 	install
 	install_vim
 	install_tmux
+  install_gitconfig
 fi
 configure_onpath
 #remove_frompath
