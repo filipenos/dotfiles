@@ -65,7 +65,6 @@ if has('gui_running')
   set guioptions-=T  "remove toolbar
   set guioptions-=r  "remove right-hand scroll bar
   set guioptions-=L  "remove left-hand scroll bar
-  set guitablabel=%M\ %t
 else
   set mouse=
   set t_Co=256
@@ -387,6 +386,10 @@ let @t='F<yf>f>pF<a/F>l'
 map <Leader>o i<CR><ESC>O
 "Break lines after >
 map <Leader>nb T>i<CR><ESC>O
+
+if filereadable(expand("~/.vimrc.projects"))
+  source ~/.vimrc.projects
+endif
 
 " Links
 " https://www.ibm.com/developerworks/library/l-vim-script-1/
