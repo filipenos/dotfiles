@@ -5,3 +5,4 @@ atom/storage/
 atom/.node-gyp/
 atom/nohup.out
 atom/packages/
+zshrc.zwc

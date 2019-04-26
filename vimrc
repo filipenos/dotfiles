@@ -93,6 +93,7 @@ augroup filemapping
   au BufRead,BufNewFile *.java setlocal makeprg=javac\ %
   au BufRead,BufNewFile *.java let g:syntastic_java_javac_options = "-Xlint -encoding utf-8"
   au BufRead,BufNewFile *.bsh setlocal filetype=java
+  au BufRead,BufNewFile *dotfilesrc setlocal filetype=sh
 
   " Golang settings
   "au BufRead,BufNewFile *.go setlocal makeprg=go\ test\ -c
