@@ -52,17 +52,30 @@ remove() {
 	rm -rf $HOME/dotfiles
 }
 
-if [ -d "$HOME/dotfiles" ]; then
-	log "dotfiles already installed, updating..."
-	git -C "$HOME/dotfiles" pull
+if [ -z $1 ]; then
+  if [ -d "$HOME/dotfiles" ]; then
+    log "dotfiles already installed, updating..."
+    git -C "$HOME/dotfiles" pull
+  else
+    install
+    install_vim
+    install_tmux
+    install_gitconfig
+  fi
+  configure_onpath
 else
-	install
-	install_vim
-	install_tmux
-  install_gitconfig
+  case $1 in
+    install-vim)
+      install_vim
+      ;;
+    install-tmux)
+      install_tmux
+      ;;
+    install-gitconfig)
+      install_gitconfig
+      ;;
+  esac
 fi
-configure_onpath
-#remove_frompath
 
 log "installation occurred successfully! have a good time"
 exit 0
