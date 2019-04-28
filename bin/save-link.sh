@@ -5,7 +5,7 @@ if [ $# -le 1 ]; then
   exit 1
 fi
 
-NAME=$(echo "$1.html" | tr '[:blank:]' '-')
+NAME=$(echo "$1" | tr '[:blank:]' '-')
 URL="$2"
 DESC="$3"
 GROUP=$(echo "$4" | tr '[:blank:]' '-')
@@ -35,7 +35,7 @@ if [ ! -f $STORE ]; then
   git -C $BASE_LINKS commit -m "\"Init links store\"" --quiet
 fi
 
-cat > $FULLNAME << EOF
+cat > "$FULLNAME.html" << EOF
 <html>
 <head>
 <meta http-equiv="refresh" content="0; url=$URL" />
@@ -45,5 +45,5 @@ EOF
 
 echo "\"$NAME\",\"$URL\",\"$DESC\",\"$GROUP\"" >> $STORE
 
-git -C $BASE_LINKS add $FULLPATH/$NAME $STORE
+git -C $BASE_LINKS add "$FULLNAME.html" $STORE
 git -C $BASE_LINKS commit -m "\"Add $NAME\"" --quiet
