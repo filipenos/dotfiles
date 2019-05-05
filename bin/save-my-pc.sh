@@ -1,12 +1,14 @@
 #!/bin/bash
 
-#TODO verificar o mimetype
+#TODO (filipenos) verificar o mimetype
 #se começar com inode inode/directory é um diretório, qualquer outra coisa que começar com inode deve dar erro
 #qualquer outra coisa deve ser um arquivo, então pensar em uma forma de sincronizar
 
-#TODO verificar se um diretório já esta sendo sincronizado com o pai
+#TODO (filipenos) verificar se um diretório já esta sendo sincronizado com o pai
 #por exemplo, existe /home/filipe/Documentos, se tentar adicionar /home/filipe/Documentos/Planilhas deve retornar erro pois
 #o diretorio acima já esta sendo salvo
+
+#TODO (filipenos) permitir salvar na amazon s3, e falar o nome do bucket, talvez com um arquivo de configuração
 
 
 FILE_WITH_PATHS=$HOME/.savemypc
