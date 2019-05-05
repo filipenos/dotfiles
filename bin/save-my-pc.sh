@@ -1,8 +1,6 @@
 #!/bin/bash
 
-#TODO (filipenos) verificar o mimetype
-#se começar com inode inode/directory é um diretório, qualquer outra coisa que começar com inode deve dar erro
-#qualquer outra coisa deve ser um arquivo, então pensar em uma forma de sincronizar
+#TODO (filipenos) permitir adicionar arquivo
 
 #TODO (filipenos) verificar se um diretório já esta sendo sincronizado com o pai
 #por exemplo, existe /home/filipe/Documentos, se tentar adicionar /home/filipe/Documentos/Planilhas deve retornar erro pois
@@ -50,6 +48,12 @@ check_path_exists() {
 add_path() {
   log "Add $1 to save"
   check_path_exists $1
+  typ=$(mimetype --output-format "%m" $1)
+  if [ $typ != "inode/directory" ]; then
+    log "[ERROR] Current type $typ is not supported"
+    exit 1
+  fi
+
   dir=$(dirname "${1}")
   file="$dir/$file"$(basename "${1}")
   grep -q -s "$file" $FILE_WITH_PATHS
