@@ -10,7 +10,7 @@
 
 #TODO (filipenos) permitir alterar o nome do pc
 
-#TODO (filipenos) permitir sincronizar os arquivos de volta, selecionando um diretorio pai, ou sincronizando com o que já existe
+#TODO (filipenos) permitir selecionar um diretorio para copiar os arquivos, ou usar a home (nesse caso a opcao -d 'apagar' é perigosa pq pode apgar tudo
 #com opção de apagar local, ou manter
 #save-my-pc.sh get <path-to-save> ou <atualizar_diretorios_locais>
 
@@ -24,13 +24,14 @@ log() {
 }
 
 print_help() {
-  echo "Usage $1 (add|show|show-remote|save)"
+  echo "Usage $1 (add|show|show-remote|save|get)"
   exit 1
 }
 
 is_empty() {
   if [ -z "$1" ]; then
-    log "[ERROR] empty"
+    shift
+    log "[ERROR] empty" $@
     exit 1
   fi
 }
@@ -53,7 +54,6 @@ check_path_exists() {
 
 add_path() {
   to_add=$(realpath "$1")
-  #to_add="$1"
   log "Add $to_add to save"
   check_path_exists "$to_add"
   typ=$(mimetype --output-format "%m" "$to_add")
@@ -117,6 +117,26 @@ save_my_pc() {
   done < $FILE_WITH_PATHS
 }
 
+get_my_pc() {
+  check_dependencies
+  pc=$(echo "$1" | sed -e 's/^[[:space:]]*//')
+  is_empty "$pc" "Get command required pc name"
+
+  log "Getting files from pc $pc"
+  gsutil ls "gs://$BUCKET_NAME/$pc" 2> /dev/null
+  if [ $? -gt 0 ]; then
+    log "[ERROR] No files from $pc"
+    exit 1
+  fi
+
+  if [ ! -d "$HOME/$pc" ]; then
+    log "Creating home pc $pc dir"
+    mkdir "$HOME/$pc"
+  fi
+
+  gsutil -m rsync -d -r "gs://$BUCKET_NAME/$pc" "$HOME/$pc" #option -d are dangeurs
+}
+
 if [ $# -eq 0 ]; then
   print_help
 fi
@@ -126,6 +146,10 @@ while [ $# -gt 0 ]; do
     add)
       shift
       add_path "$1"
+      ;;
+    get)
+      shift
+      get_my_pc "$1"
       ;;
     show)
       show_paths
