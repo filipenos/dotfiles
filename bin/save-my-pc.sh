@@ -12,6 +12,7 @@
 
 #TODO (filipenos) permitir sincronizar os arquivos de volta, selecionando um diretorio pai, ou sincronizando com o que já existe
 #com opção de apagar local, ou manter
+#save-my-pc.sh get <path-to-save> ou <atualizar_diretorios_locais>
 
 
 FILE_WITH_PATHS=$HOME/.savemypc
