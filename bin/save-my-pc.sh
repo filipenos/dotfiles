@@ -8,6 +8,11 @@
 
 #TODO (filipenos) permitir apagar um diretório que foi removido ou fazer um re-sync apagando o que não é pra sincronizar
 
+#TODO (filipenos) permitir alterar o nome do pc
+
+#TODO (filipenos) permitir sincronizar os arquivos de volta, selecionando um diretorio pai, ou sincronizando com o que já existe
+#com opção de apagar local, ou manter
+
 
 FILE_WITH_PATHS=$HOME/.savemypc
 BUCKET_NAME=filipenos
