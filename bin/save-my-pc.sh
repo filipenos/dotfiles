@@ -4,9 +4,9 @@
 
 #TODO (filipenos) permitir salvar na amazon s3, e falar o nome do bucket, talvez com um arquivo de configuração
 
-#TODO (filipenos) permitir não apagar os arquivos
+#TODO (filipenos) permitir não apagar os arquivos, sempre adicionar, talvez ser o padrão
 
-#TODO (filipenos) permitir apagar um diretório que foi removido
+#TODO (filipenos) permitir apagar um diretório que foi removido ou fazer um re-sync apagando o que não é pra sincronizar
 
 
 FILE_WITH_PATHS=$HOME/.savemypc
@@ -105,9 +105,9 @@ save_my_pc() {
   while read l;
   do
     check_path_exists "$l"
-    dir=$(echo "$l" | sed 's,'"$HOME/"',,g')
-    log "Saving path $dir"
-    gsutil -m rsync -d -r "$l" "gs://$BUCKET_NAME/$PC_NAME/$dir"
+    to_save=$(echo "$l" | sed 's,'"$HOME/"',,g')
+    log "Saving $to_save"
+    gsutil -m rsync -d -r "$l" "gs://$BUCKET_NAME/$PC_NAME/$to_save"
   done < $FILE_WITH_PATHS
 }
 
