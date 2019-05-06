@@ -14,6 +14,13 @@
 #com opção de apagar local, ou manter
 #save-my-pc.sh get <path-to-save> ou <atualizar_diretorios_locais>
 
+#TODO (filipenos) ignorar diretorios de projetos git por padrão, adicionar uma flag para forçar sincronizar
+#inside_git_repo="$(git rev-parse --is-inside-work-tree 2>/dev/null)"
+#if [ "$inside_git_repo" ]; then
+  #echo "inside git repo"
+#else
+  #echo "not in git repo"
+#fi
 
 FILE_WITH_PATHS=$HOME/.savemypc
 BUCKET_NAME=filipenos
