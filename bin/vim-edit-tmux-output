@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#TODO (filipenos) permitir receber qual o buffer para abrir fora do tmux
+
+file=`mktemp`.sh
+tmux capture-pane -pS -32768 > $file
+tmux new-window -n:mywindow "vim $file"
