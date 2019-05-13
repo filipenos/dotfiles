@@ -39,23 +39,8 @@ Plugin 'jasoncodes/ctrlp-modified.vim'
 Plugin 'Blackrush/vim-gocode'
 Plugin 'fatih/vim-go'
 Plugin 'dgryski/vim-godef'
-"Plugin 'kchmck/vim-coffee-script'
-"Plugin 'python-mode/python-mode'
-"Plugin 'ternjs/tern_for_vim'
-"Plugin 'burnettk/vim-angular'
-"Plugin 'leafgarland/typescript-vim' " syntax highlight for typescript
-"Plugin 'Quramy/tsuquyomi' " Make your Vim a TypeScript IDE.
-"Plugin 'pangloss/vim-javascript' " suport for react
-"Plugin 'mxw/vim-jsx' " suport for react
-
-"snipmate
-"Plugin 'MarcWeber/vim-addon-mw-utils'
-"Plugin 'tomtom/tlib_vim'
-"Plugin 'garbas/vim-snipmate'
-"Plugin 'honza/vim-snippets' " Optional:
 
 "color
-"Plugin 'fatih/molokai'
 Plugin 'tomasr/molokai'
 
 " plugin from http://vim-scripts.org/vim/scripts.html
@@ -122,10 +107,6 @@ let g:tagbar_type_go = {
       \ 'ctagsargs' : '-sort -silent'
       \ }
 
-
-"map <Leader>m :CtrlPModified<CR>
-"map <Leader>t :CtrlPBufTag<CR>
-"map <Leader>b :CtrlPBuffer<CR>
 
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 let g:ctrlp_custom_ignore = {
@@ -199,20 +180,8 @@ function! s:my_cr_function()
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -225,9 +194,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
-"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
