@@ -24,9 +24,6 @@ Plugin 'google/vim-searchindex' " This plugin shows how many times does a search
 
 " autolcomplete
 Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/vimshell.vim'
-Plugin 'Shougo/unite.vim'
 
 " file ident
 Plugin 'maksimr/vim-jsbeautify'
