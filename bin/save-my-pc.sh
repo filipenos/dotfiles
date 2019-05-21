@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#TODO (filipenos) !importante, ao baixar um pc, remover a permissão de escrita de todos os arquivos e pastas
+
 #TODO (filipenos) permitir adicionar arquivo
 
 #TODO (filipenos) permitir salvar na amazon s3, e falar o nome do bucket, talvez com um arquivo de configuração
