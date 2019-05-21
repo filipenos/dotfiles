@@ -1,55 +1,50 @@
 #/bin/bash
 
 log() {
-	echo "[DOTFILES] $@"
+  echo "[DOTFILES] $@"
 }
 
 install() {
-	log "installing dotfiles on $HOME"
-	git clone -q https://git@github.com/filipenos/dotfiles "$HOME/dotfiles"
+  log "installing dotfiles on $HOME"
+  git clone -q https://git@github.com/filipenos/dotfiles "$HOME/dotfiles"
 }
 
 configure_onpath() {
-	log "configure dotfiles on bashrc"
-	if ! grep -q "#DOTFILESRC" $HOME/.bashrc ; then
-		echo 'source $HOME/dotfiles/dotfilesrc #DOTFILESRC' >> $HOME/.bashrc
-	else
-		log "bashrc already configured"
-	fi
-	log "configure dotfiles on zshrc"
-	if ! grep -q "#DOTFILESRC" $HOME/.zshrc ; then
-		echo 'source $HOME/dotfiles/dotfilesrc #DOTFILESRC' >> $HOME/.zshrc
-	else
-		log "zshrc already configured"
-	fi
-	log "reload your sh shell to use dotfiles"
+  log "configure dotfiles on bashrc"
+  if ! grep -q "#DOTFILESRC" $HOME/.bashrc ; then
+    echo 'source $HOME/dotfiles/dotfilesrc #DOTFILESRC' >> $HOME/.bashrc
+  else
+    log "bashrc already configured"
+  fi
+  log "configure dotfiles on zshrc"
+  if ! grep -q "#DOTFILESRC" $HOME/.zshrc ; then
+    echo 'source $HOME/dotfiles/dotfilesrc #DOTFILESRC' >> $HOME/.zshrc
+  else
+    log "zshrc already configured"
+  fi
+  log "reload your sh shell to use dotfiles"
 }
 
 remove_frompath() {
-	log "remove dotfilesrc from .bashrc"
-	sed -i '/DOTFILESRC/d' "$HOME/.bashrc"
-	log "remove dotfilesrc from .zshrc"
-	sed -i '/DOTFILESRC/d' "$HOME/.zshrc"
+  log "remove dotfilesrc from .bashrc"
+  sed -i '/DOTFILESRC/d' "$HOME/.bashrc"
+  log "remove dotfilesrc from .zshrc"
+  sed -i '/DOTFILESRC/d' "$HOME/.zshrc"
 }
 
 install_vim() {
-	log "configuring vimrc"
-	$HOME/dotfiles/bin/vim-install-vundle
+  log "configuring vimrc"
+  $HOME/dotfiles/bin/vim-install-vundle
 }
 
 install_tmux() {
-	log "configuring tmux.conf"
-	ln -s $HOME/dotfiles/tmux.conf $HOME/.tmux.conf
-}
-
-install_gitconfig() {
-  log "Configuring gitconfig"
-  ln -s $HOME/dotfiles/gitconfig $HOME/.gitconfig
+  log "configuring tmux.conf"
+  ln -s $HOME/dotfiles/tmux.conf $HOME/.tmux.conf
 }
 
 remove() {
-	log "removing dotfiles from $HOME"
-	rm -rf $HOME/dotfiles
+  log "removing dotfiles from $HOME"
+  rm -rf $HOME/dotfiles
 }
 
 if [ -z $1 ]; then
@@ -60,7 +55,6 @@ if [ -z $1 ]; then
     install
     install_vim
     install_tmux
-    install_gitconfig
   fi
   configure_onpath
 else
@@ -70,9 +64,6 @@ else
       ;;
     install-tmux)
       install_tmux
-      ;;
-    install-gitconfig)
-      install_gitconfig
       ;;
   esac
 fi
