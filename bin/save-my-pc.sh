@@ -26,7 +26,14 @@
 
 FILE_WITH_PATHS=$HOME/.savemypc
 BUCKET_NAME=filipenos
-PC_NAME=$(cat /etc/hostname)
+
+
+test $(uname -s) = "Darwin"
+if [ $? -eq 0 ]; then
+  PC_NAME=$(scutil --get LocalHostName)
+else
+  PC_NAME=$(cat /etc/hostname)
+fi
 
 log() {
   echo "[SAVE-MY-PC]" $@
@@ -65,7 +72,7 @@ add_path() {
   to_add=$(realpath "$1")
   log "Add $to_add to save"
   check_path_exists "$to_add"
-  typ=$(mimetype --output-format "%m" "$to_add")
+  typ=$(file --mime-type -b "$to_add")
   if [ $typ != "inode/directory" ]; then
     log "[ERROR] Current type $typ is not supported"
     exit 1
