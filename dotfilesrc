@@ -25,3 +25,7 @@ PID=$(ps -p $$)
 if echo $PID | grep -q "zsh"; then
   source $HOME/dotfiles/zshrc
 fi
+
+if [ -d $HOME/dotfiles-private ]; then
+  export PATH=$PATH:$HOME/dotfiles-private/bin
+fi
