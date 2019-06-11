@@ -2,8 +2,6 @@
 
 #TODO (filipenos) !importante, ao baixar um pc, remover a permissão de escrita de todos os arquivos e pastas
 
-#TODO (filipenos) permitir adicionar arquivo
-
 #TODO (filipenos) permitir salvar na amazon s3, e falar o nome do bucket, talvez com um arquivo de configuração
 
 #TODO (filipenos) permitir não apagar os arquivos, sempre adicionar, talvez ser o padrão
@@ -68,6 +66,35 @@ check_path_exists() {
   fi
 }
 
+check_exists() {
+   is_empty "$1"
+  if [ ! -e "$1" ]; then
+    log "[ERROR] File/Path $1 not exists"
+    exit 1
+  fi
+}
+
+add() {
+  if [ ! -e "$1" ]; then
+    log "[ERROR] $1 not exists"
+    exit 1
+  fi
+
+  typ=$(file --mime-type -b "$1")
+  if [ $typ == "inode/directory" ]; then
+    add_path "$1"
+    exit 0
+  else
+    echo $typ | grep -q -s -e "text/"
+    if [ $? -eq 0 ]; then
+      add_file "$1"
+      exit 0
+    fi
+  fi
+  log "[ERROR] Current type $typ is not supported"
+  exit 1
+}
+
 add_path() {
   to_add=$(realpath "$1")
   log "Add $to_add to save"
@@ -92,11 +119,24 @@ add_path() {
   file="$dir/"$(basename "$to_add")
   grep -q -s -e "$file\$" $FILE_WITH_PATHS
   if [ $? -gt 0 ]; then
-    log "Path added successfully!"
     echo $file >> $FILE_WITH_PATHS
+    log "Path added successfully!"
   else
     log "[ERROR] Path already added"
   fi
+}
+
+add_file() {
+  to_add=$(realpath "$1")
+  log "Add file $to_add to save"
+  check_exists "$1"
+  grep -q -s -e "$to_add" $FILE_WITH_PATHS
+  if [ $? -eq 0 ]; then
+    log "[ERROR] file already added"
+    exit 1
+  fi
+  echo "$to_add" >> $FILE_WITH_PATHS
+  log "File added successfully!"
 }
 
 show_paths() {
@@ -161,7 +201,7 @@ while [ $# -gt 0 ]; do
   case "$1" in
     add)
       shift
-      add_path "$1"
+      add "$1"
       ;;
     get)
       shift
