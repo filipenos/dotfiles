@@ -27,5 +27,6 @@ if echo $PID | grep -q "zsh"; then
 fi
 
 if [ -d $HOME/dotfiles-private ]; then
+  source "$HOME/dotfiles-private/dotfilesrc"
   export PATH=$PATH:$HOME/dotfiles-private/bin
 fi
