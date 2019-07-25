@@ -2,12 +2,13 @@
 
 set -e
 
-if [ -z "$1" ]; then
-	echo "path of project is required"
-	exit 1
+path="$1"
+if [ -z "$path" ]; then
+	echo "using pwd $(pwd)"
+	path=$(pwd)
 fi
 
-path=$(realpath "$1")
+path=$(realpath "$path")
 name=$(basename "$path")
 project=$(echo "$path" | sed -e "s;^$GOPATH/;;")
 
@@ -18,5 +19,4 @@ docker run \
 	--name "$name" \
 	-v "$path":"/go/$project" \
 	-w "/go/$project" \
-	-it golang:latest \
-	/bin/bash
+	-it golang:latest
