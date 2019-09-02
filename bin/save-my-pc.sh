@@ -50,22 +50,6 @@ is_empty() {
   fi
 }
 
-check_file_exists() {
-  is_empty "$1"
-  if [ ! -f "$1" ]; then
-    log "[ERROR] File $1 not exists"
-    exit 1
-  fi
-}
-
-check_path_exists() {
-  is_empty "$1"
-  if [ ! -d "$1" ]; then
-    log "[ERROR] Path $1 not exists"
-    exit 1
-  fi
-}
-
 check_exists() {
    is_empty "$1"
   if [ ! -e "$1" ]; then
@@ -84,12 +68,12 @@ add() {
   if [ $typ == "inode/directory" ]; then
     add_path "$1"
     exit 0
-  else
-    echo $typ | grep -q -s -e "text/"
-    if [ $? -eq 0 ]; then
-      add_file "$1"
-      exit 0
-    fi
+#  else
+#    echo $typ | grep -q -s -e "text/"
+#    if [ $? -eq 0 ]; then
+#      add_file "$1"
+#      exit 0
+#    fi
   fi
   log "[ERROR] Current type $typ is not supported"
   exit 1
@@ -98,7 +82,7 @@ add() {
 add_path() {
   to_add=$(realpath "$1")
   log "Add $to_add to save"
-  check_path_exists "$to_add"
+  check_exists "$to_add"
   typ=$(file --mime-type -b "$to_add")
   if [ $typ != "inode/directory" ]; then
     log "[ERROR] Current type $typ is not supported"
@@ -141,7 +125,7 @@ add_file() {
 
 show_paths() {
   log "Listing paths to save remote"
-  check_file_exists $FILE_WITH_PATHS
+  check_exists $FILE_WITH_PATHS
   cat $FILE_WITH_PATHS
 }
 
@@ -161,12 +145,12 @@ check_dependencies() {
 
 save_my_pc() {
   check_dependencies
-  check_file_exists $FILE_WITH_PATHS
+  check_exists $FILE_WITH_PATHS
 
   log "Saving pc data to $PC_NAME"
   while read l;
   do
-    check_path_exists "$l"
+    check_exists "$l"
     to_save=$(echo "$l" | sed 's,'"$HOME/"',,g')
     log "Saving $to_save"
     gsutil -m rsync -d -r "$l" "gs://$BUCKET_NAME/$PC_NAME/$to_save"
