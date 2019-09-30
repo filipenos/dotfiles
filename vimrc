@@ -12,8 +12,8 @@ set wildmenu       " enhanced command-line completion
 set laststatus=2   " Always display status line
 
 set autoread
-set visualbell     " shut vim up
-set noerrorbells
+"set visualbell this option on iterm results on blank screen always ESC is pressed
+"set errorbells
 
 "encoding
 "set encoding=utf-8
@@ -53,7 +53,7 @@ set foldlevel=99
 "map 0 ^
 
 set pastetoggle=<F12>
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
 
 " increasing <CTRL>+a <CTRL>+x
 " avaliable options are alpha,bin,octal,hex
@@ -106,7 +106,7 @@ augroup filemapping
   autocmd BufEnter * :syntax sync fromstart
 
   " Map ,gb to add current branch on commit
-  au Filetype gitcommit map ,gb :0r!git rev-parse --abbrev-ref HEAD<CR>A 
+  au Filetype gitcommit map ,gb :0r!git rev-parse --abbrev-ref HEAD<CR>A
 
   " Posiciona a janela QuickFix sempre na parte inferior da tela
   au FileType qf wincmd J
@@ -410,6 +410,6 @@ endif
 
 " Comments
 " to replace selected text on visual mode use \%V before text to replace:
-" sample :'<,'>s/\%Vorig/replace/g 
+" sample :'<,'>s/\%Vorig/replace/g
 " to replace comma inside two quotes to dot
 " %s/"\(\d\+\),\(\d\+\)"/\"\1\.\2\"/g
