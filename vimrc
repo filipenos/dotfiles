@@ -65,10 +65,6 @@ if has('gui_running')
   set guioptions-=T  "remove toolbar
   set guioptions-=r  "remove right-hand scroll bar
   set guioptions-=L  "remove left-hand scroll bar
-else
-  set mouse=
-  set t_Co=256
-  "set term=screen-256color
 endif
 
 " The default leader is '\\', changed to ','
@@ -78,14 +74,6 @@ let mapleader=","
 if filereadable(expand("~/.vimrc.plugins"))
   source ~/.vimrc.plugins
 endif
-
-" set colorscheme if exists
-try
-  " set colorscheme
-  colorscheme molokai
-catch /^Vim\%((\a\+)\)\=:E185/
-  " deal with it
-endtry
 
 augroup filemapping
   " Java settings
