@@ -19,7 +19,7 @@ if [ -e "$HOME/.vimrc" ]; then
     info "Ignore existing $HOME/.vimrc file"
 else
     info "Creating link to $HOME/.vimrc file"
-    ln -s "$BASE/vimrc" "$HOME/.vimrc" 
+    ln -s "$BASE/vimrc" "$HOME/.vimrc"
 fi
 
 if [ -e "$HOME/.vimrc.plugins" ]; then
@@ -29,11 +29,18 @@ else
     ln -s "$BASE/vimrc.plugins" "$HOME/.vimrc.plugins"
 fi
 
+if [ -e "$HOME/.vimrc.funcs" ]; then
+    info "Ignore existing $HOME/.vimrc.funcs file"
+else
+    info "Creating link to $HOME/.vimrc.funcs file"
+    ln -s "$BASE/vimrc.funcs" "$HOME/.vimrc.funcs"
+fi
+
 if [ -e "$HOME/.editorconfig" ]; then
     info "Ignore existing $HOME/.editorconfig file"
 else
     info "Creating link to $HOME/.editorconfig file"
-    ln -s "$BASE/editorconfig" "$HOME/.editorconfig" 
+    ln -s "$BASE/editorconfig" "$HOME/.editorconfig"
 fi
 
 info "Updating local plugins"

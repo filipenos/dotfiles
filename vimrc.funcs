@@ -1,0 +1,171 @@
+function! Build()
+  " build has a funtion to map custom files to build
+  if (&ft=='go') " to build work correctly is necessary the plugin fatih/vim-go
+    if(match(expand('%:t'), '_test\.go') > 0)
+      :GoTestCompile <CR>
+    else
+      :GoBuild <CR>
+    endif
+  endif
+endfunction
+command! Build call Build()
+map <Leader>B :call Build() <CR>
+command! W w | Build " map W to save and build file
+
+function! TabToSpace()
+  :s/\t/  /g
+endfunction
+command! TabToSpace call TabToSpace()
+
+function! RangeTabToSpace() range
+  :'<,'>s/\t/  /g
+endfunction
+command! RangeTabToSpace call RangeTabToSpace()
+
+function! Space4ToTab()
+  :s/    /\t/g
+endfunction
+command! Space4ToTab call Space4ToTab()
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#cmd#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+function! ToggleCursor()
+  let g:cursor_on = exists('g:cursor_on') ? !g:cursor_on : 1
+  if g:cursor_on
+    set cursorcolumn
+    set cursorline
+  else
+    set nocursorcolumn
+    set nocursorline
+  endif
+endfunction
+map <Leader>tc :call ToggleCursor() <CR>
+
+function! ToggleErrors()
+  if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
+    " No location/quickfix list shown, open syntastic error location panel
+    Errors
+  else
+    lclose
+  endif
+endfunction
+map <Leader>te :call ToggleErrors() <CR>
+
+function! ToggleHidden()
+  set listchars=eol:↵,extends:>,precedes:<,nbsp:·,tab:»\ \,trail:~
+  "Toggle the flag (or set it if it doesn't yet exist)...
+  let g:list_on = exists('g:list_on') ? !g:list_on : 1
+  if g:list_on
+    set list
+  else
+    set nolist
+  endif
+endfunction
+map <Leader>th :call ToggleHidden() <CR>
+
+function! FormatJSON()
+  %!python -m json.tool
+endfunction
+command! FormatJSON call FormatJSON()
+
+function! FormatXML()
+  %!xmllint -encode utf8 -format -
+endfunction
+command! FormatXML call FormatXML()
+
+function! FormatSH()
+  %!shfmt
+endfunction
+command! FormatSH call FormatSH()
+
+function! URLDecode()
+  %!python -c "import sys, urllib as ul; print ul.unquote_plus(sys.stdin.read())"
+endfunction
+command! URLDecode call URLDecode()
+
+function! URLEncode()
+  %!python -c "import sys, urllib as ul; print ul.quote_plus(sys.stdin.read())"
+endfunction
+command! URLEncode call URLEncode()
+
+function! CloseHelpWindows()
+  :pclose
+  :cclose " close the quickfix window
+  :lclose
+endfunction
+map <F6> :call CloseHelpWindows()<CR>
+
+function! TrimWhiteSpace()
+  ":%s/\s\+$//e
+	%s/\s*$//
+	''
+endfunction
+command! TrimWhiteSpace call TrimWhiteSpace()
+
+function! RunNode()
+  :%y"
+  call TempWindow("Node", 1, 's')
+  :put
+  execute 'silent %!node'
+endfunction
+
+function! Table(...)
+  let a:delimiter = get(a:, 1, 0)
+  if a:delimiter == "0"
+    let a:delimiter=','
+  endif
+
+  :%y"
+  call TempWindow("Table", 1, 's')
+  :put
+  execute 'silent %!column -t -s"' . a:delimiter . '"'
+endfunction
+command! Table call Table()
+
+function! Execute(c)
+  :%y"
+  call TempWindow("Execute", 1, 'v')
+  :put
+  execute 'silent %!' . a:c
+endfunction
+command! Execute -nargs=1 Execute call Execute(<f-args>)
+
+" Disposable temporary window
+" TODO bug janela não atulizar se rodar mais de uma vez
+function! TempWindow(name, clear, mode) abort
+  let name = substitute(a:name, "[^a-zA-Z0-9]", "_", "g")
+  let bn = bufnr(name)
+  if bn == -1
+    exe "new " . name
+    let bn = bufnr(name)
+    setlocal buftype=nofile
+    setlocal bufhidden=hide
+    setlocal noswapfile
+    setlocal buflisted
+  else
+    let wn = bufwinnr(bn)
+    if wn != -1
+      exe wn . "wincmd w"
+    else
+      exe "split +buffer" . bn
+    endif
+  endif
+
+  if a:clear
+    normal gg
+    normal dG
+  endif
+  if a:mode == 'v'
+    wincmd L
+  else
+    wincmd J
+  endif
+endfunction
