@@ -1,0 +1,35 @@
+---
+version: "2"
+services:
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
+    environment:
+      - USER=filipenos
+      - PASS=senha100
+    volumes:
+      - ~/Downloads/t/config:/config
+      - ~/Downloads/t/downloads:/downloads
+      - ~/Downloads/t/watch:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped
+
+  syncthing:
+    image: linuxserver/syncthing
+    container_name: syncthing
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - UMASK_SET=022
+    volumes:
+      - ~/Downloads/t/configsync:/config
+      - ~/Downloads/t/downloads:/config/Downloads
+    ports:
+      - 8384:8384
+      - 22000:22000
+      - 21027:21027/udp
+    restart: unless-stopped

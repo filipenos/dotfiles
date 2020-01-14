@@ -1,0 +1,180 @@
+version: '2.1'
+services:
+  transmission:
+    container_name: transmission
+    image: dperson/transmission
+    restart: unless-stopped
+    depends_on:
+      - plex
+    network_mode: host
+    environment:
+      - TZ=Europe/Bucharest
+      - TR_IDLE_SEEDING_LIMIT_ENABLED=true
+      - TR_IDLE_SEEDING_LIMIT=600
+      - TR_RATIO_LIMIT_ENABLED=true
+      - TR_RATIO_LIMIT=4
+      - TR_DOWNLOAD_DIR=/downloads
+      - TR_INCOMPLETE_DIR_ENABLED=false
+      - TR_RENAME_PARTIAL_FILES=true
+      - TR_DHT_ENABLED=false
+      - TR_PEX_ENABLED=false
+      - USERID=1000
+      - GROUPID=1000
+    volumes:
+      - /opt/config/transmission:/var/lib/transmission-daemon/info
+      #set transmission or sonarr download folder to /downloads
+      - /opt/downloads/complete:/downloads
+      - /opt/downloads/temp:/var/lib/transmission-daemon/incomplete
+
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - TZ=Europe/Bucharest
+      - PLEX_CLAIM=
+      - PLEX_UID=1000
+      - PLEX_GID=1000
+    hostname: xxx
+    volumes:
+      - /opt/config/plex:/config
+      - /opt/transcode:/transcode
+      - /opt/storage:/data
+    #tmpfs: /transcode:uid=0
+
+  sonarr:
+    container_name: sonarr
+    image: linuxserver/sonarr
+    restart: unless-stopped
+    depends_on:
+      - transmission
+      - plex
+    network_mode: host
+    environment:
+      - TZ=Europe/Bucharest
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /opt/config/sonarr:/config
+      - /opt/storage/series:/tv
+      - /opt/downloads/complete:/downloads
+
+  radarr:
+    container_name: radarr
+    image: linuxserver/radarr
+    restart: unless-stopped
+    depends_on:
+      - transmission
+      - plex
+    network_mode: host
+    environment:
+      - TZ=Europe/Bucharest
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /opt/config/radarr:/config
+      - /opt/storage/movies:/movies
+      - /opt/downloads/complete:/downloads
+
+  jackett:
+    container_name: jackett
+    image: linuxserver/jackett
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - TZ=Europe/Bucharest
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /opt/config/jackett:/config
+      - /opt/downloads/blackhole:/downloads
+
+  ombi:
+    container_name: ombi
+    image: rogueosb/ombi
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - TZ=Europe/Bucharest
+      - PUID=1000
+      - PGID=1000
+      - EAP=1
+    volumes:
+      - /opt/config/ombi:/config
+
+  iperf:
+    container_name: iperf
+    image: networkstatic/iperf3
+    command: -s
+    restart: unless-stopped
+    network_mode: host
+
+  netdata:
+    container_name: netdata
+    image: titpetric/netdata
+    restart: unless-stopped
+    cap_add:
+      - SYS_PTRACE
+    network_mode: host
+    environment:
+      - TZ=Europe/Bucharest
+      #- PUID=1000
+      #- PGID=1000
+    volumes:
+      - /opt/config/netdata:/etc/netdata
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  nextcloud:
+    container_name: nextcloud
+    image: wonderfall/nextcloud:daily
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - UID=1000
+      - GID=1000
+      - UPLOAD_MAX_SIZE=2G
+      - APC_SHM_SIZE=128M
+      - OPCACHE_MEM_SIZE=128
+      - CRON_PERIOD=15m
+      - TZ=Europe/Bucharest
+      - ADMIN_USER=            # Don't set to configure through browser
+      - ADMIN_PASSWORD=        # Don't set to configure through browser
+      - DOMAIN=
+      - DB_TYPE=mysql
+      - DB_NAME=nextcloud
+      - DB_USER=nextcloud
+      - DB_PASSWORD=
+      - DB_HOST=127.0.0.1
+    volumes:
+      - /opt/cloud:/data
+      - /opt/config/nextcloud/config:/config
+      - /opt/config/nextcloud/apps:/apps2
+      - /opt/config/nextcloud/themes:/nextcloud/themes
+
+  mariadb:
+    container_name: mariadb
+    image: mariadb:10
+    restart: unless-stopped
+    network_mode: host
+    user: 1000:1000
+    environment:
+      - MYSQL_ROOT_PASSWORD=
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=
+    volumes:
+      - /opt/config/mariadb/data:/var/lib/mysql
+
+  caddy:
+    container_name: caddy
+    image: abiosoft/caddy
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      - CADDYPATH=/etc/caddycerts
+    volumes:
+      - /opt/config/caddy/Caddyfile:/etc/Caddyfile
+      - /opt/config/certs:/etc/caddycerts
