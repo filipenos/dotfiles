@@ -4,9 +4,12 @@ log() {
 	echo "[PATH] $@"
 }
 
-FILE="$(readlink -f "$0")"
+FILE="$(realpath "$0")"
 BASE="${FILE%/*}"
 BASE="${BASE%/*}"
+
+echo $FILE
+echo $BASE
 
 configure_path() {
 	if ! grep -q -1 "#CUSTOM_PATH" $HOME/.bashrc ; then
