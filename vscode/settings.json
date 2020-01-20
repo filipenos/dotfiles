@@ -1,0 +1,10 @@
+{
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "terminal.integrated.rendererType": "dom",
+    "editor.minimap.enabled": false,
+    "workbench.colorTheme": "Default Light+",
+    "projectManager.projectsLocation": "/home/filipe",
+    "editor.renderWhitespace": "selection",
+    "go.formatTool": "goimports",
+    "go.testFlags": ["-v"]
+}
