@@ -3,7 +3,7 @@
     "terminal.integrated.shell.osx": "/bin/zsh",
     "terminal.integrated.rendererType": "dom",
     "editor.minimap.enabled": false,
-    "workbench.colorTheme": "Default Light+",
+    "workbench.colorTheme": "Solarized Dark",
     "editor.renderWhitespace": "selection",
     "go.formatTool": "goimports",
     "go.testFlags": ["-v"],
@@ -12,6 +12,5 @@
     "editor.fontLigatures": true,
     "terminal.integrated.fontFamily": "JetBrains Mono",
     "terminal.integrated.fontSize": 13,
-    "projectManager.groupList": true,
-    "projectManager.projectsLocation": "/Users/filipe"
+    "projectManager.groupList": true
 }
