@@ -150,7 +150,9 @@ module.exports = {
     "hyper-font-ligatures",
     "hyper-pane",
     "hyper-material-theme",
-    "hyper-solarized-dark"
+    "hyper-solarized-dark",
+    "hyper-statusline",
+    "hypercwd"
   ],
 
   // in development, you can create a directory under
