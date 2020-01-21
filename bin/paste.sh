@@ -1,7 +1,5 @@
 #!/bin/sh
 
-xclip -h >/dev/null 2>&1 || sudo apt-get install xclip
-
 SELECTION="clipboard"
 FILE=
 
@@ -33,8 +31,14 @@ case "$1" in
     ;;
 esac
 
-if [ -n "$FILE" ]; then
-  exec xclip -selection $SELECTION -o "$@" > "$FILE"
+test $(uname -s) = "Darwin"
+if [ $? -eq 0 ]; then
+  exec pbpaste "$@"
 else
-  exec xclip -selection $SELECTION -o "$@"
+  xclip -h >/dev/null 2>&1 || sudo apt-get install xclip
+  if [ -n "$FILE" ]; then
+    exec xclip -selection $SELECTION -o "$@" > "$FILE"
+  else
+    exec xclip -selection $SELECTION -o "$@"
+  fi
 fi

@@ -1,7 +1,5 @@
 #!/bin/sh
 
-xclip -h >/dev/null 2>&1 || sudo apt-get install xclip
-
 SELECTION="clipboard"
 
 help() {
@@ -27,4 +25,10 @@ case "$1" in
     ;;
 esac
 
-exec xclip -selection $SELECTION -i "$@"
+test $(uname -s) = "Darwin"
+if [ $? -eq 0 ]; then
+  exec pbcopy "$@"
+else
+  xclip -h >/dev/null 2>&1 || sudo apt-get install xclip
+  exec xclip -selection $SELECTION -i "$@"
+fi
