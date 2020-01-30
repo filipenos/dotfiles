@@ -12,5 +12,8 @@
     "editor.fontLigatures": true,
     "terminal.integrated.fontFamily": "JetBrains Mono",
     "terminal.integrated.fontSize": 13,
-    "projectManager.groupList": true
+    "projectManager.groupList": true,
+    "files.associations": {
+        "Dockerfile_dev": "dockerfile"
+    }
 }
