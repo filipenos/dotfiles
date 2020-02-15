@@ -8,6 +8,7 @@
     "editor.renderWhitespace": "selection",
     "go.formatTool": "goimports",
     "go.testFlags": ["-v"],
+    "go.useLanguageServer": true,
     "editor.fontFamily": "JetBrains Mono",
     "editor.fontSize": 13,
     "editor.fontLigatures": true,
