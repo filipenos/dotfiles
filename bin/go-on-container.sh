@@ -2,7 +2,8 @@
 
 set -e
 
-GOLANG_VERSION="1.13-alpine"
+GOLANG_VERSION="1.12.5"
+#GOLANG_VERSION="1.13-alpine"
 
 while [ $# -gt 0 ]; do
   case "$1" in
@@ -24,7 +25,7 @@ path=$(realpath "$path")
 name=$(basename "$path")
 project=$(echo "$path" | sed -e "s;^$GOPATH/;;")
 
-echo "running $name > $project > $path on container"
+echo "running $name > $project > $path on container golang:$GOLANG_VERSION"
 
 if [ ! -z $BUILD ]; then
   echo "building..."
