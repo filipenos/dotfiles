@@ -1,21 +1,24 @@
 {
-    "terminal.integrated.shell.linux": "/bin/zsh",
-    "terminal.integrated.shell.osx": "/bin/zsh",
-    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe",
-    "terminal.integrated.rendererType": "dom",
     "editor.minimap.enabled": false,
-    "workbench.colorTheme": "Solarized Dark",
     "editor.renderWhitespace": "selection",
-    "go.formatTool": "goimports",
-    "go.testFlags": ["-v"],
-    "go.useLanguageServer": true,
     "editor.fontFamily": "JetBrains Mono",
     "editor.fontSize": 13,
     "editor.fontLigatures": true,
+    "files.associations": {
+        "Dockerfile_dev": "dockerfile",
+        "dotfilesrc": "shellscript"
+    },
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "terminal.integrated.shell.osx": "/bin/zsh",
+    "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe",
     "terminal.integrated.fontFamily": "JetBrains Mono",
     "terminal.integrated.fontSize": 13,
+    "terminal.integrated.rendererType": "dom",
+    "workbench.colorTheme": "Solarized Dark",
+    "workbench.startupEditor": "none",
+    "go.formatTool": "goimports",
+    "go.testFlags": ["-v"],
+    "go.useLanguageServer": true,
     "projectManager.groupList": true,
-    "files.associations": {
-        "Dockerfile_dev": "dockerfile"
-    }
+    "todo-tree.tree.showScanModeButton": false
 }
