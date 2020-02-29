@@ -1,5 +1,6 @@
 alefragnani.project-manager
 bungcip.better-toml
+Gruntfuggly.todo-tree
 humao.rest-client
 janisdd.vscode-edit-csv
 mauve.terraform
@@ -12,3 +13,4 @@ ms-vscode-remote.remote-wsl
 ms-vscode-remote.vscode-remote-extensionpack
 ms-vscode.csharp
 ms-vscode.Go
+shd101wyy.markdown-preview-enhanced
