@@ -1,0 +1,35 @@
+version: "3.7"
+
+services:
+  # PostgreSQL Database for Pentaho BI
+  pentaho-pg:
+    container_name: pentaho-pg
+    image: postgres:9.4
+    environment:
+      - POSTGRES_USER=pentaho
+      - POSTGRES_PASSWORD=password
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - pentaho-pg-data:/var/lib/postgresql/data/pgdata
+
+  # Pentaho BI
+  pentaho:
+    container_name: pentaho
+    image: ca0abinary/docker-pentaho
+    depends_on:
+      - pentaho-pg
+    ports:
+      - "9090:8080"
+    environment:
+      - HOST=pentaho-pg
+      - USER=pentaho
+      - PASSWORD=password
+    volumes:
+      - pentaho-hsqldb-data:/opt/pentaho/server/pentaho-server/data/hsqldb
+      - pentaho-jackrabbit-data:/opt/pentaho/server/pentaho-server/pentaho-solutions/system/jackrabbit/repository
+
+# Data volumes
+volumes:
+  pentaho-hsqldb-data:
+  pentaho-jackrabbit-data:
+  pentaho-pg-data:
