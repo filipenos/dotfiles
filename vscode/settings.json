@@ -6,7 +6,8 @@
     "editor.fontLigatures": true,
     "files.associations": {
         "Dockerfile_dev": "dockerfile",
-        "dotfilesrc": "shellscript"
+        "dotfilesrc": "shellscript",
+        "*.inc": "php"
     },
     "terminal.integrated.shell.linux": "/bin/zsh",
     "terminal.integrated.shell.osx": "/bin/zsh",
