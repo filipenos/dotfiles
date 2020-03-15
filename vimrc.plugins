@@ -40,6 +40,9 @@ Plugin 'Blackrush/vim-gocode'
 Plugin 'fatih/vim-go'
 Plugin 'dgryski/vim-godef'
 
+" get metrics and send to wakatime.com
+Plugin 'wakatime/vim-wakatime'
+
 "color
 Plugin 'tomasr/molokai'
 

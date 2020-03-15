@@ -10,6 +10,9 @@ antigen use oh-my-zsh
 antigen bundle git
 antigen bundle command-not-found
 
+# track info and send to wakatime
+antigen bundle sobolevn/wakatime-zsh-plugin
+
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
 
