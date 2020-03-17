@@ -1,6 +1,13 @@
 #!/bin/sh
 
-SELECTION="clipboard"
+test $(uname -s) = "Darwin"
+if [ $? -eq 0 ]; then
+  SELECTION="general"
+  PC=mac
+else
+  SELECTION="clipboard"
+  PC=linux
+fi
 
 help() {
   echo "Copy selections of shell"
@@ -8,6 +15,15 @@ help() {
   echo "    -c|--clip|--clipboard to clipboard (default)"
   echo "    -m|--middle to primary"
   echo "    -h|--help to print this message"
+}
+
+copy() {
+  if [ $PC = "mac" ]; then #-pboard {general | ruler | find | font}
+    exec pbcopy -pboard $SELECTION "$@"
+  else
+    xclip -h >/dev/null 2>&1 || sudo apt-get install xclip
+    exec xclip -selection $SELECTION -i "$@"
+  fi
 }
 
 case "$1" in
@@ -21,14 +37,16 @@ case "$1" in
     ;;
   -h|--help)
     help
-    return 0
+    exit 0
+    ;;
+  *)
+    if [ $# -eq 1 ]; then
+      if [ -f $1 ]; then
+        cat $1 | copy
+        exit 0
+      fi
+    fi
     ;;
 esac
 
-test $(uname -s) = "Darwin"
-if [ $? -eq 0 ]; then
-  exec pbcopy "$@"
-else
-  xclip -h >/dev/null 2>&1 || sudo apt-get install xclip
-  exec xclip -selection $SELECTION -i "$@"
-fi
+copy
