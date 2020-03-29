@@ -4,6 +4,8 @@ test $(uname -s) = "Darwin"
 if [ $? -eq 0 ]; then
   SELECTION="general"
   PC=mac
+elif [ $(grep -q "microsoft" /proc/sys/kernel/osrelease ; echo $?) -eq 0 ]; then
+  PC=wsl
 else
   SELECTION="clipboard"
   PC=linux
@@ -20,6 +22,8 @@ help() {
 copy() {
   if [ $PC = "mac" ]; then #-pboard {general | ruler | find | font}
     exec pbcopy -pboard $SELECTION "$@"
+  elif [ $PC = "wsl" ]; then
+    exec powershell.exe -command "clip.exe" "$@"
   else
     xclip -h >/dev/null 2>&1 || sudo apt-get install xclip
     exec xclip -selection $SELECTION -i "$@"

@@ -34,6 +34,8 @@ esac
 test $(uname -s) = "Darwin"
 if [ $? -eq 0 ]; then
   exec pbpaste "$@"
+elif [ $(grep -q "microsoft" /proc/sys/kernel/osrelease ; echo $?) -eq 0 ]; then
+  exec powershell.exe -command "Get-Clipboard" "$@"
 else
   xclip -h >/dev/null 2>&1 || sudo apt-get install xclip
   if [ -n "$FILE" ]; then
