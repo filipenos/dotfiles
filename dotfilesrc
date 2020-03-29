@@ -10,6 +10,8 @@ alias npm-list="npm list -g --depth=0"
 alias dpkg-purge-rc='dpkg -l | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge'
 # Aliases of Git
 #alias diffwithmaster="git diff master...`git rev-parse --abbrev-ref HEAD`"
+# Aliases of docker
+alias docker-container-ip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
 
 alias starwars="telnet towel.blinkenlights.nl"
 
