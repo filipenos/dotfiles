@@ -9,7 +9,7 @@
         "dotfilesrc": "shellscript",
         "*.inc": "php"
     },
-    "terminal.integrated.shell.linux": "/bin/zsh",
+    "terminal.integrated.shell.linux": "/home/linuxbrew/.linuxbrew/bin/zsh",
     "terminal.integrated.shell.osx": "/bin/zsh",
     "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe",
     "terminal.integrated.fontFamily": "JetBrains Mono",
