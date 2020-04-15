@@ -27,13 +27,20 @@ else
   export RUNNING_ZSH=0
 fi
 
+# allow read file with paths to add a PATH
+if [ -f "$HOME/.paths" ]; then
+  while read p; do
+    PATH="$PATH:$p"
+  done < "$HOME/.paths"
+fi
+
 # allow to use a local dotfilesrc
 if [ -f "$HOME/.dotfilesrc" ]; then
   source "$HOME/.dotfilesrc"
 fi
 
 # allow to load private dotfiles
-if [ -d $HOME/dotfiles-private ]; then
+if [ -d "$HOME/dotfiles-private" ]; then
   source "$HOME/dotfiles-private/dotfilesrc"
   export PATH=$PATH:$HOME/dotfiles-private/bin
 fi
