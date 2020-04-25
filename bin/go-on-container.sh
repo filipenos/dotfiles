@@ -2,8 +2,7 @@
 
 set -e
 
-GOLANG_VERSION="1.12.5"
-#GOLANG_VERSION="1.13-alpine"
+GOLANG_VERSION="latest"
 
 while [ $# -gt 0 ]; do
   case "$1" in
