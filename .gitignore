@@ -8,5 +8,8 @@ atom/packages/
 zshrc.zwc
 
 containers/plex-config/
-containers/movies/
-containers/tv/
+containers/plex-movies/
+containers/plex-tv/
+containers/transmission-config/
+containers/transmission-downloads/
+containers/transmission-watch/
