@@ -6,3 +6,7 @@ atom/.node-gyp/
 atom/nohup.out
 atom/packages/
 zshrc.zwc
+
+containers/plex-config/
+containers/movies/
+containers/tv/
