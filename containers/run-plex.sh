@@ -7,18 +7,30 @@ if [ "$(docker ps -q -f name=$NAME)" ]; then
   if [ "$yesno" = "yes" ]; then
     echo "stop container"
     docker stop $NAME
+  elif [ "$yesno" = "con" ]; then
+    echo conecting to container
+    docker exec -it $NAME /bin/bash
   fi
   exit 0
 fi
 
-base_path=$(dirname $(realpath $0))
-config_path=$base_path/plex-config
-movies_path=$base_path/plex-movies
-tv_path=$base_path/plex-tv
+printhelp() {
+  echo "Usage $0"
+  echo "  -claim --plex_claim set plex claim get on https://www.plex.tv/claim"
+  echo "  -c --config change config path"
+  echo "  -m --movies change movies path"
+  echo "  -t --tv change tv path"
+  echo "  -h --help print this help"
+  exit 0
+}
+
+base_path="$HOME/Volumes/$NAME"
+config_path=$base_path/config
+movies_path=$base_path/movies
+tv_path=$base_path/tv
 plex_claim=""
 
-while [ $# -gt 0 ]
-do
+while [ $# -gt 0 ]; do
   case "$1" in
     -c|--config)
       config_path="$2"
@@ -35,6 +47,9 @@ do
     -claim|--plex_claim)
       plex_claim="$2"
       shift
+      ;;
+    -h|--help)
+      printhelp
       ;;
   esac
   shift
