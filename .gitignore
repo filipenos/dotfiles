@@ -10,6 +10,3 @@ zshrc.zwc
 containers/plex-config/
 containers/plex-movies/
 containers/plex-tv/
-containers/transmission-config/
-containers/transmission-downloads/
-containers/transmission-watch/
