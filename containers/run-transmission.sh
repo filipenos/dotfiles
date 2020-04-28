@@ -1,6 +1,7 @@
 #!/bin/bash
 
 NAME=run-transmission
+PORT=9091
 
 if [ "$(docker ps -q -f name=$NAME)" ]; then
   read -p "alread running container $NAME, stop this (yes|no): "  yesno
@@ -60,12 +61,10 @@ docker run \
   -e TRANSMISSION_WEB_HOME=$interface \
   -e USER=filipe \
   -e PASS=filipe \
-  -p 9091:9091 \
+  -p $PORT:9091 \
   -p 51413:51413 \
   -p 51413:51413/udp \
   -v $config_path:/config \
   -v $downloads_path:/downloads \
   -v $watch_path:/watch \
   linuxserver/transmission
-
-  #--restart unless-stopped \

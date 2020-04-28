@@ -1,6 +1,7 @@
 #!/bin/bash
 
 NAME=run-plex
+PORT=32400
 
 if [ "$(docker ps -q -f name=$NAME)" ]; then
   read -p "alread running container $NAME, stop this (yes|no): "  yesno
@@ -72,8 +73,8 @@ docker run \
   -e PGID=$(id -g) \
   -e VERSION=docker \
   -e PLEX_CLAIM=$plex_claim \
-  -p 32400:32400 \
-  -p 32400:32400/udp \
+  -p $PORT:32400 \
+  -p $PORT:32400/udp \
   -p 32469:32469 \
   -p 32469:32469/udp \
   -p 1900:1900/udp \
