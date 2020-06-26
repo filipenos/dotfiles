@@ -18,8 +18,19 @@
     "workbench.colorTheme": "Solarized Dark",
     "workbench.startupEditor": "none",
     "go.formatTool": "goimports",
-    "go.testFlags": ["-v"],
+    "go.testFlags": [
+        "-v"
+    ],
+    "todo-tree.tree.showScanModeButton": false,
     "go.useLanguageServer": true,
     "projectManager.groupList": true,
-    "todo-tree.tree.showScanModeButton": false
+    "projectManager.sortList": "Name",
+    "projectManager.openInNewWindowWhenClickingInStatusBar": true,
+    "projectManager.git.baseFolders": [
+        "$home\\Code",
+    ],
+    "editor.codeActionsOnSave": {},
+    "window.zoomLevel": 0,
+    "dotfiles.repository": "https://github.com/filipenos/dotfiles",
+    "dotfiles.installCommand": "~/dotfiles/install-container.sh"
 }
