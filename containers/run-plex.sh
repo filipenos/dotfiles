@@ -56,6 +56,8 @@ while [ $# -gt 0 ]; do
   shift
 done
 
+#TODO (filipenos) ao ler do prompt tem um erro de leitura de variavel, o read por padrao adiciona uma nova linha ao final
+#https://www.computerhope.com/unix/bash/read.htm
 if [ -z "$plex_claim" ]; then
   read -p "Claim server: get on https://www.plex.tv/claim " plex_claim
 fi
