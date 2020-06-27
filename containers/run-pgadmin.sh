@@ -24,5 +24,4 @@ docker run \
   -e "PGADMIN_DEFAULT_EMAIL=filipenos@gmail.com" \
   -e "PGADMIN_DEFAULT_PASSWORD=filipe" \
   -v "pgadmin-data:/var/lib/pgadmin" \
-  -v "$path:/var/lib/pgadmin/storage/filipenos_gmail.com" \
   dpage/pgadmin4:latest
