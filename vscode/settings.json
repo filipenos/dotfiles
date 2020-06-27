@@ -4,6 +4,7 @@
     "editor.fontFamily": "JetBrains Mono",
     "editor.fontSize": 13,
     "editor.fontLigatures": true,
+    "editor.codeActionsOnSave": {},
     "files.associations": {
         "Dockerfile_dev": "dockerfile",
         "dotfilesrc": "shellscript",
@@ -21,7 +22,6 @@
     "go.testFlags": [
         "-v"
     ],
-    "todo-tree.tree.showScanModeButton": false,
     "go.useLanguageServer": true,
     "projectManager.groupList": true,
     "projectManager.sortList": "Name",
@@ -29,8 +29,5 @@
     "projectManager.git.baseFolders": [
         "$home\\Code",
     ],
-    "editor.codeActionsOnSave": {},
-    "window.zoomLevel": 0,
-    "dotfiles.repository": "https://github.com/filipenos/dotfiles",
-    "dotfiles.installCommand": "~/dotfiles/install-container.sh"
+    "window.zoomLevel": 0
 }
