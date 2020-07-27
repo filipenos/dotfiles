@@ -1,6 +1,8 @@
+42Crunch.vscode-openapi
 alefragnani.project-manager
+Arjun.swagger-viewer
 bungcip.better-toml
-Gruntfuggly.todo-tree
+golang.go
 humao.rest-client
 janisdd.vscode-edit-csv
 ms-azuretools.vscode-docker
@@ -10,6 +12,7 @@ ms-vscode-remote.remote-ssh
 ms-vscode-remote.remote-ssh-edit
 ms-vscode-remote.remote-wsl
 ms-vscode-remote.vscode-remote-extensionpack
-ms-vscode.Go
+octref.vetur
+redhat.vscode-yaml
 shd101wyy.markdown-preview-enhanced
 WakaTime.vscode-wakatime
