@@ -1,7 +1,6 @@
 #!/bin/bash
 
 NAME=run-plex
-PORT=32400
 
 if [ "$(docker ps -q -f name=$NAME)" ]; then
   read -p "alread running container $NAME, stop this (yes|no): "  yesno
@@ -19,16 +18,16 @@ printhelp() {
   echo "Usage $0"
   echo "  -claim --plex_claim set plex claim get on https://www.plex.tv/claim"
   echo "  -c --config change config path"
-  echo "  -m --movies change movies path"
-  echo "  -t --tv change tv path"
+  echo "  -m --media change media path"
+  echo "  -t --transcode change transcode path"
   echo "  -h --help print this help"
   exit 0
 }
 
 base_path="$HOME/Volumes/$NAME"
 config_path=$base_path/config
-movies_path=$base_path/movies
-tv_path=$base_path/tv
+media_path=$base_path/media
+transcode_path=$base_path/transcode
 plex_claim=""
 
 while [ $# -gt 0 ]; do
@@ -37,12 +36,12 @@ while [ $# -gt 0 ]; do
       config_path="$2"
       shift
       ;;
-    -m|--movies)
-      movies_path="$2"
+    -m|--media)
+      media_path="$2"
       shift
       ;;
-    -t|--tv)
-      tv_path="$2"
+    -t|--transcode)
+      transcode_path="$2"
       shift
       ;;
     -claim|--plex_claim)
@@ -70,19 +69,20 @@ fi
 docker run \
   --rm \
   --detach \
-  --name=$NAME \
-  -e PUID=$(id -u) \
-  -e PGID=$(id -g) \
-  -e VERSION=docker \
-  -e PLEX_CLAIM=$plex_claim \
-  -p $PORT:32400 \
-  -p $PORT:32400/udp \
-  -p 32469:32469 \
-  -p 32469:32469/udp \
+  --name $NAME \
+  -p 32400:32400/tcp \
+  -p 3005:3005/tcp \
+  -p 8324:8324/tcp \
+  -p 32469:32469/tcp \
   -p 1900:1900/udp \
+  -p 32410:32410/udp \
+  -p 32412:32412/udp \
+  -p 32413:32413/udp \
+  -p 32414:32414/udp \
+  -e TZ="America/Sao_Paulo" \
+  -e PLEX_CLAIM="$plex_claim" \
+  -h $NAME \
   -v $config_path:/config \
-  -v $tv_path:/tv \
-  -v $movies_path:/movies \
-  linuxserver/plex
-
-#--restart unless-stopped \
+  -v $transcode_path:/transcode \
+  -v $media_path:/data \
+  plexinc/pms-docker
