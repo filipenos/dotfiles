@@ -27,7 +27,7 @@
     "projectManager.sortList": "Name",
     "projectManager.openInNewWindowWhenClickingInStatusBar": true,
     "projectManager.git.baseFolders": [
-        "$home\\Code",
+        "$home\\Code"
     ],
     "window.zoomLevel": 0
 }
