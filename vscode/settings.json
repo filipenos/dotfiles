@@ -22,7 +22,6 @@
     "go.testFlags": [
         "-v"
     ],
-    "go.useLanguageServer": true,
     "projectManager.groupList": true,
     "projectManager.sortList": "Name",
     "projectManager.openInNewWindowWhenClickingInStatusBar": true,
