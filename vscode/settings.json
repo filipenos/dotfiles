@@ -7,7 +7,6 @@
         "dotfilesrc": "shellscript",
         "*.inc": "php"
     },
-    "terminal.integrated.shell.linux": "/home/linuxbrew/.linuxbrew/bin/zsh",
     "terminal.integrated.shell.osx": "/bin/zsh",
     "terminal.integrated.shell.windows": "C:\\Windows\\System32\\wsl.exe",
     "terminal.integrated.rendererType": "dom",
@@ -23,5 +22,26 @@
     "projectManager.git.baseFolders": [
         "$home\\Code"
     ],
-    "window.zoomLevel": 0
+    "window.zoomLevel": 0,
+    "editor.suggestSelection": "first",
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "go.toolsManagement.autoUpdate": true,
+    "todo-tree.tree.showScanModeButton": false,
+    "todo-tree.general.tags": [
+        "BUG",
+        "HACK",
+        "FIXME",
+        "TODO",
+        "XXX",
+        "[ ]",
+        "[x]"
+    ],
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+    "terminal.integrated.tabs.enabled": true,
+    "security.workspace.trust.untrustedFiles": "open"
 }

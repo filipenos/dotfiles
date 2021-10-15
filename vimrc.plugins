@@ -26,6 +26,7 @@ Plugin 'google/vim-searchindex' " This plugin shows how many times does a search
 Plugin 'Shougo/neocomplete.vim'
 
 " file ident
+
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'editorconfig/editorconfig-vim'
 
