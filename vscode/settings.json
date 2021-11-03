@@ -30,5 +30,11 @@
   ],
   "terminal.integrated.tabs.enabled": true,
   "security.workspace.trust.untrustedFiles": "open",
-  "git.confirmSync": false
+"git.confirmSync": false,
+"github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": false,
+    "markdown": false
+}
 }
