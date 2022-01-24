@@ -13,7 +13,6 @@
         "-v"
     ],
     "projectManager.groupList": true,
-    "projectManager.sortList": "Name",
     "projectManager.openInNewWindowWhenClickingInStatusBar": true,
     "projectManager.git.baseFolders": [
         "$home\\Code"
@@ -28,15 +27,11 @@
     },
     "go.toolsManagement.autoUpdate": true,
     "terminal.integrated.tabs.enabled": true,
-    "security.workspace.trust.untrustedFiles": "open",
     "git.confirmSync": false,
     "github.copilot.enable": {
         "*": true,
         "yaml": true,
         "plaintext": true,
         "markdown": false
-    },
-    "remote.SSH.remotePlatform": {
-        "dsite-stage": "linux"
     }
 }
