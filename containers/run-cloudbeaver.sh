@@ -21,5 +21,5 @@ docker run \
   --detach \
   --name "$name" \
   --publish 8978:8978 \
-  -v /var/cloudbeaver/workspace:/opt/cloudbeaver/workspace \
-  dbeaver/cloudbeaver
+  -v $HOME/.cloudbeaver/workspace:/opt/cloudbeaver/workspace \
+  dbeaver/cloudbeaver:latest
