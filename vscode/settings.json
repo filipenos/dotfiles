@@ -1,11 +1,18 @@
 {
     "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "selection",
+    "editor.fontFamily": "JetBrains Mono",
+    "editor.fontSize": 13,
+    "editor.fontLigatures": true,
     "editor.codeActionsOnSave": {},
     "files.associations": {
-        "Dockerfile_dev": "dockerfile",
+        "Dockerfile_*": "dockerfile",
         "dotfilesrc": "shellscript",
         "*.inc": "php"
     },
+    "terminal.integrated.fontFamily": "JetBrains Mono",
+    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.shellIntegration.enabled": true,
     "workbench.colorTheme": "Solarized Dark",
     "workbench.startupEditor": "none",
     "go.formatTool": "goimports",
@@ -13,6 +20,7 @@
         "-v"
     ],
     "projectManager.groupList": true,
+    "projectManager.sortList": "Name",
     "projectManager.openInNewWindowWhenClickingInStatusBar": true,
     "projectManager.git.baseFolders": [
         "$home\\Code"
@@ -27,11 +35,22 @@
     },
     "go.toolsManagement.autoUpdate": true,
     "terminal.integrated.tabs.enabled": true,
+    "security.workspace.trust.untrustedFiles": "open",
     "git.confirmSync": false,
-    "github.copilot.enable": {
-        "*": true,
-        "yaml": true,
-        "plaintext": true,
-        "markdown": false
-    }
+    "remote.SSH.remotePlatform": {
+        "dsite-stage": "linux"
+    },
+    "[dart]": {
+        "editor.formatOnSave": true,
+        "editor.formatOnType": true,
+        "editor.rulers": [
+            80
+        ],
+        "editor.selectionHighlight": false,
+        "editor.suggest.snippetsPreventQuickSuggestions": false,
+        "editor.suggestSelection": "first",
+        "editor.tabCompletion": "onlySnippets",
+        "editor.wordBasedSuggestions": false
+    },
+    "diffEditor.ignoreTrimWhitespace": false
 }
