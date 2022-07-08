@@ -9,6 +9,10 @@ while [ $# -gt 0 ]; do
     -b|--build)
       BUILD="1"
       ;;
+    -v|--version)
+      shift
+      GOLANG_VERSION="$1"
+      ;;
     *)
       path="$1"
   esac
