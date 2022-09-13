@@ -2,11 +2,12 @@
 
 set -e
 
-IMAGE="alpine"
-CMD="/bin/sh"
+IMAGE=alpine
+CMD=/bin/sh
 
 path=$(pwd)
-name=$(basename "$path")
+name=$(basename $path)
+mount="/mnt/$name"
 
 case "$1" in
   -h|--help)
@@ -25,7 +26,8 @@ fi
 
 docker run \
   --rm \
+  --publish-all \
   --name "$name" \
-  -v "$(pwd)":"/mnt" \
-  -w "/mnt" \
-  -it "$IMAGE" "$CMD"
+  -v "$(pwd)":"$mount" \
+  -w "$mount" \
+  -it $IMAGE $CMD
