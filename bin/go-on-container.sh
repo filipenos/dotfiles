@@ -4,6 +4,20 @@ set -e
 
 GOLANG_VERSION="latest"
 
+if [ -f go.mod ]; then
+  GOLANG_VERSION=$(cat go.mod | grep -e '^go\s[0-9]*\.[0-9]*$' | sed 's/go //g')
+fi
+
+usage() {
+  cat <<HELP_USAGE
+  usage $0 [-b] [-v] [-h] path
+    -b    build instead run
+    -v    version of go (actual: $GOLANG_VERSION)
+    -h    print help
+HELP_USAGE
+  exit 1
+}
+
 while [ $# -gt 0 ]; do
   case "$1" in
     -b|--build)
@@ -12,6 +26,9 @@ while [ $# -gt 0 ]; do
     -v|--version)
       shift
       GOLANG_VERSION="$1"
+      ;;
+    -h|--help)
+      usage
       ;;
     *)
       path="$1"
