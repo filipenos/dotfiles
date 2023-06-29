@@ -16,9 +16,6 @@ alias docker-container-ip="docker inspect -f '{{range .NetworkSettings.Networks}
 
 alias starwars="telnet towel.blinkenlights.nl"
 
-# Necessary to use tmux plugin manager
-export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins"
-
 #load zshrc only running on zsh
 PID=$(ps -p $$)
 if echo $PID | grep -q "zsh"; then

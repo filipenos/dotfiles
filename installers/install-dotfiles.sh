@@ -37,11 +37,6 @@ install_vim() {
   $HOME/dotfiles/bin/vim-install-vundle
 }
 
-install_tmux() {
-  log "configuring tmux.conf"
-  ln -s $HOME/dotfiles/tmux.conf $HOME/.tmux.conf
-}
-
 remove() {
   log "removing dotfiles from $HOME"
   rm -rf $HOME/dotfiles
@@ -54,16 +49,12 @@ if [ -z $1 ]; then
   else
     install
     install_vim
-    install_tmux
   fi
   configure_onpath
 else
   case $1 in
     install-vim)
       install_vim
-      ;;
-    install-tmux)
-      install_tmux
       ;;
   esac
 fi
