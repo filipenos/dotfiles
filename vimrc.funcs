@@ -72,7 +72,7 @@ endfunction
 map <Leader>th :call ToggleHidden() <CR>
 
 function! FormatJSON()
-  %!python -m json.tool
+  %!python3 -m json.tool
 endfunction
 command! FormatJSON call FormatJSON()
 
@@ -87,12 +87,12 @@ endfunction
 command! FormatSH call FormatSH()
 
 function! URLDecode()
-  %!python -c "import sys, urllib as ul; print ul.unquote_plus(sys.stdin.read())"
+  %!python3 -c "import sys, urllib as ul; print ul.unquote_plus(sys.stdin.read())"
 endfunction
 command! URLDecode call URLDecode()
 
 function! URLEncode()
-  %!python -c "import sys, urllib as ul; print ul.quote_plus(sys.stdin.read())"
+  %!python3 -c "import sys, urllib as ul; print ul.quote_plus(sys.stdin.read())"
 endfunction
 command! URLEncode call URLEncode()
 
