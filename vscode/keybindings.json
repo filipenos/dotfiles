@@ -2,5 +2,13 @@
     {
         "key": "ctrl+'",
         "command": "workbench.action.terminal.newInActiveWorkspace"
+    },
+    {
+        "key": "alt+t",
+        "command": "go.test.cursor"
+    },
+    {
+        "key": "shift+alt+t",
+        "command": "go.debug.cursor"
     }
 ]
