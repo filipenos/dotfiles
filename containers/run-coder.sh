@@ -17,7 +17,9 @@ else
   runpath=$(pwd)
 fi
 
-echo "running $NAME on path $runpath"
+projectname=$(basename $runpath)
+
+echo "running $projectname path $runpath"
 
 docker run \
   --rm \
@@ -28,9 +30,10 @@ docker run \
   --name "$NAME" \
   --hostname "$NAME" \
   --publish 8080:8080 \
-  --env PASSWORD=filipe \
-  --volume "/etc/passwd:/etc/passwd:ro" \
-  --volume "/home/filipe:/home/filipe" \
-  --volume "/home/linuxbrew:/home/linuxbrew" \
-  --volume "$runpath:/home/filipe/project" \
-  codercom/code-server
+  --env "DOCKER_USER=$USER" \
+  --volume "$runpath:/home/coder/$projectname" \
+  --volume "$HOME/.config/code-server:/home/coder/.config/code-server" \
+  --volume "$HOME/.local/share/code-server:/home/coder/.local/share/code-server" \
+  codercom/code-server:latest
+
+echo "visit: http://localhost:8080/?folder=/home/coder/$projectname"

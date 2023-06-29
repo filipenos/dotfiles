@@ -26,7 +26,7 @@ fi
 
 docker run \
   --rm \
-  --publish-all \
+  --publish 18080:8080 \
   --name "$name" \
   -v "$(pwd)":"$mount" \
   -w "$mount" \

@@ -12,10 +12,11 @@ if [ "$(docker ps -q -f name=$NAME)" ]; then
 fi
 
 docker run \
-  --rm \
   -d \
+  -p 8000:8000 \
+  -p 9443:9443 \
   --name $NAME \
-  -p 9000:9000 \
+  --restart=always \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -v portainer_data:/data \
-  portainer/portainer
+  portainer/portainer-ce:latest
