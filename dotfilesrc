@@ -13,6 +13,8 @@ alias dpkg-purge-rc='dpkg -l | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --
 #alias diffwithmaster="git diff master...`git rev-parse --abbrev-ref HEAD`"
 # Aliases of docker
 alias docker-container-ip="docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'"
+alias github-ssh-ok="ssh -T git@github.com"
+alias gitlab-ssh-ok="ssh -T git@gitlab.com"
 
 alias starwars="telnet towel.blinkenlights.nl"
 
