@@ -18,6 +18,17 @@ alias gitlab-ssh-ok="ssh -T git@gitlab.com"
 
 alias starwars="telnet towel.blinkenlights.nl"
 
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+  # Estamos em uma sessão SSH
+  alias ssh='/usr/bin/ssh'
+elif [ -n "$WSL_DISTRO_NAME" ]; then
+  # Estamos em uma sessão interativa do WSL
+  alias ssh='/mnt/c/Windows/System32/OpenSSH/ssh.exe'
+else
+  # Estamos em uma sessão local
+  alias ssh='/usr/bin/ssh'
+fi
+
 #load zshrc only running on zsh
 PID=$(ps -p $$)
 if echo $PID | grep -q "zsh"; then
