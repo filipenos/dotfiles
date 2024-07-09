@@ -24,7 +24,6 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 elif [ -n "$WSL_DISTRO_NAME" ]; then
   # Estamos em uma sessão interativa do WSL
   alias ssh='/mnt/c/Windows/System32/OpenSSH/ssh.exe'
-  export GIT_SSH_COMMAND="/mnt/c/Windows/System32/OpenSSH/ssh.exe"
 else
   # Estamos em uma sessão local
   alias ssh='/usr/bin/ssh'
@@ -55,4 +54,8 @@ fi
 if [ -d "$HOME/dotfiles-private" ]; then
   source "$HOME/dotfiles-private/dotfilesrc"
   export PATH=$PATH:$HOME/dotfiles-private/bin
+
+  if [ -f "$HOME/dotfiles-private/$(hostname)/dotfilesrc" ]; then
+    source "$HOME/dotfiles-private/$(hostname)/dotfilesrc"
+  fi
 fi
