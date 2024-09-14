@@ -34,6 +34,9 @@ PID=$(ps -p $$)
 if echo $PID | grep -q "zsh"; then
   source $HOME/dotfiles/zshrc
   export RUNNING_ZSH=1
+  if [ -f "$HOME/.dotfileszrc" ]; then
+    source "$HOME/.dotfileszrc"
+  fi
 else
   export RUNNING_ZSH=0
 fi
