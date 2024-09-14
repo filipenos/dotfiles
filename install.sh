@@ -37,6 +37,11 @@ install_vim() {
   $HOME/dotfiles/bin/vim-install-vundle
 }
 
+install_nvim() {
+  log "configuring nvimrc"
+  ln -s $HOME/dotfiles/init.vim $HOME/.config/nvim/init.vim
+}
+
 remove() {
   log "removing dotfiles from $HOME"
   rm -rf $HOME/dotfiles
@@ -48,16 +53,13 @@ if [ -z $1 ]; then
     git -C "$HOME/dotfiles" pull
   else
     install
-    install_vim
   fi
   configure_onpath
-else
-  case $1 in
-    install-vim)
-      install_vim
-      ;;
-  esac
 fi
+
+
+install_vim
+install_nvim
 
 log "installation occurred successfully! have a good time"
 exit 0
