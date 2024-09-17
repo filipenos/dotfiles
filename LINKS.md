@@ -1,0 +1,5 @@
+  - [brew](https://brew.sh)
+  - [git](https://git-scm.com)
+  - [zsh](https://ohmyz.sh)
+  - [vim](https://www.vim.org)
+  - [nvim](https://neovim.io)
