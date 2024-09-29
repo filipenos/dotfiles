@@ -31,8 +31,10 @@ endif
 
 call plug#begin()
 
-" List your plugins here
 Plug 'tpope/vim-sensible'
+
+Plug 'williamboman/mason.nvim'
+Plug 'neovim/nvim-lspconfig'
 
 " Shorthand notation for GitHub; translates to https://github.com/junegunn/seoul256.vim.git
 Plug 'junegunn/seoul256.vim'
@@ -41,8 +43,8 @@ Plug 'junegunn/seoul256.vim'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 
 " On-demand loading: loaded when the specified command is executed
-" Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
-" nnoremap <C-b> :NERDTreeToggle<CR>
+Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+nnoremap <C-b> :NERDTreeToggle<CR>
 
 Plug 'nvim-tree/nvim-web-devicons' " optional
 Plug 'nvim-tree/nvim-tree.lua'
@@ -53,6 +55,7 @@ Plug 'fatih/vim-go', { 'tag': '*' }
 
 " If the vim plugin is in a subdirectory, use 'rtp' option to specify its path
 Plug 'nsf/gocode', { 'rtp': 'vim' }
+noremap <F12> :GoDef<CR>
 
 Plug 'airblade/vim-rooter'
 let g:rooter_patterns = ['.git', 'Makefile', 'package.json', 'go.mod']
