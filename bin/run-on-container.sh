@@ -24,9 +24,14 @@ elif [ $# -gt 1 ]; then
   CMD=$@
 fi
 
+PORTS=${PORTS}
+if [ -n "$PORTS" ]; then
+  PORTS="-p $PORTS"
+fi
+
 docker run \
   --rm \
-  --publish 18080:8080 \
+  $PORTS \
   --name "$name" \
   -v "$(pwd)":"$mount" \
   -w "$mount" \
