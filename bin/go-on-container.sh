@@ -5,7 +5,7 @@ set -e
 GOLANG_VERSION="latest"
 
 if [ -f go.mod ]; then
-  GOLANG_VERSION=$(cat go.mod | grep -e '^go\s[0-9]*\.[0-9]*$' | sed 's/go //g')
+  GOLANG_VERSION=$(cat go.mod | grep -E '^go\s[0-9]+\.[0-9]+(\.[0-9]+)?$' | sed 's/go //g')
 fi
 
 usage() {
