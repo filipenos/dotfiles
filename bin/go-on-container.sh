@@ -47,6 +47,11 @@ project=$(echo "$path" | sed -e "s;^$GOPATH/;;")
 
 echo "running $name > $project > $path on container golang:$GOLANG_VERSION"
 
+PORTS=${PORTS}
+if [ -n "$PORTS" ]; then
+  PORTS="-p $PORTS"
+fi
+
 if [ ! -z $BUILD ]; then
   echo "building..."
   docker run \
@@ -59,6 +64,7 @@ if [ ! -z $BUILD ]; then
 else
   docker run \
     --rm \
+    $PORTS \
     --name "$name" \
     -v "$path":"/go/$project" \
     -w "/go/$project" \
