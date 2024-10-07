@@ -37,7 +37,7 @@ install_vim() {
   $HOME/dotfiles/bin/vim-install-vundle
 }
 
-//TODO (filipenos) - problemas no link simbolico
+#TODO (filipenos) - problemas no link simbolico
 install_nvim() {
   log "configuring nvimrc"
   mkdir -p $HOME/.config/nvim
