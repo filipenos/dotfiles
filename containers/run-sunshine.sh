@@ -16,7 +16,6 @@ fi
 
 docker run \
   --rm \
-  --detach \
   --device /dev/dri/ \
   --name=$NAME \
   --ipc=host \
