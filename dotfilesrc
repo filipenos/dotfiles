@@ -8,6 +8,7 @@ alias trim-emptyprefix="sed 's/^ *//g'"
 alias serve-dir="python3 -m http.server"
 alias change-ps1='export PS1="\e[0;34m\W: \e[m"'
 alias npm-list="npm list -g --depth=0"
+alias current-branch="git rev-parse --abbrev-ref HEAD"
 alias dpkg-purge-rc='dpkg -l | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge'
 alias file-perm="stat -c '%A %a %n'"
 # Aliases of Git
@@ -59,7 +60,9 @@ if [ -d "$HOME/dotfiles-private" ]; then
   source "$HOME/dotfiles-private/dotfilesrc"
   export PATH=$PATH:$HOME/dotfiles-private/bin
 
-  if [ -f "$HOME/dotfiles-private/$(hostname)/dotfilesrc" ]; then
-    source "$HOME/dotfiles-private/$(hostname)/dotfilesrc"
+  DOTFILERC_FILE=$HOME/dotfiles-private/$(hostname)/dotfilesrc
+  if [ -f "$DOTFILERC_FILE" ]; then
+    source "$DOTFILERC_FILE"
+    alias dotfilesrc="vim $DOTFILERC_FILE"
   fi
 fi
