@@ -7,6 +7,7 @@ if [ "$(docker ps -q -f name=$NAME)" ]; then
   if [ "$yesno" = "yes" ]; then
     echo "stop container"
     docker stop $NAME
+    docker rm -f $NAME
   fi
   exit 0
 fi
@@ -19,4 +20,5 @@ docker run \
   --add-host=host.docker.internal:host-gateway \
   -v open-webui:/app/backend/data \
   --restart always \
+  --pull always \
   ghcr.io/open-webui/open-webui:main
