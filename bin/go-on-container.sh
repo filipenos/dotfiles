@@ -66,6 +66,7 @@ else
     --rm \
     $PORTS \
     --name "$name" \
+    --pull always \
     -v "$path":"/go/$project" \
     -w "/go/$project" \
     -it "golang:$GOLANG_VERSION"

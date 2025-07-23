@@ -33,6 +33,7 @@ docker run \
   --rm \
   $PORTS \
   --name "$name" \
+  --pull always \
   -v "$(pwd)":"$mount" \
   -w "$mount" \
   -it $IMAGE $CMD
