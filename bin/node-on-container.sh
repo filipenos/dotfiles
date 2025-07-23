@@ -3,7 +3,7 @@
 set -e
 
 NODE_VERSION="lts"
-RUN="bash"
+RUN="${RUN:-bash}"
 
 path=$(pwd)
 path=$(realpath "$path")
