@@ -15,3 +15,8 @@ npm install -g grunt-cli
 npm install -g underscore-cli
 
 npm install cool-ascii-faces -g
+
+npm install -g @google/gemini-cli
+npm install -g @openai/codex
+npm install -g @anthropic-ai/claude-code
+
