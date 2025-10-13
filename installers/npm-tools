@@ -1,22 +1,22 @@
 #!/bin/bash
 
-npm install -g jshint
-npm install -g js-beautify
+#npm install -g jshint
+#npm install -g js-beautify
 
-npm install -g codebox
+#npm install -g codebox
 
-npm install -g cordova
-npm install -g ionic
-npm install -g phonegap
+#npm install -g cordova
+#npm install -g ionic
+#npm install -g phonegap
 
-npm install -g yo
-npm install -g bower
-npm install -g grunt-cli
-npm install -g underscore-cli
+#npm install -g yo
+#npm install -g bower
+#npm install -g grunt-cli
+#npm install -g underscore-cli
 
-npm install cool-ascii-faces -g
+#npm install cool-ascii-faces -g
 
 npm install -g @google/gemini-cli
 npm install -g @openai/codex
 npm install -g @anthropic-ai/claude-code
-
+npm install -g @github/copilot
