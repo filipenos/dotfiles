@@ -18,10 +18,8 @@ fi
 docker run \
   -d \
   -p 10434:8080 \
-  --name $NAME \
-  -e OLLAMA_BASE_URL=http://localhost:11434 \
   --add-host=host.docker.internal:host-gateway \
   -v open-webui:/app/backend/data \
+  --name $NAME \
   --restart always \
-  --pull always \
   ghcr.io/open-webui/open-webui:main
