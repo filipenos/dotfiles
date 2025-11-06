@@ -67,10 +67,28 @@ run_npm() {
 
 main() {
   ensure_not_root
-  run_apt
-  run_brew
-  run_snap
-  run_npm
+  local platform
+  platform="$(uname -s || echo unknown)"
+
+  case "$platform" in
+    Linux)
+      log "Sistema detectado: Linux"
+      run_apt
+      run_snap
+      run_brew
+      run_npm
+      ;;
+    Darwin)
+      log "Sistema detectado: macOS"
+      run_brew
+      run_npm
+      ;;
+    *)
+      log "Sistema operacional desconhecido (${platform}). Executando apenas gerenciadores independentes."
+      run_brew
+      run_npm
+      ;;
+  esac
 
   log "Atualização concluída."
 }
