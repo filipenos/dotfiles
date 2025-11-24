@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+AVAILABLE_MANAGERS=()
+
 ensure_not_root() {
   if [ "${EUID:-$(id -u)}" -eq 0 ]; then
     printf '[%s] Este script não deve ser executado com sudo/root.\n' "$(date +'%Y-%m-%d %H:%M:%S')" >&2
@@ -65,10 +67,41 @@ run_npm() {
   fi
 }
 
+collect_planned_managers() {
+  local platform="$1"
+  local -a available=()
+
+  case "$platform" in
+    Linux)
+      command -v apt >/dev/null 2>&1 && available+=("apt")
+      command -v snap >/dev/null 2>&1 && available+=("snap")
+      command -v brew >/dev/null 2>&1 && available+=("brew")
+      command -v npm >/dev/null 2>&1 && available+=("npm")
+      ;;
+    Darwin)
+      command -v brew >/dev/null 2>&1 && available+=("brew")
+      command -v npm >/dev/null 2>&1 && available+=("npm")
+      ;;
+    *)
+      command -v brew >/dev/null 2>&1 && available+=("brew")
+      command -v npm >/dev/null 2>&1 && available+=("npm")
+      ;;
+  esac
+
+  AVAILABLE_MANAGERS=("${available[@]}")
+}
+
 main() {
   ensure_not_root
   local platform
   platform="$(uname -s || echo unknown)"
+
+  collect_planned_managers "$platform"
+  if ((${#AVAILABLE_MANAGERS[@]} > 0)); then
+    log "Gerenciadores que serão atualizados: ${AVAILABLE_MANAGERS[*]}"
+  else
+    log "Nenhum gerenciador de pacotes disponível para atualizar (comandos não encontrados)."
+  fi
 
   case "$platform" in
     Linux)
