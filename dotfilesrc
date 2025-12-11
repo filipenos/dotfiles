@@ -11,6 +11,7 @@ alias npm-list="npm list -g --depth=0"
 alias current-branch="git rev-parse --abbrev-ref HEAD"
 alias dpkg-purge-rc='dpkg -l | grep "^rc" | cut -d " " -f 3 | xargs sudo dpkg --purge'
 alias file-perm="stat -c '%A %a %n'"
+alias mktmp='tmp_dir="/tmp/mktmp-$(date +%Y%m%d-%H%M%S)"; mkdir -p "$tmp_dir" && cd "$tmp_dir" && printf "Usando: %s\n" "$tmp_dir"'
 # Aliases of Git
 #alias diffwithmaster="git diff master...`git rev-parse --abbrev-ref HEAD`"
 # Aliases of docker
