@@ -7,3 +7,4 @@ atom/nohup.out
 atom/packages/
 zshrc.zwc
 .DS_Store
+tmp/
