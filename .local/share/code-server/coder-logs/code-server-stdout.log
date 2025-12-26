@@ -1,7 +1,0 @@
-[2022-11-09T12:37:00.803Z] info  code-server 4.8.3 977b853a1e162ab583aed64b1322d1515c57728c
-[2022-11-09T12:37:00.804Z] info  Using user-data-dir ~/.local/share/code-server
-[2022-11-09T12:37:00.820Z] info  Using config file ~/.config/code-server/config.yaml
-[2022-11-09T12:37:00.820Z] info  HTTP server listening on http://0.0.0.0:8080/ 
-[2022-11-09T12:37:00.820Z] info    - Authentication is enabled
-[2022-11-09T12:37:00.820Z] info      - Using password from ~/.config/code-server/config.yaml
-[2022-11-09T12:37:00.820Z] info    - Not serving HTTPS 
