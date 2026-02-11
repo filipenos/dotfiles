@@ -1,39 +1,75 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+usage() {
+  cat <<EOF
+usage: $(basename "$0") [image] [command ...]
 
-IMAGE=alpine
-CMD=/bin/sh
+Default:
+  image   alpine
+  command /bin/sh
 
-path=$(pwd)
-name=$(basename $path)
-mount="/mnt/$name"
+Env vars:
+  PORTS       Space/comma-separated port mappings (ex: "8080:8080 9229:9229")
+  PULL_POLICY Docker --pull policy (default: always)
+EOF
+}
 
-case "$1" in
-  -h|--help)
-    echo "usage $0 image_name command with args (default run: alpine /bin/sh)"
-    exit 0
-    ;;
-esac
+require_cmd() {
+  local cmd="$1"
+  command -v "$cmd" >/dev/null 2>&1 || {
+    echo "missing command: $cmd" >&2
+    exit 1
+  }
+}
 
-if [ $# -eq 1 ]; then
-  IMAGE=$1
-elif [ $# -gt 1 ]; then
-  IMAGE=$1
+sanitize_name() {
+  local raw="$1"
+  local out
+  out="$(echo "$raw" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9_.-]/-/g; s/^-*//; s/-*$//')"
+  if [[ -z "$out" ]]; then
+    out="workspace"
+  fi
+  printf '%s\n' "$out"
+}
+
+if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
+  usage
+  exit 0
+fi
+
+require_cmd docker
+
+IMAGE="alpine"
+CMD=("/bin/sh")
+
+if [[ $# -ge 1 ]]; then
+  IMAGE="$1"
   shift
-  CMD=$@
+fi
+if [[ $# -ge 1 ]]; then
+  CMD=("$@")
 fi
 
-PORTS=${PORTS}
-if [ -n "$PORTS" ]; then
-  PORTS="-p $PORTS"
+path="$(pwd)"
+name="$(sanitize_name "$(basename "$path")")"
+mount="/mnt/$name"
+pull_policy="${PULL_POLICY:-always}"
+
+run_args=(
+  --rm
+  --name "$name"
+  --pull "$pull_policy"
+  -v "$path:$mount"
+  -w "$mount"
+  -it
+)
+
+if [[ -n "${PORTS:-}" ]]; then
+  ports_raw="$(echo "${PORTS}" | tr ',' ' ')"
+  for mapping in $ports_raw; do
+    run_args+=(-p "$mapping")
+  done
 fi
 
-docker run \
-  --rm \
-  $PORTS \
-  --name "$name" \
-  --pull always \
-  -v "$(pwd)":"$mount" \
-  -w "$mount" \
-  -it $IMAGE $CMD
+docker run "${run_args[@]}" "$IMAGE" "${CMD[@]}"
