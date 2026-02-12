@@ -1,0 +1,14 @@
+#!/bin/bash
+
+if [ -n "$STY" ]; then
+	echo "already running inside screen"
+	exit 1
+fi
+
+if [ -z "$1" ]; then
+	SESSION_NAME=$(basename "$PWD")
+else
+	SESSION_NAME=$1
+fi
+
+screen -S "$SESSION_NAME" -xRR
