@@ -18,7 +18,7 @@ fi
 docker run \
   -d \
   --restart always \
-  -p "127.0.0.1:5000:5000" \
+  -p "5000:5000" \
   -v changedetection:/datastore \
   --name $NAME \
   dgtlmoon/changedetection.io
