@@ -16,6 +16,5 @@
 
 #npm install cool-ascii-faces -g
 
-npm install -g @github/copilot
 npm install -g ctx7
 
