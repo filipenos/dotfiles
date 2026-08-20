@@ -49,7 +49,7 @@ run_brew() {
   if command -v brew >/dev/null 2>&1; then
     log "Atualizando via brew..."
     brew update
-    brew upgrade
+    brew upgrade --greedy-auto-updates
     brew cleanup
     log "brew finalizado."
   else
