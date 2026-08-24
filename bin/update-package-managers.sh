@@ -67,6 +67,16 @@ run_npm() {
   fi
 }
 
+run_mise() {
+  if command -v mise >/dev/null 2>&1; then
+    log "Atualizando ferramentas gerenciadas pelo mise..."
+    mise upgrade
+    log "mise finalizado."
+  else
+    log "Ignorando mise: comando não encontrado."
+  fi
+}
+
 collect_planned_managers() {
   local platform="$1"
   local -a available=()
@@ -76,14 +86,17 @@ collect_planned_managers() {
       command -v apt >/dev/null 2>&1 && available+=("apt")
       command -v snap >/dev/null 2>&1 && available+=("snap")
       command -v brew >/dev/null 2>&1 && available+=("brew")
+      command -v mise >/dev/null 2>&1 && available+=("mise")
       command -v npm >/dev/null 2>&1 && available+=("npm")
       ;;
     Darwin)
       command -v brew >/dev/null 2>&1 && available+=("brew")
+      command -v mise >/dev/null 2>&1 && available+=("mise")
       command -v npm >/dev/null 2>&1 && available+=("npm")
       ;;
     *)
       command -v brew >/dev/null 2>&1 && available+=("brew")
+      command -v mise >/dev/null 2>&1 && available+=("mise")
       command -v npm >/dev/null 2>&1 && available+=("npm")
       ;;
   esac
@@ -109,16 +122,19 @@ main() {
       run_apt
       run_snap
       run_brew
+      run_mise
       run_npm
       ;;
     Darwin)
       log "Sistema detectado: macOS"
       run_brew
+      run_mise
       run_npm
       ;;
     *)
       log "Sistema operacional desconhecido (${platform}). Executando apenas gerenciadores independentes."
       run_brew
+      run_mise
       run_npm
       ;;
   esac
