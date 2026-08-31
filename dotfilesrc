@@ -61,7 +61,8 @@ if [ -d "$HOME/dotfiles-private" ]; then
   source "$HOME/dotfiles-private/dotfilesrc"
   export PATH=$PATH:$HOME/dotfiles-private/bin
 
-  DOTFILERC_FILE=$HOME/dotfiles-private/host/$HOST/dotfilesrc
+  DOTFILES_HOST=${HOST:-${HOSTNAME:-$(hostname -s)}}
+  DOTFILERC_FILE=$HOME/dotfiles-private/host/$DOTFILES_HOST/dotfilesrc
   if [ -f "$DOTFILERC_FILE" ]; then
     source "$DOTFILERC_FILE"
   else

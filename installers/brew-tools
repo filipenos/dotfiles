@@ -1,0 +1,5 @@
+#!/bin/bash
+
+brew install codex
+brew install claude-code
+brew install --cask antigravity-cli

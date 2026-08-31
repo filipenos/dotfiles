@@ -1,8 +1,48 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-if [ -z $1 ]; then
-  echo "user@host is required"
+set -euo pipefail
+
+show_help() {
+  cat <<'EOF'
+Usage:
+  ssh-to-server user@host [public-key-path]
+
+Examples:
+  ssh-to-server user@example.com
+  ssh-to-server user@example.com ~/.ssh/id_ed25519.pub
+
+Behavior:
+  - Adds the server ed25519 host key to ~/.ssh/known_hosts
+  - Copies your default public key with ssh-copy-id
+  - Uses the provided public key when public-key-path is set
+EOF
+}
+
+target="${1:-}"
+public_key="${2:-}"
+
+if [ -z "$target" ]; then
+  show_help
   exit 1
 fi
 
-cat ~/.ssh/id_rsa.pub | ssh "$1" 'umask 0077; mkdir -p .ssh; cat >> .ssh/authorized_keys && echo "Key copied"'
+if [ -n "$public_key" ] && [ ! -f "$public_key" ]; then
+  echo "Public key not found: $public_key"
+  exit 1
+fi
+
+host="${target#*@}"
+host="${host%%:*}"
+
+mkdir -p "$HOME/.ssh"
+touch "$HOME/.ssh/known_hosts"
+chmod 700 "$HOME/.ssh"
+chmod 600 "$HOME/.ssh/known_hosts"
+
+ssh-keyscan -t ed25519 "$host" >> "$HOME/.ssh/known_hosts"
+
+if [ -n "$public_key" ]; then
+  ssh-copy-id -i "$public_key" "$target"
+else
+  ssh-copy-id "$target"
+fi
