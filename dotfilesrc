@@ -64,6 +64,8 @@ if [ -d "$HOME/dotfiles-private" ]; then
   DOTFILERC_FILE=$HOME/dotfiles-private/host/$HOST/dotfilesrc
   if [ -f "$DOTFILERC_FILE" ]; then
     source "$DOTFILERC_FILE"
-    alias dotfilesrc="vim $DOTFILERC_FILE"
+  else
+    mkdir -p "$(dirname "$DOTFILERC_FILE")"
   fi
+  alias dotfilesrc="vim $DOTFILERC_FILE"
 fi
